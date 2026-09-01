@@ -1,0 +1,55 @@
+/* WALL OF VOICES — design tokens
+   Mirrors the "WOV Tokens" variable collection in Figma
+   (file 13hMVjIUc9X1sKOfVHmSc1). Keep the two in sync. */
+
+:root {
+  /* Ground */
+  --wov-paper:        #FBF9F6;
+  --wov-paper-raised: #FFFFFF;
+  --wov-halo:         #F2EDE6;
+
+  /* Ink */
+  --wov-ink:          #16130F;
+  --wov-ink-mid:      #46403A;
+  --wov-ink-muted:    #6B635B;
+
+  /* Structure */
+  --wov-rule:         #E6E0D8;
+  --wov-rule-strong:  #16130F;
+
+  /* Accent — PLACEHOLDER. Swap for the upGrad red token from the existing DS
+     before build. Permitted in five places only: logo, one word in the H1,
+     link hover, live-count dot, primary CTA fill. */
+  --wov-accent:       #E5202E;
+  --wov-accent-soft:  #F9E8E6;   /* accent at 8% over paper */
+
+  /* Type */
+  --wov-text-xs:   12px;   /* 1.4 — date, badge */
+  --wov-text-sm:   14px;   /* 1.5 — role, company */
+  --wov-text-base: 16px;   /* 1.6 — post body, never smaller */
+  --wov-text-lg:   20px;   /* 1.5 */
+  --wov-quote:     clamp(28px, 3.4vw, 44px);  /* 1.25 — serif */
+  --wov-h1:        clamp(40px, 6vw, 76px);    /* 1.05 — serif */
+
+  /* Space */
+  --wov-space-1: 4px;   --wov-space-2: 8px;   --wov-space-3: 12px;
+  --wov-space-4: 16px;  --wov-space-6: 24px;  --wov-space-8: 32px;
+  --wov-space-12: 48px; --wov-space-16: 64px; --wov-space-24: 96px;
+  --wov-space-32: 128px;
+
+  --wov-radius:      10px;
+  --wov-radius-full: 999px;
+  --wov-container:   1240px;
+  --wov-gutter-mobile: 20px;
+
+  /* Motion — two durations only */
+  --wov-dur-micro: 160ms;
+  --wov-dur-enter: 520ms;
+  --wov-dur-exit:  364ms;
+  --wov-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* entrances instant; marquee static + arrow controls;
+     counters render final values; all transitions <= 1ms */
+}
