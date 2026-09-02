@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wall of Voices — upGrad</title>
+<meta name="description" content="A public record of unpaid, unedited, unprompted LinkedIn posts by upGrad learners. Every post links to the live original.">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="tokens/wov.css">
+<link rel="stylesheet" href="assets/css/wov-prototype.css">
+</head>
+<body>
+
+<a class="wov-skip" href="#archive">Skip to the archive</a>
+
+<!-- 74:2295 -->
+<div class="wov-banner">
+  <p>Internal prototype · learner consent pending · sample data throughout</p>
+</div>
+
+<!-- 74:2297 -->
+<header class="wov-header">
+  <div class="wov-container">
+    <a class="wov-logo" href="#" aria-label="upGrad home">upGrad</a>
+    <p class="wov-header__label">Wall of Voices</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- 74:2304 — Overture -->
+  <section class="wov-hero" aria-labelledby="wov-h1">
+    <div class="wov-container wov-hero__inner">
+      <p class="wov-eyebrow wov-enter">
+        <span>Unedited</span><i aria-hidden="true">·</i><span>Unprompted</span><i aria-hidden="true">·</i><span>Unpaid</span>
+      </p>
+      <h1 class="wov-h1 wov-enter" id="wov-h1">
+        Don’t take our word for it.
+        <span class="wov-h1__turn">Take theirs.</span>
+      </h1>
+      <p class="wov-hero__lede wov-enter">
+        6,404 upGrad learners posted about their experience on their own <b>LinkedIn</b> —
+        unpaid, unedited, unprompted. Every post here links to the live original.
+      </p>
+      <div class="wov-hero__stage wov-enter">
+        <div class="wov-hero__fan" id="wov-hero-fan" aria-hidden="true"></div>
+        <div id="wov-hero-card"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 74:2329 — Ledger -->
+  <section class="wov-ledger" aria-label="The ledger">
+    <div class="wov-container">
+      <div class="wov-ledger__grid">
+        <div class="wov-stat wov-stat--lead">
+          <div class="wov-stat__badges" aria-hidden="true">
+            <span class="wov-badge wov-badge--like">
+              <svg viewBox="0 0 24 24"><path d="M6 10h2.2l2.9-6.1c.2-.5.7-.8 1.2-.7 1.2.2 2 1.3 1.8 2.5L13.7 9h4.2c1.3 0 2.3 1.2 2 2.5l-1.4 6.3c-.2 1-1.1 1.7-2.1 1.7H6zM2.8 10H5v10H2.8A.8.8 0 0 1 2 19.2v-8.4c0-.4.4-.8.8-.8z"/></svg>
+            </span>
+            <span class="wov-badge wov-badge--love">
+              <svg viewBox="0 0 24 24"><path d="M12 20.3 3.9 12.6C1.8 10.6 2 7.1 4.4 5.4 6.4 4 9.1 4.4 10.6 6.2l1.4 1.6 1.4-1.6c1.5-1.8 4.2-2.2 6.2-.8 2.4 1.7 2.6 5.2.5 7.2z"/></svg>
+            </span>
+          </div>
+          <p class="wov-stat__value" data-count="412880" data-format="comma">412,880</p>
+          <p class="wov-stat__label">Reactions from their networks</p>
+        </div>
+        <div class="wov-stat">
+          <p class="wov-stat__value" data-count="3472">3472</p>
+          <p class="wov-stat__label">Posts</p>
+        </div>
+        <div class="wov-stat">
+          <p class="wov-stat__value" data-count="49072">49072</p>
+          <p class="wov-stat__label">Learners</p>
+        </div>
+        <div class="wov-stat">
+          <p class="wov-stat__value" data-count="482">482</p>
+          <p class="wov-stat__label">Programmes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 74:2353 — Act I, ghosted, with the pull quote (74:2926) over it -->
+  <section class="wov-actone" aria-labelledby="wov-quote-text">
+    <div class="wov-actone__masonry" id="wov-actone" aria-hidden="true"></div>
+
+    <figure class="wov-quote">
+      <div class="wov-quote__ghost wov-quote__ghost--left"  data-ghost aria-hidden="true"></div>
+      <div class="wov-quote__ghost wov-quote__ghost--mid"   data-ghost aria-hidden="true"></div>
+      <div class="wov-quote__ghost wov-quote__ghost--right" data-ghost aria-hidden="true"></div>
+      <blockquote class="wov-quote__text" id="wov-quote-text">
+        “I didn’t tell anyone in my family I had enrolled. This post is how they found out I graduated.”
+      </blockquote>
+      <figcaption class="wov-quote__by">
+        Ramesh Iyer, Senior Manager, Tata Steel —
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">read the post ↗</a>
+      </figcaption>
+    </figure>
+
+    <!-- 74:2933 — the turn -->
+    <p class="wov-turn">And another six thousand.</p>
+  </section>
+
+  <!-- 74:2935 — controls -->
+  <div class="wov-controls" id="wov-controls">
+    <div class="wov-container">
+      <div class="wov-controls__row">
+        <div class="wov-tabs" role="tablist" aria-label="Filter by category">
+          <button class="wov-tab" role="tab" id="tab-all"            aria-selected="true"  aria-controls="archive" data-category="all">All</button>
+          <button class="wov-tab" role="tab" id="tab-convocation"    aria-selected="false" aria-controls="archive" data-category="convocation"    tabindex="-1">Convocation</button>
+          <button class="wov-tab" role="tab" id="tab-on-campus"      aria-selected="false" aria-controls="archive" data-category="on-campus"      tabindex="-1">On campus</button>
+          <button class="wov-tab" role="tab" id="tab-thank-you"      aria-selected="false" aria-controls="archive" data-category="thank-you"      tabindex="-1">Thank-yous</button>
+          <button class="wov-tab" role="tab" id="tab-recommendation" aria-selected="false" aria-controls="archive" data-category="recommendation" tabindex="-1">Recommendations</button>
+          <button class="wov-tab" role="tab" id="tab-milestone"      aria-selected="false" aria-controls="archive" data-category="milestone"      tabindex="-1">Milestones</button>
+        </div>
+
+        <div class="wov-search">
+          <label class="wov-visually-hidden" for="wov-search">Search posts by name or company</label>
+          <input id="wov-search" type="search" placeholder="Search name or company" autocomplete="off">
+        </div>
+
+        <div class="wov-sort">
+          <label class="wov-visually-hidden" for="wov-sort">Sort posts</label>
+          <select id="wov-sort">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="reactions">Most reactions</option>
+          </select>
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <p class="wov-controls__count" id="wov-count" aria-live="polite">140 posts</p>
+    </div>
+  </div>
+
+  <!-- 74:2959 — Act II archive -->
+  <section class="wov-archive" id="archive" tabindex="-1" aria-label="The archive">
+    <div class="wov-container">
+      <div class="wov-masonry" id="wov-masonry"></div>
+      <div class="wov-empty" id="wov-empty">
+        <p>No posts match that yet.</p>
+        <p class="wov-empty__hint" id="wov-empty-hint"></p>
+        <button type="button" id="wov-clear">Clear filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 74:3897 — method note -->
+  <section class="wov-method" aria-labelledby="wov-method-h">
+    <div class="wov-container">
+      <h2 id="wov-method-h">How this page is made</h2>
+      <div class="wov-method__grid">
+        <div>
+          <h3>Collection</h3>
+          <p>Posts are found by our alumni team when learners tag upGrad or a programme on LinkedIn. They are captured as written — text, typos, emoji and all — and republished here with a link back to the original. We never edit a post, and we never pay for one.</p>
+        </div>
+        <div>
+          <h3>Consent</h3>
+          <p>Every author is contacted before their post appears here and can decline or withdraw at any time. A post whose original is deleted on LinkedIn is removed from this page in the next monthly update.</p>
+        </div>
+        <div>
+          <h3>Removal</h3>
+          <p>If your post appears here and you’d like it taken down, write to <a href="mailto:voices@upgrad.com">voices@upgrad.com</a> with the link. It comes down within five working days, no questions asked.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 74:3919 — CTA -->
+  <section class="wov-cta">
+    <div class="wov-container">
+      <p>One of these posts could be yours.</p>
+      <a href="#">Explore programmes</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- 74:3928 -->
+<div class="wov-surface-label">
+  <p>Separate surface · homepage band (existing upGrad DS)</p>
+</div>
+
+<!-- 74:3930 — homepage band -->
+<section class="wov-band" aria-labelledby="wov-band-h">
+  <div class="wov-container">
+    <div class="wov-band__head">
+      <div>
+        <p class="wov-band__eyebrow">In their own words</p>
+        <p class="wov-band__title" id="wov-band-h">6,404 learners wrote about us. We didn’t edit a word.</p>
+      </div>
+      <a class="wov-band__all" href="#archive">See all 6,404 →</a>
+    </div>
+  </div>
+  <div class="wov-marquee" id="wov-marquee">
+    <div class="wov-marquee__track" id="wov-marquee-track"></div>
+  </div>
+</section>
+
+<!-- 74:4326 -->
+<footer class="wov-footer">
+  <div class="wov-container">
+    <p>Wall of Voices is a public record maintained by upGrad. Posts belong to their authors. Prototype — all names, posts, and figures on this page are sample data.</p>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
