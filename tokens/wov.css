@@ -1,12 +1,13 @@
 /* WALL OF VOICES — design tokens
    Mirrors the "WOV Tokens" variable collection in Figma
-   (file 13hMVjIUc9X1sKOfVHmSc1). Keep the two in sync. */
+   (file 13hMVjIUc9X1sKOfVHmSc1, node 242:6008). Keep the two in sync. */
 
 :root {
   /* Ground */
   --wov-paper:        #FBF9F6;
   --wov-paper-raised: #FFFFFF;
   --wov-halo:         #F2EDE6;
+  --wov-surface-bg:   #FFFFFF;   /* surface/bg */
 
   /* Ink */
   --wov-ink:          #16130F;
@@ -16,30 +17,59 @@
   /* Structure */
   --wov-rule:         #E6E0D8;
   --wov-rule-strong:  #16130F;
+  --wov-border-secondary: #E8E8E8;   /* border/secondary — LinkedIn chrome */
+  --wov-border-white: #FFFFFF;
+  --wov-stroke-thin:  1px;
+  --wov-stroke-medium: 2px;
 
-  /* Accent — PLACEHOLDER. Swap for the upGrad red token from the existing DS
-     before build. Permitted in five places only: logo, one word in the H1,
-     link hover, live-count dot, primary CTA fill. */
+  /* Accent — PLACEHOLDER token value. The page itself is drawn with the
+     upGrad brand red below; swap both for the red token from the existing DS.
+     Permitted in five places only: logo, one word in the H1, link hover,
+     live-count dot, primary CTA fill. */
   --wov-accent:       #E5202E;
+  --wov-accent-brand: #EE2A3D;   /* as drawn in Figma: logo, H1 word, CTA */
   --wov-accent-soft:  #F9E8E6;   /* accent at 8% over paper */
 
+  /* Borrowed chrome — the archive card reproduces a LinkedIn post */
+  --wov-linkedin:     #0A66C2;   /* Logo/LinkedIn */
+  --wov-linkedin-link:#2065AA;   /* tag/significance-text */
+  --wov-black-60:     rgba(0, 0, 0, 0.6);   /* dataviz/black-60 */
+  --wov-black-90:     rgba(0, 0, 0, 0.9);
+  --wov-grey-2:       #666666;   /* System/Text/Content/Body-Greyscale 2 */
+  --wov-react-like:   #378FE9;
+  --wov-react-love:   #DF704D;
+  --wov-react-clap:   #6DAE4F;
+
   /* Type */
+  --wov-font-display: "Fraunces", "Instrument Serif", Georgia, "Times New Roman", serif;
+  --wov-font-sans:    "DM Sans", "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --wov-font-ui:      "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --wov-font-chrome:  "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --wov-font-profile: "Poppins", "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
   --wov-text-xs:   12px;   /* 1.4 — date, badge */
   --wov-text-sm:   14px;   /* 1.5 — role, company */
   --wov-text-base: 16px;   /* 1.6 — post body, never smaller */
-  --wov-text-lg:   20px;   /* 1.5 */
-  --wov-quote:     clamp(28px, 3.4vw, 44px);  /* 1.25 — serif */
-  --wov-h1:        clamp(40px, 6vw, 76px);    /* 1.05 — serif */
+  --wov-text-lg:   18px;   /* 1.6 — hero standfirst */
+  --wov-quote:     clamp(24px, 2.2vw, 32px);   /* 1.375 — serif interstitial */
+  --wov-h1:        clamp(38px, 4.2vw, 60px);   /* 1.19 — serif */
+  --wov-h2:        clamp(30px, 3.2vw, 44px);   /* 1.25 — serif */
+  --wov-display:   clamp(46px, 6.4vw, 90px);   /* 1.1 — "And another six thousand." */
 
   /* Space */
   --wov-space-1: 4px;   --wov-space-2: 8px;   --wov-space-3: 12px;
-  --wov-space-4: 16px;  --wov-space-6: 24px;  --wov-space-8: 32px;
-  --wov-space-12: 48px; --wov-space-16: 64px; --wov-space-24: 96px;
+  --wov-space-4: 16px;  --wov-space-5: 20px;  --wov-space-6: 24px;
+  --wov-space-8: 32px;  --wov-space-10: 40px; --wov-space-12: 48px;
+  --wov-space-16: 64px; --wov-space-20: 80px; --wov-space-24: 96px;
   --wov-space-32: 128px;
 
-  --wov-radius:      10px;
+  --wov-radius:      10px;   /* radius/card */
+  --wov-radius-m:    16px;
+  --wov-radius-l:    24px;
+  --wov-radius-card-lg: 12px;   /* archive PostCard */
   --wov-radius-full: 999px;
   --wov-container:   1240px;
+  --wov-gutter:      20px;
   --wov-gutter-mobile: 20px;
 
   /* Motion — two durations only */
@@ -47,9 +77,13 @@
   --wov-dur-enter: 520ms;
   --wov-dur-exit:  364ms;
   --wov-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --wov-marquee: 90s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* entrances instant; marquee static + arrow controls;
-     counters render final values; all transitions <= 1ms */
+  :root {
+    --wov-dur-micro: 1ms;
+    --wov-dur-enter: 1ms;
+    --wov-dur-exit:  1ms;
+  }
 }

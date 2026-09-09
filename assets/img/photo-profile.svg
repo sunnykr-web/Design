@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 704" width="620" height="704" role="img">
+  <defs>
+  <filter id="g" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.055"/></feComponentTransfer>
+  </filter>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9A7358"/><stop offset="1" stop-color="#6B4E3A"/></linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2EDE4"/><stop offset="1" stop-color="#DCD5C8"/></linearGradient>
+  </defs>
+  <path d="M37.19999999999999 704 C37.19999999999999 485.76000000000005 161.20000000000002 450.56000000000006 248.0 429.44000000000005 L372.0 429.44000000000005 C458.79999999999995 450.56000000000006 582.8 485.76000000000005 582.8 704 Z" fill="url(#shirt)"/>
+  <path d="M248.0 429.44000000000005 L310.0 499.84000000000003 L372.0 429.44000000000005" fill="none" stroke="#C8BFAF" stroke-width="2.5" stroke-linejoin="round"/>
+  <rect x="257.92" y="316.8" width="104.16" height="168.96000000000004" rx="37.199999999999996" fill="#7C5A43"/>
+  <ellipse cx="310.0" cy="239.36" rx="124.0" ry="140.8" fill="url(#skin)"/>
+  <ellipse cx="186.0" cy="253.44000000000003" rx="16.12" ry="22.528000000000002" fill="#7C5A43"/>
+  <ellipse cx="434.0" cy="253.44000000000003" rx="16.12" ry="22.528000000000002" fill="#7C5A43"/>
+  <path d="M181.04 225.28 C183.51999999999998 59.135999999999996 436.48 59.135999999999996 438.96000000000004 225.28 C399.28 137.984 220.72 137.984 181.04 225.28 Z" fill="#241A16"/>
+  <rect width="620" height="704" filter="url(#g)" opacity=".55"/>
+</svg>

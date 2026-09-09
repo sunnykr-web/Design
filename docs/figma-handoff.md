@@ -2,10 +2,18 @@
 
 File: https://www.figma.com/design/13hMVjIUc9X1sKOfVHmSc1/Wall-of-Voices
 
+## Built
+
+`index.html` at the repository root is the coded build of the desktop page,
+Figma node `242:6008` on page `Landing Page (wip)` — the current 1512-wide
+iteration, which supersedes the earlier `16:1789` frame. See the root README for
+what was reproduced exactly, what is a stand-in, and why.
+
 ## What is designed
 
 | Deliverable | Where | Node |
 |---|---|---|
+| Desktop page, 1512, current iteration (**built**) | page `Landing Page (wip)` | `242:6008` |
 | Desktop page, 1440, all nine sections | page `Landing Page (wip)` | `16:1789` |
 | Mobile page, 390 | page `Landing Page (wip)` | `33:548` |
 | Homepage band, 1440x420 | page `Landing Page (wip)` | `31:548` |
@@ -39,6 +47,21 @@ Variants: `Text only` · `With photo` · `With certificate` · `Truncated` · `N
 `06b Act II archive` → `07 Interstitial` → `08 Method note` → `09 CTA` → `10 Footer`
 
 Scroll arc: one → few → many → one. No grid renders above the fold.
+
+## Divergences between `242:6008` and this document
+
+The `242:6008` iteration moves on from the notes below in three ways, and the
+build follows the Figma:
+
+- **The LinkedIn action bar is back on the archive card.** `242:6008` keeps
+  Like / Comment / repost / send beneath the reaction row. The
+  `Read on LinkedIn ↗` footer survives on the large card used in the hero
+  collage and the pull-quote interstitial, which is the format supplied in
+  `1:2404`.
+- **Truncated cards end in `…more`, inline**, not a fade. Three of the fifteen
+  archive posts are truncated this way.
+- **The display serif is Fraunces**, not Instrument Serif, and the archive card
+  is 282 wide in a four-column grid (24 gutter), not 392 in three.
 
 ## Known placeholders
 

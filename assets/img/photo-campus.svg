@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 370" width="560" height="370" role="img">
+  <defs>
+  <filter id="g" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.055"/></feComponentTransfer>
+  </filter>
+    <linearGradient id="csky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CBD7DE"/><stop offset="1" stop-color="#EEE6DA"/></linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9C8AE"/><stop offset="1" stop-color="#B39C7C"/></linearGradient>
+    <linearGradient id="lawn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FA07A"/><stop offset="1" stop-color="#68764F"/></linearGradient>
+  </defs>
+  <rect width="560" height="370" fill="url(#csky)"/>
+  <rect x="33.6" y="59.2" width="492.8" height="207.20000000000002" fill="url(#wall)"/>
+  <path d="M11.200000000000001 66.6 L280.0 7.4 L548.8 66.6 Z" fill="#9C8563"/>
+  <rect y="266.4" width="560" height="103.60000000000001" fill="url(#lawn)"/>
+  <rect x="78.4" y="111.0" width="30.8" height="155.4" rx="15.68" fill="#F2ECE0" opacity=".75"/>
+  <rect x="159.60000000000002" y="111.0" width="30.8" height="155.4" rx="15.68" fill="#F2ECE0" opacity=".75"/>
+  <rect x="240.79999999999998" y="111.0" width="30.8" height="155.4" rx="15.68" fill="#F2ECE0" opacity=".75"/>
+  <rect x="322.0" y="111.0" width="30.8" height="155.4" rx="15.68" fill="#F2ECE0" opacity=".75"/>
+  <rect x="403.2" y="111.0" width="30.8" height="155.4" rx="15.68" fill="#F2ECE0" opacity=".75"/>
+  <rect x="484.4" y="111.0" width="30.8" height="155.4" rx="15.68" fill="#F2ECE0" opacity=".75"/>
+<g fill="#2C2A26" opacity="0.8"><circle cx="100.8" cy="271.173" r="15.873000000000001"/><path d="M63.059999999999995 366.3 Q63.059999999999995 293.04 100.8 290.82 Q138.54 293.04 138.54 366.3 Z"/></g><g fill="#2C2A26" opacity="0.8"><path d="M74.9925 259.9176 L100.8 249.59459999999999 L126.60749999999999 259.9176 L100.8 270.2406 Z"/><path d="M87.813 263.9136 L87.813 275.7351 Q100.8 284.0601 113.78699999999999 275.7351 L113.78699999999999 263.9136 Z"/><rect x="122.77799999999999" y="259.0851" width="1.4984999999999997" height="15.817499999999997" rx="0.7492499999999999"/></g>
+<g fill="#2C2A26" opacity="0.8"><circle cx="173.6" cy="258.48940000000005" r="17.9894"/><path d="M130.828 366.3 Q130.828 283.27200000000005 173.6 280.75600000000003 Q216.37199999999999 283.27200000000005 216.37199999999999 366.3 Z"/></g>
+<g fill="#2C2A26" opacity="0.8"><circle cx="257.6" cy="271.173" r="15.873000000000001"/><path d="M219.86 366.3 Q219.86 293.04 257.6 290.82 Q295.34000000000003 293.04 295.34000000000003 366.3 Z"/></g><g fill="#2C2A26" opacity="0.8"><path d="M231.79250000000002 259.9176 L257.6 249.59459999999999 L283.4075 259.9176 L257.6 270.2406 Z"/><path d="M244.61300000000003 263.9136 L244.61300000000003 275.7351 Q257.6 284.0601 270.58700000000005 275.7351 L270.58700000000005 263.9136 Z"/><rect x="279.57800000000003" y="259.0851" width="1.4984999999999997" height="15.817499999999997" rx="0.7492499999999999"/></g>
+<g fill="#2C2A26" opacity="0.8"><circle cx="330.4" cy="258.48940000000005" r="17.9894"/><path d="M287.628 366.3 Q287.628 283.27200000000005 330.4 280.75600000000003 Q373.17199999999997 283.27200000000005 373.17199999999997 366.3 Z"/></g>
+<g fill="#2C2A26" opacity="0.8"><circle cx="408.8" cy="271.173" r="15.873000000000001"/><path d="M371.06 366.3 Q371.06 293.04 408.8 290.82 Q446.54 293.04 446.54 366.3 Z"/></g><g fill="#2C2A26" opacity="0.8"><path d="M382.9925 259.9176 L408.8 249.59459999999999 L434.6075 259.9176 L408.8 270.2406 Z"/><path d="M395.813 263.9136 L395.813 275.7351 Q408.8 284.0601 421.78700000000003 275.7351 L421.78700000000003 263.9136 Z"/><rect x="430.778" y="259.0851" width="1.4984999999999997" height="15.817499999999997" rx="0.7492499999999999"/></g>
+<g fill="#2C2A26" opacity="0.8"><circle cx="481.59999999999997" cy="258.48940000000005" r="17.9894"/><path d="M438.828 366.3 Q438.828 283.27200000000005 481.59999999999997 280.75600000000003 Q524.372 283.27200000000005 524.372 366.3 Z"/></g>
+  <rect width="560" height="370" filter="url(#g)" opacity=".55"/>
+</svg>
