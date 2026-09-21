@@ -247,22 +247,22 @@ body {
   inset: 0;
   border-radius: inherit;
   overflow: clip;
-  /* Stand-in tonality so the composition reads before assets/card.png lands;
-     the photograph paints straight over it. */
+  /* Fallback ground if the photograph ever fails to load. */
   background:
     radial-gradient(120% 90% at 22% 18%, #eef2f7 0%, #cfd8e4 48%, #9fb0c6 100%),
     #b9c5d6;
 }
 
-/*  Framing is node 926:22119's: a 454.5 x 544 fill placed at (-23, -10) inside a
-    387 x 476 frame, rescaled here to the fan card's 384.06 x 473.783.          */
+/*  card.webp is node 926:22119 exported at 2x (774 x 952), so the design's crop
+    is already baked into the file — no offset is applied here. Its 64px corners
+    are baked in too, and land a hair outside this card's 62.88px clip, so the
+    image bleeds 1px on every side and the clip owns the corner.                */
 .card__media img {
   position: absolute;
-  left: -22.83px;
-  top: -9.95px;
+  inset: -1px;
   display: block;
-  width: 451.05px;
-  height: 541.47px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
   max-width: none;
   object-fit: cover;
 }
