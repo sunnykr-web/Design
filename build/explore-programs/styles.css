@@ -1,0 +1,330 @@
+/* ============================================================================
+   Wall of Voices — "Explore Programs" CTA band
+   Pixel replica of Figma 13hMVjIUc9X1sKOfVHmSc1, node 914:18698 (1512 x 846).
+
+   Every number below is lifted from the Figma node, not eyeballed. The design
+   canvas is a 1775 x 753 frame, centred in the 1512 artboard and clipped by it;
+   all fan coordinates are expressed in that canvas's space.
+   ========================================================================== */
+
+:root {
+  /* --- Colour (mirrors tokens/wov.css + the node's bound variables) -------- */
+  --colour-ink:          #16130f;   /* var colour/ink          */
+  --colour-paper-raised: #ffffff;   /* var colour/paper-raised */
+  --colour-accent:       #ee2a3d;   /* CTA fill, node 914:19886 */
+  --colour-rule-strong:  #000000;   /* pill hairline            */
+
+  /* --- Type ---------------------------------------------------------------- */
+  --font-display: "Fraunces", "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body:    "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-ui:      "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --title-size:     48px;
+  --title-leading:  71.4px;
+  --title-tracking: -0.68px;
+
+  --sub-size:  24px;
+  --sub-width: 1155px;
+
+  --cta-size:    15px;
+  --cta-leading: 24px;
+
+  /* --- Geometry ------------------------------------------------------------ */
+  --artboard-w: 1512px;
+  --artboard-h: 846px;
+  --canvas-w:   1775px;
+  --canvas-h:   753px;
+  --canvas-top:  61px;
+
+  --card-w: 384.06px;
+  --card-h: 473.783px;
+  --card-radius: 62.88px;          /* the heavy corner radius, verbatim */
+
+  --pill-w: 145.527px;
+  --pill-h: 48.144px;
+  --pill-radius: 32.826px;
+  --pill-border: 1.094px;
+
+  --radius-full: 999px;            /* var radius/full */
+
+  /* --- Motion -------------------------------------------------------------- */
+  --fan-sweep: 7.5deg;             /* arc travelled either side of the design frame */
+  --fan-duration: 18s;
+  --fan-ease: cubic-bezier(0.37, 0, 0.63, 1);
+
+  /* Continuous downscale below 1512px. atan2()/tan() turn a length ratio into a
+     unitless number; browsers without them keep the `1` above and simply clip. */
+  --fit: 1;
+  --fit: tan(atan2(min(100vw, var(--artboard-w)), var(--artboard-w)));
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  background: var(--colour-paper-raised);
+  overflow-x: clip;   /* the 1512px artboard is scaled down, never scrolled sideways */
+}
+
+body {
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  overflow-x: clip;
+  background: var(--colour-paper-raised);
+  color: var(--colour-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- artboard */
+
+.stage {
+  position: relative;
+  width: var(--artboard-w);
+  height: var(--artboard-h);
+  overflow: clip;
+  background: var(--colour-paper-raised);
+  transform: scale(var(--fit));
+  transform-origin: top center;
+  /* reclaim the layout height the scale transform does not */
+  margin-bottom: calc(var(--artboard-h) * (var(--fit) - 1));
+}
+
+/* The 1775 x 753 design canvas, centred on the artboard (Figma x = -131). */
+.canvas {
+  position: absolute;
+  top: var(--canvas-top);
+  left: calc(50% + 0.5px);
+  translate: -50% 0;
+  width: var(--canvas-w);
+  height: var(--canvas-h);
+  overflow: clip;
+}
+
+/* ------------------------------------------------------- copy: h2 / p / cta */
+
+.lockup {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lockup__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--title-size);
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  color: var(--colour-ink);
+  text-align: center;
+  white-space: nowrap;
+  /* Figma centres this at canvas x 889.07 — 1.57px right of the canvas midline. */
+  translate: 1.57px 0;
+}
+
+.lockup__sub {
+  /* title line box ends at y 71.4; Figma puts this text node at y 81 */
+  margin: 9.6px 0 0;
+  width: var(--sub-width);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--sub-size);
+  line-height: normal;
+  letter-spacing: 0;
+  font-variation-settings: "opsz" 14;
+  color: var(--colour-ink);
+  text-align: center;
+  /* Figma centres this at canvas x 904.50 — the copy block sits 17px right. */
+  translate: 17px 0;
+}
+
+.lockup__cta {
+  /* subhead line box ends at y 112; Figma puts the button at y 151 */
+  margin-top: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 217.242px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  background: var(--colour-accent);
+  color: var(--colour-paper-raised);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--cta-size);
+  line-height: var(--cta-leading);
+  letter-spacing: 0;
+  text-decoration: none;
+  white-space: nowrap;
+  /* Figma centres the button at canvas x 886.996 */
+  translate: -0.5px 0;
+  transition: background-color 160ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform      160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lockup__cta:hover { background: #d81f31; }
+
+.lockup__cta:focus-visible {
+  outline: 2px solid var(--colour-ink);
+  outline-offset: 3px;
+}
+
+.lockup__cta:active { scale: 0.985; }
+
+/* ------------------------------------------------------------- the fanned arc */
+
+.fan {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/*  Each seat is the card's UNROTATED box at its exact Figma coordinates, so the
+    first painted frame is the Figma frame. The seat carries the orbit: its
+    transform-origin is offset so that all five origins resolve to the one shared
+    axis at canvas (889.02, 1177.10) — 690px below the centre card, i.e. below
+    the container. The card inside carries only its own design tilt.           */
+.fan__seat {
+  position: absolute;
+  width: var(--card-w);
+  height: var(--card-h);
+  margin: 0;
+  transform-origin: var(--ox) var(--oy);
+  transform: rotate(0deg) translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  animation: fan-orbit var(--fan-duration) var(--fan-ease) infinite;
+}
+
+.fan__seat--1 { left:  111.602px; top: 587.163px; --ox:  777.421px; --oy: 589.941px; --tilt: -57.48deg; --blur: 7px;   --wash: 0.6; }
+.fan__seat--2 { left:  340.602px; top: 336.165px; --ox:  548.420px; --oy: 840.939px; --tilt: -30.20deg; --blur: 1px;   --wash: 0.2; }
+.fan__seat--3 { left:  687.602px; top: 250.166px; --ox:  201.421px; --oy: 926.938px; --tilt:   0deg;    --blur: 0px;   --wash: 0;   }
+.fan__seat--4 { left: 1031.024px; top: 337.456px; --ox: -142.002px; --oy: 839.648px; --tilt:  29.46deg; --blur: 1px;   --wash: 0.2; }
+.fan__seat--5 { left: 1281.825px; top: 580.543px; --ox: -392.803px; --oy: 596.562px; --tilt:  59.41deg; --blur: 3.5px; --wash: 0.2; }
+
+/* the centre card sits on top of the fan */
+.fan__seat--3 { z-index: 3; }
+.fan__seat--2,
+.fan__seat--4 { z-index: 2; }
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--card-radius);
+  overflow: clip;
+  transform: rotate(var(--tilt)) translateZ(0);
+  filter: blur(var(--blur));
+  backface-visibility: hidden;
+}
+
+.card--hero {
+  border: 1px solid var(--colour-paper-raised);
+  box-shadow: 10px 24px 34px 0 rgb(255 255 255 / 0.25);
+  overflow: visible;
+}
+
+.card__media {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: clip;
+  /* Stand-in tonality so the composition reads before assets/card.png lands;
+     the photograph paints straight over it. */
+  background:
+    radial-gradient(120% 90% at 22% 18%, #eef2f7 0%, #cfd8e4 48%, #9fb0c6 100%),
+    #b9c5d6;
+}
+
+.card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* the 20% / 60% white veil Figma lays over every card but the hero */
+.card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgb(255 255 255 / var(--wash));
+  pointer-events: none;
+}
+
+.card__pill {
+  position: absolute;
+  left: 31.73px;
+  top: 396.64px;
+  display: flex;
+  align-items: center;
+  width: var(--pill-w);
+  height: var(--pill-h);
+  padding-left: 51.43px;
+  border: var(--pill-border) solid var(--colour-rule-strong);
+  border-radius: var(--pill-radius);
+  background: var(--colour-paper-raised);
+  overflow: clip;
+  color: var(--colour-ink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15.319px;
+  line-height: 24.51px;
+  letter-spacing: 3.6765px;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.card__caption {
+  position: absolute;
+  left: 31.73px;
+  top: 356.16px;
+  color: var(--colour-paper-raised);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 37.202px;
+  line-height: 24.51px;
+  letter-spacing: 3.6765px;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ motion */
+
+/*  One shared axis, one set of keyframes. 0% and 100% are the Figma frame
+    exactly, so the band always comes to rest on the design.                  */
+@keyframes fan-orbit {
+  0%, 100% { transform: rotate(0deg)                          translateZ(0); }
+  25%      { transform: rotate(var(--fan-sweep))              translateZ(0); }
+  75%      { transform: rotate(calc(var(--fan-sweep) * -1))   translateZ(0); }
+}
+
+.fan:hover .fan__seat,
+.fan:focus-within .fan__seat { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fan__seat { animation: none; }
+  .lockup__cta { transition-duration: 1ms; }
+}
