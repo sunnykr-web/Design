@@ -254,12 +254,17 @@ body {
     #b9c5d6;
 }
 
+/*  Framing is node 926:22119's: a 454.5 x 544 fill placed at (-23, -10) inside a
+    387 x 476 frame, rescaled here to the fan card's 384.06 x 473.783.          */
 .card__media img {
+  position: absolute;
+  left: -22.83px;
+  top: -9.95px;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 451.05px;
+  height: 541.47px;
+  max-width: none;
   object-fit: cover;
-  border-radius: inherit;
 }
 
 /* the 20% / 60% white veil Figma lays over every card but the hero */

@@ -74,9 +74,10 @@ and any non-zero angle swings the whole fan around the shared axis.
 1. **Five cards, not three.** The brief described three images; node `914:18698`
    contains five (`914:19866`, `19870`, `19871`, `19875`, `19878`). The build
    follows the node.
-2. **The photograph is a placeholder.** `www.figma.com` is blocked by the egress
-   policy on the build runner, so the image fill could not be fetched. See
-   `build/explore-programs/assets/README.md`.
+2. **The photograph is a placeholder.** The image is node `926:22119`
+   (`image 20493`); `www.figma.com` is not on the build runner's egress
+   allowlist, so it could not be fetched. The card crop reproduces that node's
+   framing exactly. See `build/explore-programs/assets/README.md`.
 3. **Copy is reproduced verbatim,** including `One of the Post could be yours`.
    Reads like a typo for `One of these posts could be yours`; left as designed.
 4. The three copy elements are centred on three different axes (above). Held as
