@@ -17,11 +17,12 @@
   --wov-rule:         #E6E0D8;
   --wov-rule-strong:  #16130F;
 
-  /* Accent — PLACEHOLDER. Swap for the upGrad red token from the existing DS
-     before build. Permitted in five places only: logo, one word in the H1,
-     link hover, live-count dot, primary CTA fill. */
-  --wov-accent:       #E5202E;
-  --wov-accent-soft:  #F9E8E6;   /* accent at 8% over paper */
+  /* Accent — upGrad red, resolved from the `text/brand` variable used in the
+     Figma file's Convocation chapter page (node 914:11203). Permitted in
+     five places only: logo, one word in the H1, link hover, live-count dot,
+     primary CTA fill. */
+  --wov-accent:       #EE2C3C;
+  --wov-accent-soft:  #FCE8E9;   /* accent at 8% over paper */
 
   /* Type */
   --wov-text-xs:   12px;   /* 1.4 — date, badge */

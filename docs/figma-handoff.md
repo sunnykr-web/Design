@@ -13,6 +13,7 @@ File: https://www.figma.com/design/13hMVjIUc9X1sKOfVHmSc1/Wall-of-Voices
 | Empty / loading / error states sheet | page `Wall of Voices — Components` | `32:2` |
 | Consent open questions (spec §12) | page `Wall of Voices — Components` | `32:36` |
 | Token variables (`WOV Tokens`) | local variables | collection `21:2` |
+| Convocation chapter page | page `Landing Page (wip)` | `914:11203` |
 
 ## PostCard
 
@@ -42,13 +43,28 @@ Scroll arc: one → few → many → one. No grid renders above the fold.
 
 ## Known placeholders
 
-- **Accent red is `#E5202E`, a stand-in.** Replace with the upGrad red token from the
-  existing design system.
-- **Display serif is Instrument Serif**, the free stand-in named in the spec. Swap for
-  Freight Display / Tiempos Headline / GT Super when licensed.
+- **Accent red is resolved to `#EE2C3C`** (Figma's `text/brand` variable, seen on the
+  Convocation chapter page). `tokens/wov.css` has been updated to match; the earlier
+  `#E5202E` was a stand-in.
+- **Display serif used in-file is Fraunces**, not Instrument Serif as originally named
+  in the spec text — the Convocation chapter page sets H1 and pull-quotes in Fraunces
+  Regular/Italic. Treat Fraunces as the current stand-in until Freight Display / Tiempos
+  Headline / GT Super is licensed.
 - **Content is representative, not cleared.** Names, roles, employers and post text are
   written for layout. Real records replace them only after consent clearance.
 - Two photo/avatar images are reused from the supplied LinkedIn card mock.
+
+## Built so far
+
+- **Convocation chapter page** (`914:11203`) — `pages/convocation/index.html` +
+  `pages/convocation/convocation.css`. Static HTML/CSS against `tokens/wov.css`,
+  no build tooling in this repo yet. Photos in the hero portrait stack and the
+  filmstrip are tone-matched CSS/SVG placeholders, not the real photography —
+  the sandbox this was built in has no network path to Figma's asset CDN to pull
+  the source images, and the content is unconsented per §12 regardless. Swap in
+  real crops (or `next/image` sources, once the Next.js app exists) without
+  touching layout: each placeholder is a `[data-tone]` block sized to the
+  original image's aspect ratio.
 
 ## Open before final design (spec §12)
 
