@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: auto; }
+  body { margin: 0; background: #0E0C0B; color: #F3EEE6; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: inherit; }
+  ::selection { background: #E4041C; color: #FFFFFF; }
+  [data-drag]::-webkit-scrollbar { display: none; }
+  @keyframes p5-pre-out { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+  @keyframes p5-cue { 0% { transform: translateY(-100%); } 60%, 100% { transform: translateY(260%); } }
+  @keyframes p5-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+</style>
+</helmet>
+
+<div id="p5-root" style="width:100%;overflow-x:clip;background:#0E0C0B">
+
+  <div id="p5-pre" style="position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(20px,4vw,56px);background:#0E0C0B;color:#F3EEE6;clip-path:inset(0 0 0 0);animation:p5-pre-out 1s cubic-bezier(.76,0,.24,1) 3.4s forwards;cursor:pointer">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:20px">
+      <span style="font-size:24px;font-weight:700;letter-spacing:-.04em;color:#E4041C">upGrad</span>
+      <span style="font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,238,230,.7)">In their own words</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px">
+        <span id="p5-pct" style="font-family:'Instrument Serif',serif;font-size:clamp(110px,18vw,280px);line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums">000</span>
+        <span style="max-width:320px;padding-bottom:12px;font-size:15px;line-height:1.55;color:rgba(243,238,230,.72)">Collecting 6,404 posts written by upGrad learners on their own LinkedIn.</span>
+      </div>
+      <div style="height:1px;background:rgba(243,238,230,.16);overflow:hidden"><div id="p5-pbar" style="height:100%;background:#E4041C;transform:scaleX(0);transform-origin:left"></div></div>
+    </div>
+  </div>
+
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:250;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27180%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.85%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')"></div>
+
+  <div id="p5-cur" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:240;width:88px;height:88px;border-radius:50%;background:#E4041C;color:#FFFFFF;display:none;align-items:center;justify-content:center;pointer-events:none;transform:translate3d(-200px,-200px,0) scale(0);will-change:transform;font-size:13px;font-weight:600;letter-spacing:.04em">
+    <span id="p5-cur-l"></span>
+  </div>
+
+  <header style="position:fixed;top:0;left:0;right:0;z-index:60;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 clamp(18px,4vw,56px);background:{{ hdrBg }};border-bottom:1px solid {{ hdrLine }};backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);transform:{{ hdrTf }};transition:background .7s cubic-bezier(.16,1,.3,1),border-color .7s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)">
+    <a href="#p5-hero" onClick="{{ goTop }}" style="font-size:23px;font-weight:700;letter-spacing:-.04em;color:#E4041C">upGrad</a>
+    <nav style="display:{{ navDisplay }};align-items:center;gap:clamp(18px,2.4vw,36px)">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+        <a href="{{ n.href }}" onClick="{{ n.go }}" onMouseEnter="{{ n.enter }}" onMouseLeave="{{ n.leave }}" style="position:relative;display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;font-weight:500;color:{{ n.fg }};transition:color .4s">
+          <span style="width:5px;height:5px;border-radius:50%;background:#E4041C;transform:scale({{ n.dot }});transition:transform .5s cubic-bezier(.16,1,.3,1)"></span>{{ n.label }}
+        </a>
+      </sc-for>
+    </nav>
+    <a href="#" data-mag="1" style="flex:none;padding:11px 20px;border-radius:999px;background:#F3EEE6;color:#0E0C0B;font-size:13px;font-weight:600;transition:background .35s,color .35s,transform .6s cubic-bezier(.16,1,.3,1)" style-hover="background:#E4041C;color:#FFFFFF">Explore programmes</a>
+    <span id="p5-prog" style="position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#E4041C;transform:scaleX(0);transform-origin:left"></span>
+  </header>
+
+  <div style="position:fixed;left:12px;bottom:12px;z-index:100;display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;border:1px solid rgba(243,238,230,.18);background:rgba(14,12,11,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:11px;font-weight:600;letter-spacing:.06em">
+    <a href="Trust%20Building.dc.html?v=1" style="padding:5px 11px;border-radius:999px;color:rgba(243,238,230,.7)" style-hover="color:#F3EEE6">V1</a>
+    <a href="Trust%20Building.dc.html?v=2" style="padding:5px 11px;border-radius:999px;color:rgba(243,238,230,.7)" style-hover="color:#F3EEE6">V2</a>
+    <a href="Trust%20Building.dc.html?v=3" style="padding:5px 11px;border-radius:999px;color:rgba(243,238,230,.7)" style-hover="color:#F3EEE6">V3</a>
+    <a href="Trust%20Building%20V4.dc.html" style="padding:5px 11px;border-radius:999px;color:rgba(243,238,230,.7)" style-hover="color:#F3EEE6">V4</a>
+    <span style="padding:5px 11px;border-radius:999px;background:#F3EEE6;color:#0E0C0B">V5</span>
+  </div>
+
+  <section id="p5-hero" data-screen-label="00 Hero" style="position:relative;height:100vh;min-height:660px;background:#0E0C0B;color:#FFFFFF">
+    <div id="p5-vwrap" style="position:absolute;inset:0;overflow:hidden;will-change:clip-path">
+      <video id="p5-video" src="./assets/reel.mp4" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.2);will-change:transform"></video>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,12,11,.62) 0%,rgba(14,12,11,.06) 26%,rgba(14,12,11,.2) 52%,rgba(14,12,11,.94) 100%)"></div>
+    </div>
+    <div id="p5-hero-c" style="position:absolute;left:clamp(18px,4vw,56px);right:clamp(18px,4vw,56px);bottom:clamp(36px,7vh,80px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:36px 64px;will-change:transform,opacity">
+      <div style="flex:1 1 560px;max-width:1100px;display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px)">
+        <div data-hf="1" style="display:flex;align-items:center;gap:14px;font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.86)">
+          <span style="width:7px;height:7px;border-radius:50%;background:#E4041C;animation:p5-pulse 2.4s ease-in-out infinite"></span>Unedited · Unprompted · Unpaid
+        </div>
+        <h1 data-lines="hero" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(58px,8vw,140px);line-height:.9;letter-spacing:-.035em;color:#FFFFFF">
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Don’t take</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">our word for it.</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#FF3B4A">Take theirs.</span></span>
+        </h1>
+        <div data-hf="1" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px">
+          <a href="#p5-man" onClick="{{ goMan }}" data-mag="1" onMouseEnter="{{ heroCta.enter }}" onMouseLeave="{{ heroCta.leave }}" style="display:flex;align-items:center;gap:14px;padding:17px 28px;border-radius:999px;background:{{ heroCta.bg }};color:{{ heroCta.fg }};font-size:14px;font-weight:600;transition:background .4s,color .4s,transform .6s cubic-bezier(.16,1,.3,1)">Read their posts<span style="display:inline-block;transform:{{ heroCta.arrow }};transition:transform .6s cubic-bezier(.16,1,.3,1)">↓</span></a>
+          <p style="margin:0;max-width:380px;font-size:15px;line-height:1.55;color:rgba(255,255,255,.86);text-wrap:pretty">Real posts from upGrad learners, on their own profiles, in their own words.</p>
+        </div>
+      </div>
+      <div data-hf="1" style="flex:none;display:flex;flex-direction:column;gap:10px;padding-left:24px;border-left:1px solid rgba(255,255,255,.28)">
+        <span id="p5-count" style="font-family:'Instrument Serif',serif;font-size:clamp(60px,6.4vw,104px);line-height:.85;letter-spacing:-.03em;color:#FFFFFF;font-variant-numeric:tabular-nums">6,404</span>
+        <span style="font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.76)">Posts, all still live</span>
+      </div>
+    </div>
+    <div data-hf="1" style="position:absolute;right:clamp(18px,4vw,56px);top:50%;display:flex;flex-direction:column;align-items:center;gap:14px;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.72);writing-mode:vertical-rl">
+      Scroll<span style="position:relative;width:1px;height:48px;background:rgba(255,255,255,.25);overflow:hidden"><span style="position:absolute;left:0;top:0;width:1px;height:40%;background:#FFFFFF;animation:p5-cue 2.2s cubic-bezier(.65,0,.35,1) infinite"></span></span>
+    </div>
+  </section>
+
+  <section id="p5-man" data-screen-label="01 Manifesto" style="position:relative;background:#0E0C0B;color:#F3EEE6;padding:clamp(120px,20vh,220px) clamp(18px,6vw,96px) clamp(96px,14vh,160px)">
+    <div style="max-width:1320px;display:flex;flex-direction:column;gap:clamp(32px,4vw,56px)">
+      <span style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,238,230,.72)"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>Why this page exists</span>
+      <p id="p5-words-p" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(36px,4.8vw,80px);line-height:1.06;letter-spacing:-.025em;color:#F3EEE6;text-wrap:pretty">
+        <span data-w="1">6,404</span> <span data-w="1">learners</span> <span data-w="1">wrote</span> <span data-w="1">about</span> <span data-w="1">their</span> <span data-w="1">programme</span> <span data-w="1">on</span> <span data-w="1">LinkedIn.</span> <em data-w="1" style="color:#FF3B4A">Nobody</em> <em data-w="1" style="color:#FF3B4A">asked</em> <em data-w="1" style="color:#FF3B4A">them</em> <em data-w="1" style="color:#FF3B4A">to.</em> <em data-w="1" style="color:#FF3B4A">Nobody</em> <em data-w="1" style="color:#FF3B4A">paid</em> <em data-w="1" style="color:#FF3B4A">them.</em> <span data-w="1">We</span> <span data-w="1">collected</span> <span data-w="1">the</span> <span data-w="1">posts,</span> <span data-w="1">left</span> <span data-w="1">every</span> <span data-w="1">word</span> <span data-w="1">as</span> <span data-w="1">it</span> <span data-w="1">was,</span> <span data-w="1">and</span> <span data-w="1">linked</span> <span data-w="1">each</span> <span data-w="1">one</span> <span data-w="1">back</span> <span data-w="1">to</span> <span data-w="1">the</span> <span data-w="1">original.</span>
+      </p>
+    </div>
+    <div style="margin-top:clamp(96px,14vh,160px);display:flex;flex-direction:column">
+      
+      <sc-for list="{{ tocRows }}" as="t" hint-placeholder-count="5">
+        
+      </sc-for>
+      
+    </div>
+  </section>
+
+  <section id="p5-conv" data-screen-label="02 Convocation" style="position:relative;background:#F3EEE6;color:#0E0C0B;border-radius:32px 32px 0 0">
+    <div id="cv5-stage" style="position:relative;height:300vh">
+    <div style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,4vh,40px);overflow:hidden;padding-top:72px;box-sizing:border-box">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px;padding:0 clamp(18px,6vw,96px)">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <span style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B80317"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>01 · Convocation</span>
+        <h2 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(54px,7.4vw,120px);line-height:.9;letter-spacing:-.035em">
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Months on screen.</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#6A645C">One day on stage.</span></span>
+        </h2>
+      </div>
+      <p data-rv="1" style="margin:0;max-width:400px;font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:#4A453F;text-wrap:pretty">Trade your virtual classroom for the campus grounds as you finally meet the peers you’ve studied alongside for months.</p>
+    </div>
+        <div id="cv5-track" style="position:relative;display:flex;align-items:flex-end;gap:clamp(18px,2vw,32px);width:max-content;padding:0 clamp(18px,6vw,96px);will-change:transform">
+          <sc-for list="{{ convItems }}" as="g" hint-placeholder-count="6">
+            <sc-if value="{{ g.isImg }}" hint-placeholder-val="{{ true }}">
+              <figure data-cur="View" onMouseEnter="{{ g.enter }}" onMouseLeave="{{ g.leave }}" style="flex:none;margin:0;display:flex;flex-direction:column;gap:14px">
+                <div style="position:relative;height:min(39vh,336px);aspect-ratio:{{ g.ar }};border-radius:18px;overflow:hidden;background:{{ g.bg }};box-shadow:{{ g.shadow }};transition:box-shadow .8s cubic-bezier(.16,1,.3,1)">
+                  <div style="position:absolute;inset:0;transform:{{ g.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
+                    <img data-cvimg="{{ g.px }}" src="{{ g.src }}" alt="{{ g.alt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:{{ g.fit }};padding:{{ g.pad }};display:block;will-change:transform">
+                  </div>
+                </div>
+                <figcaption style="display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:500;color:{{ g.capFg }};transition:color .4s"><span>{{ g.place }}</span><span style="font-variant-numeric:tabular-nums">{{ g.year }}</span></figcaption>
+              </figure>
+            </sc-if>
+            <sc-if value="{{ g.isQuote }}" hint-placeholder-val="{{ false }}">
+              <figure style="flex:none;margin:0;display:flex;flex-direction:column;gap:14px">
+                <blockquote style="margin:0;height:min(39vh,336px);width:clamp(210px,21vw,315px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:clamp(28px,2.6vw,42px);border-radius:18px;background:#0E0C0B;color:#F3EEE6">
+                  <span style="font-family:'Instrument Serif',serif;font-size:96px;line-height:.55;color:#E4041C">“</span>
+                  <p style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(26px,2.3vw,38px);line-height:1.16;letter-spacing:-.015em;text-wrap:pretty">I didn’t tell anyone in my family I had enrolled. This post is how they found out I graduated.</p>
+                  <footer style="display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.4;color:rgba(243,238,230,.72)"><span style="font-weight:600;color:#F3EEE6">Ramesh Iyer</span><span>Senior Manager, Tata Steel</span></footer>
+                </blockquote>
+                <figcaption style="font-size:13px;font-weight:500"><a href="#" style="display:inline-flex;gap:6px;color:#0E0C0B;border-bottom:1px solid #C9C0B2;padding-bottom:2px;transition:color .3s,border-color .3s" style-hover="color:#B80317;border-bottom-color:#B80317">Course details ↗</a></figcaption>
+              </figure>
+            </sc-if>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;padding:0 clamp(18px,6vw,96px);font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#6A645C">
+          <span>Convocation 2026</span>
+          <div style="flex:1;height:1px;background:#D9D1C4;overflow:hidden"><div id="cv5-bar" style="height:100%;background:#0E0C0B;transform-origin:left;transform:scaleX(0)"></div></div>
+          <span>Keep scrolling</span>
+        </div>
+      </div></div>
+  </section>
+
+  <section id="p5-alumni" data-screen-label="03 Alumni" style="position:relative;background:#0E0C0B;color:#F3EEE6">
+    <div id="al5-stage" data-n="3" style="position:relative;height:380vh">
+      <div style="position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;isolation:isolate">
+        <img id="al5-bg" src="./assets/alumni-ballroom.png" alt="" style="position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.14);will-change:transform">
+        <div style="position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,8,7,.9) 0%,rgba(10,8,7,.62) 36%,rgba(10,8,7,.22) 100%),linear-gradient(180deg,rgba(10,8,7,.55) 0%,rgba(10,8,7,0) 28%,rgba(10,8,7,0) 70%,rgba(10,8,7,.6) 100%)"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,72px);padding:clamp(92px,13vh,120px) clamp(18px,5vw,80px) clamp(24px,5vh,56px)">
+          <div style="flex:1 1 300px;max-width:440px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:0;color:#FFFFFF">
+            <div style="display:flex;flex-direction:column;gap:22px">
+              <span style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.82)"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>02 · Alumni</span>
+              <h2 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,4.2vw,66px);line-height:.94;letter-spacing:-.03em">
+                <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Where profile pictures</span></span>
+                <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic">became people.</span></span>
+              </h2>
+              <div style="display:flex;flex-direction:column">
+                <sc-for list="{{ alSteps }}" as="s" hint-placeholder-count="3">
+                  <button type="button" id="al5-s{{ $index }}" onClick="{{ s.go }}" style="position:relative;display:grid;grid-template-columns:40px 1fr auto;align-items:center;padding:13px 0;border:0;border-top:1px solid rgba(255,255,255,.2);background:transparent;color:#FFFFFF;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;text-align:left;cursor:pointer;opacity:{{ s.op }};transition:opacity .4s" style-hover="opacity:1">
+                    <span data-fill="1" style="position:absolute;left:0;right:0;top:-1px;height:1px;background:#FFFFFF;transform:scaleX({{ s.fill }});transform-origin:left"></span>
+                    <span style="font-variant-numeric:tabular-nums;color:rgba(255,255,255,.72)">{{ s.num }}</span><span>{{ s.label }}</span><span aria-hidden="true">→</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;align-items:baseline;gap:10px;font-family:'Instrument Serif',serif;color:#FFFFFF">
+                <span style="display:block;height:1em;overflow:hidden;font-size:clamp(56px,5vw,80px);line-height:1;letter-spacing:-.03em"><span id="al5-roll" style="display:flex;flex-direction:column;will-change:transform"><span style="height:1em">01</span><span style="height:1em">02</span><span style="height:1em">03</span></span></span>
+                <span style="font-size:22px;color:rgba(255,255,255,.7)">/ 03</span>
+              </div>
+              <div style="position:relative;min-height:clamp(170px,22vh,230px)">
+                <sc-for list="{{ alSteps }}" as="s" hint-placeholder-count="1">
+                  <div id="al5-t{{ $index }}" style="position:absolute;left:0;right:0;top:0;display:flex;flex-direction:column;gap:14px;opacity:{{ s.op0 }};will-change:transform,opacity">
+                    <span style="font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.84)">{{ s.tag }}</span>
+                    <p style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(26px,2.5vw,38px);line-height:1.12;letter-spacing:-.01em;color:#FFFFFF;text-wrap:balance">{{ s.line }}</p>
+                    <a href="#" style="align-self:flex-start;display:flex;gap:8px;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.4);font-size:13px;font-weight:600;color:#FFFFFF;transition:border-color .3s" style-hover="border-bottom-color:#FFFFFF">View on LinkedIn ↗</a>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div id="al5-media" data-cur="View" style="position:relative;flex:3 1 440px;min-width:0;min-height:260px">
+            <sc-for list="{{ alSteps }}" as="s" hint-placeholder-count="1">
+              <div id="al5-c{{ $index }}" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:{{ s.z }};transform:{{ s.tf0 }};will-change:transform,filter,opacity">
+                <img id="al5-i{{ $index }}" src="{{ s.src }}" alt="{{ s.alt }}" draggable="false" style="max-width:100%;max-height:100%;width:auto;height:auto;display:block;border-radius:14px;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)">
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:clamp(96px,14vh,160px) 0 clamp(88px,12vh,140px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px;padding:0 clamp(18px,6vw,96px) 32px">
+        <h3 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(38px,4.2vw,64px);line-height:.98;letter-spacing:-.03em">
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Where they went next,</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#FF3B4A">in their words.</span></span>
+        </h3>
+        <div style="display:flex;gap:10px">
+          <button type="button" aria-label="Previous" data-mag="1" onClick="{{ alPrev }}" style="width:56px;height:56px;border-radius:50%;border:1px solid rgba(243,238,230,.28);background:transparent;color:#F3EEE6;font-size:18px;cursor:pointer;transition:background .35s,color .35s,border-color .35s,transform .6s cubic-bezier(.16,1,.3,1)" style-hover="background:#F3EEE6;color:#0E0C0B;border-color:#F3EEE6">←</button>
+          <button type="button" aria-label="Next" data-mag="1" onClick="{{ alNext }}" style="width:56px;height:56px;border-radius:50%;border:1px solid rgba(243,238,230,.28);background:transparent;color:#F3EEE6;font-size:18px;cursor:pointer;transition:background .35s,color .35s,border-color .35s,transform .6s cubic-bezier(.16,1,.3,1)" style-hover="background:#F3EEE6;color:#0E0C0B;border-color:#F3EEE6">→</button>
+        </div>
+      </div>
+      <div id="al5-rail" data-drag="1" data-cur="Drag" style="display:flex;gap:18px;overflow-x:auto;overflow-y:visible;scrollbar-width:none;padding:14px clamp(18px,6vw,96px) 32px;cursor:grab">
+        <sc-for list="{{ careers }}" as="c" hint-placeholder-count="4">
+          <div data-ir="18" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="flex:none;width:clamp(310px,34vw,500px);border-radius:18px;overflow:hidden;transform:{{ c.lift }};box-shadow:{{ c.shadow }};transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1),clip-path 1.4s cubic-bezier(.16,1,.3,1)">
+            <img src="./assets/career-move-v4.png" alt="Career move: Data Analyst at Accenture to Business Analyst at Microsoft" draggable="false" style="width:100%;display:block">
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="p5-abroad" data-screen-label="04 Study Abroad" style="position:relative;background:#F3EEE6;color:#0E0C0B;padding:clamp(110px,15vh,170px) 0 clamp(88px,12vh,140px);border-radius:32px 32px 0 0">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px;padding:0 clamp(18px,6vw,96px) clamp(32px,3.4vw,52px)">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <span style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B80317"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>03 · Study abroad</span>
+        <h2 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(54px,7.4vw,120px);line-height:.9;letter-spacing:-.035em">
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">When the classroom</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#6A645C">got a passport.</span></span>
+        </h2>
+      </div>
+      <p data-rv="1" style="margin:0;max-width:400px;font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:#4A453F;text-wrap:pretty">Some learners took their programme further than their desk. These are the posts they wrote from the other side.</p>
+    </div>
+    <div id="ab5-panel" data-rv="1" style="position:relative;margin:0 clamp(10px,1.6vw,24px);border-radius:32px;overflow:hidden;isolation:isolate;padding:clamp(44px,5vw,76px) 0 clamp(30px,3vw,44px)">
+      <img id="ab5-bg" src="./assets/sa-plane.png" alt="" style="position:absolute;left:0;right:0;top:-70px;z-index:-2;width:100%;height:calc(100% + 140px);object-fit:cover;object-position:center top;display:block;will-change:transform">
+      <div style="position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,22,38,.42) 0%,rgba(18,22,38,0) 42%,rgba(18,22,38,.24) 100%)"></div>
+      <h3 style="margin:0;padding:0 clamp(20px,5vw,76px);max-width:920px;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,3.4vw,52px);line-height:1.06;letter-spacing:-.015em;color:#FFFFFF;text-shadow:0 2px 24px rgba(0,0,0,.3);text-wrap:balance">They left for a degree. <em>They wrote home on LinkedIn.</em></h3>
+      <div id="ab5-stage" tabIndex="0" role="region" aria-roledescription="carousel" aria-label="LinkedIn posts from learners who studied abroad" onKeyDown="{{ saKey }}" onMouseEnter="{{ saPause }}" onMouseLeave="{{ saResume }}" style="position:relative;height:clamp(430px,34vw,480px);margin-top:clamp(24px,3vw,40px);perspective:1600px;touch-action:pan-y;outline:none">
+        <sc-for list="{{ saPosts }}" as="p" hint-placeholder-count="3">
+          <article onClick="{{ p.go }}" aria-hidden="{{ p.hidden }}" style="position:absolute;left:50%;top:50%;width:min(440px,80vw);display:flex;flex-direction:column;padding:28px 28px 0;background:#FFFFFF;border-radius:20px;box-shadow:{{ p.shadow }};font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color:#1F1F1F;text-align:left;user-select:none;cursor:{{ p.cursor }};transform:{{ p.tf }};opacity:{{ p.op }};filter:{{ p.blur }};z-index:{{ p.z }};pointer-events:{{ p.pe }};transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity 1.1s cubic-bezier(.16,1,.3,1),filter 1.1s cubic-bezier(.16,1,.3,1),box-shadow .6s">
+            <header style="display:flex;align-items:flex-start;gap:14px">
+              <span style="position:relative;flex:none;width:56px;height:56px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:#46403A">{{ p.ini }}<sc-if value="{{ p.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ p.av }}" alt="" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:17px;font-weight:600">{{ p.name }}</span>
+                <span style="font-size:14px;color:#666666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.role }}</span>
+                <span style="font-size:13px;color:#666666">{{ p.date }}</span>
+              </span>
+              <span style="flex:none;width:26px;height:26px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;font-family:Arial,sans-serif">in</span>
+            </header>
+            <p style="margin:18px 0 0;font-size:16px;line-height:1.55;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;overflow:hidden">{{ p.text }}</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 0 14px;font-size:13px;color:#666666">
+              <span style="display:flex;align-items:center;gap:10px"><span style="display:flex"><span style="width:16px;height:16px;border-radius:50%;background:#378FE9;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:16px;height:16px;border-radius:50%;background:#DF704D;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:16px;height:16px;border-radius:50%;background:#6DAE4F;box-shadow:0 0 0 1.5px #fff"></span></span>{{ p.likes }}</span>
+              <span>{{ p.comments }}</span>
+            </div>
+            <a href="#" style="margin:0 -28px;padding:15px 28px;border-top:1px solid #E6E0D8;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;color:#1F1F1F;transition:color .3s" style-hover="color:#0A66C2">Read on LinkedIn<span>↗</span></a>
+          </article>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-top:clamp(20px,2vw,28px)">
+        <button type="button" aria-label="Previous post" data-mag="1" onClick="{{ saPrev }}" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#FFFFFF;font-size:16px;cursor:pointer;transition:background .35s,color .35s,transform .6s cubic-bezier(.16,1,.3,1)" style-hover="background:#FFFFFF;color:#0E0C0B">←</button>
+        <div style="display:flex;align-items:center;gap:8px">
+          <sc-for list="{{ saDots }}" as="d" hint-placeholder-count="5">
+            <button type="button" aria-label="{{ d.label }}" onClick="{{ d.go }}" style="position:relative;width:{{ d.w }};height:6px;padding:0;border:0;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.45);cursor:pointer;transition:width .7s cubic-bezier(.16,1,.3,1)"><span data-safill="{{ $index }}" style="position:absolute;inset:0;background:#FFFFFF;transform:scaleX(0);transform-origin:left"></span></button>
+          </sc-for>
+        </div>
+        <button type="button" aria-label="Next post" data-mag="1" onClick="{{ saNext }}" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#FFFFFF;font-size:16px;cursor:pointer;transition:background .35s,color .35s,transform .6s cubic-bezier(.16,1,.3,1)" style-hover="background:#FFFFFF;color:#0E0C0B">→</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 40px;padding:clamp(80px,11vh,120px) clamp(18px,6vw,96px) 30px">
+      <h3 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(38px,4.2vw,64px);line-height:1;letter-spacing:-.03em">
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Hear from the <span style="color:#B80317">upGrad</span> learner</span></span>
+      </h3>
+      <p data-rv="1" style="margin:0;max-width:440px;font-size:15px;line-height:1.6;color:#4A453F;text-wrap:pretty">Real voices, real struggles, and triumphs. Hear the unscripted stories of learners who forged lifelong friendships through late-night study sessions.</p>
+    </div>
+    <div data-drag="1" data-cur="Play" style="display:flex;gap:clamp(14px,1.4vw,22px);overflow-x:auto;overflow-y:visible;scrollbar-width:none;padding:14px clamp(18px,6vw,96px) 30px;cursor:grab">
+      <sc-for list="{{ saCards }}" as="v" hint-placeholder-count="5">
+        <div data-ir="22" onMouseEnter="{{ v.enter }}" onMouseLeave="{{ v.leave }}" style="position:relative;flex:none;width:clamp(230px,19vw,284px);aspect-ratio:265/472;border-radius:22px;overflow:hidden;background:#1A1816;transform:{{ v.lift }};box-shadow:{{ v.shadow }};transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1),clip-path 1.4s cubic-bezier(.16,1,.3,1)">
+          <img src="{{ v.src }}" alt="{{ v.alt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:{{ v.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,9,0) 38%,rgba(12,10,9,.92) 100%);opacity:{{ v.shade }};transition:opacity .6s"></div>
+          <span style="position:absolute;left:50%;top:50%;margin:-30px 0 0 -30px;display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:50%;background:{{ v.playBg }};border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transform:{{ v.playScale }};transition:background .45s,transform .7s cubic-bezier(.16,1,.3,1)"><svg viewBox="0 0 12 12" width="14" height="14" fill="#FFFFFF" style="margin-left:2px"><path d="M3 1.6v8.8a.6.6 0 0 0 .9.5l7-4.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5Z"></path></svg></span>
+          <p style="position:absolute;left:20px;right:20px;bottom:20px;margin:0;font-size:15px;line-height:1.45;color:#FFFFFF;opacity:{{ v.capOp }};transform:{{ v.capY }};transition:opacity .5s,transform .8s cubic-bezier(.16,1,.3,1)">{{ v.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="p5-imm" data-screen-label="05 Immersion" style="position:relative;background:#0E0C0B;color:#F3EEE6">
+    <div id="im5-stage" data-n="3" style="position:relative;height:380vh">
+      <div style="position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;isolation:isolate">
+        <img id="im5-bg" src="./assets/cafe.png" alt="" style="position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.14);will-change:transform">
+        <div style="position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(18,10,5,.9) 0%,rgba(18,10,5,.62) 36%,rgba(18,10,5,.24) 100%),linear-gradient(180deg,rgba(18,10,5,.55) 0%,rgba(18,10,5,0) 28%,rgba(18,10,5,0) 70%,rgba(18,10,5,.6) 100%)"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,72px);padding:clamp(92px,13vh,120px) clamp(18px,5vw,80px) clamp(24px,5vh,56px)">
+          <div style="flex:1 1 300px;max-width:440px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:0;color:#FFFFFF">
+            <div style="display:flex;flex-direction:column;gap:22px">
+              <span style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.82)"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>04 · Immersion</span>
+              <h2 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,4.2vw,66px);line-height:.94;letter-spacing:-.03em">
+                <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">When the course</span></span>
+                <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic">stepped off the screen.</span></span>
+              </h2>
+              <div style="display:flex;flex-direction:column">
+                <sc-for list="{{ imSteps }}" as="s" hint-placeholder-count="3">
+                  <button type="button" id="im5-s{{ $index }}" onClick="{{ s.go }}" style="position:relative;display:grid;grid-template-columns:40px 1fr auto;align-items:center;padding:13px 0;border:0;border-top:1px solid rgba(255,255,255,.2);background:transparent;color:#FFFFFF;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;text-align:left;cursor:pointer;opacity:{{ s.op }};transition:opacity .4s" style-hover="opacity:1">
+                    <span data-fill="1" style="position:absolute;left:0;right:0;top:-1px;height:1px;background:#FFFFFF;transform:scaleX({{ s.fill }});transform-origin:left"></span>
+                    <span style="font-variant-numeric:tabular-nums;color:rgba(255,255,255,.72)">{{ s.num }}</span><span>{{ s.label }}</span><span aria-hidden="true">→</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;align-items:baseline;gap:10px;font-family:'Instrument Serif',serif;color:#FFFFFF">
+                <span style="display:block;height:1em;overflow:hidden;font-size:clamp(56px,5vw,80px);line-height:1;letter-spacing:-.03em"><span id="im5-roll" style="display:flex;flex-direction:column;will-change:transform"><span style="height:1em">01</span><span style="height:1em">02</span><span style="height:1em">03</span></span></span>
+                <span style="font-size:22px;color:rgba(255,255,255,.7)">/ 03</span>
+              </div>
+              <div style="position:relative;min-height:clamp(170px,22vh,230px)">
+                <sc-for list="{{ imSteps }}" as="s" hint-placeholder-count="1">
+                  <div id="im5-t{{ $index }}" style="position:absolute;left:0;right:0;top:0;display:flex;flex-direction:column;gap:14px;opacity:{{ s.op0 }};will-change:transform,opacity">
+                    <span style="font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.84)">{{ s.tag }}</span>
+                    <p style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(26px,2.5vw,38px);line-height:1.12;letter-spacing:-.01em;color:#FFFFFF;text-wrap:balance">{{ s.line }}</p>
+                    <a href="#" style="align-self:flex-start;display:flex;gap:8px;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.4);font-size:13px;font-weight:600;color:#FFFFFF;transition:border-color .3s" style-hover="border-bottom-color:#FFFFFF">View on LinkedIn ↗</a>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div id="im5-media" data-cur="View" style="position:relative;flex:3 1 440px;min-width:0;min-height:260px">
+            <sc-for list="{{ imSteps }}" as="s" hint-placeholder-count="1">
+              <div id="im5-c{{ $index }}" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:{{ s.z }};transform:{{ s.tf0 }};will-change:transform,filter,opacity">
+                <img id="im5-i{{ $index }}" src="{{ s.src }}" alt="{{ s.alt }}" draggable="false" style="max-width:100%;max-height:100%;width:auto;height:auto;display:block;border-radius:14px;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)">
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 40px;padding:clamp(96px,13vh,150px) clamp(18px,6vw,96px) 30px">
+      <h3 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(38px,4.2vw,64px);line-height:.98;letter-spacing:-.03em">
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">One week on campus,</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#FF3B4A">frame by frame.</span></span>
+      </h3>
+      <p data-rv="1" style="margin:0;max-width:400px;font-size:15px;line-height:1.6;color:rgba(243,238,230,.72);text-wrap:pretty">Faculty, mentors and founders in the same room as the learners they teach.</p>
+    </div>
+    <div data-drag="1" data-cur="Drag" style="display:flex;gap:clamp(16px,1.6vw,24px);overflow-x:auto;overflow-y:visible;scrollbar-width:none;padding:14px clamp(18px,6vw,96px) clamp(80px,11vh,120px);cursor:grab">
+      <sc-for list="{{ imCards }}" as="c" hint-placeholder-count="5">
+        <figure onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="flex:none;margin:0;width:clamp(290px,26vw,400px);display:flex;flex-direction:column;gap:16px">
+          <div data-ir="16" style="position:relative;aspect-ratio:335/218;border-radius:16px;overflow:hidden;background:#1A1816;transform:{{ c.lift }};box-shadow:{{ c.shadow }};transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1),clip-path 1.4s cubic-bezier(.16,1,.3,1)">
+            <img src="{{ c.src }}" alt="{{ c.alt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:{{ c.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
+          </div>
+          <figcaption style="display:flex;flex-direction:column;gap:8px">
+            <span style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(243,238,230,.66)"><span>{{ c.place }}</span><span>{{ c.year }}</span></span>
+            <span style="font-size:15px;line-height:1.5;color:{{ c.fg }};transition:color .4s;text-wrap:pretty">{{ c.desc }}</span>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="p5-words" data-screen-label="06 In Their Own Words" style="position:relative;background:#F3EEE6;color:#0E0C0B;overflow:hidden;padding:clamp(110px,15vh,170px) 0 clamp(88px,12vh,140px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px;padding:0 clamp(18px,6vw,96px) clamp(40px,4.4vw,64px)">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <span style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B80317"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>05 · In their own words</span>
+        <h2 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(46px,5.8vw,92px);line-height:.94;letter-spacing:-.035em">
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">6,404 learners wrote about us.</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#6A645C">We didn’t edit a word.</span></span>
+        </h2>
+      </div>
+      <a href="#" data-rv="1" style="flex:none;display:flex;gap:10px;padding-bottom:5px;border-bottom:1px solid #C9C0B2;font-size:15px;font-weight:600;color:#0E0C0B;transition:color .3s,border-color .3s" style-hover="color:#B80317;border-bottom-color:#B80317">Read all 6,404 posts →</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div data-mq="-1" style="display:flex;width:max-content;will-change:transform">
+        <sc-for list="{{ rowA }}" as="w" hint-placeholder-count="6">
+          <article style="flex:none;width:clamp(300px,27vw,400px);margin-right:18px;padding:24px;background:#FFFFFF;border:1px solid #E2DBD0;border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;transition:border-color .4s,transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s" style-hover="border-color:#0E0C0B;transform:translateY(-6px);box-shadow:0 24px 40px -24px rgba(14,12,11,.35)">
+            <p style="margin:0;font-family:'Instrument Serif',serif;font-size:22px;line-height:1.28;color:#0E0C0B;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden">{{ w.text }}</p>
+            <div style="display:flex;align-items:center;gap:12px;min-width:0">
+              <span style="position:relative;flex:none;width:38px;height:38px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#46403A">{{ w.ini }}<sc-if value="{{ w.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ w.av }}" alt="{{ w.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
+              <span style="min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ w.name }}</span><span style="font-size:12.5px;color:#655F57;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.role }}</span></span>
+              <span style="margin-left:auto;flex:none;width:22px;height:22px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:Arial,sans-serif">in</span>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+      <div data-mq="1" style="display:flex;width:max-content;will-change:transform">
+        <sc-for list="{{ rowB }}" as="w" hint-placeholder-count="6">
+          <article style="flex:none;width:clamp(300px,27vw,400px);margin-right:18px;padding:24px;background:#FFFFFF;border:1px solid #E2DBD0;border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;transition:border-color .4s,transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s" style-hover="border-color:#0E0C0B;transform:translateY(-6px);box-shadow:0 24px 40px -24px rgba(14,12,11,.35)">
+            <p style="margin:0;font-family:'Instrument Serif',serif;font-size:22px;line-height:1.28;color:#0E0C0B;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden">{{ w.text }}</p>
+            <div style="display:flex;align-items:center;gap:12px;min-width:0">
+              <span style="position:relative;flex:none;width:38px;height:38px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#46403A">{{ w.ini }}<sc-if value="{{ w.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ w.av }}" alt="{{ w.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
+              <span style="min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ w.name }}</span><span style="font-size:12.5px;color:#655F57;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.role }}</span></span>
+              <span style="margin-left:auto;flex:none;width:22px;height:22px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:Arial,sans-serif">in</span>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="p5-close" data-screen-label="07 Close" style="position:relative;background:#E4041C;color:#FFFFFF;overflow:hidden;padding:clamp(130px,20vh,220px) clamp(18px,4vw,56px) clamp(110px,16vh,180px)">
+    <div style="position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(24px,2.8vw,38px);max-width:1180px;margin:0 auto">
+      <span data-rv="1" style="font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#FFFFFF">Your turn</span>
+      <h2 id="p5-close-h" data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(62px,10vw,176px);line-height:.86;letter-spacing:-.045em;will-change:transform">
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">The next post</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic">could be yours.</span></span>
+      </h2>
+      <p data-rv="1" style="margin:0;max-width:560px;font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:#FFFFFF;text-wrap:pretty">Tell us where you’re starting from and we’ll show you the programmes the people in these posts took.</p>
+      <div data-rv="1" style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:8px">
+        <a href="#" data-mag="1" onMouseEnter="{{ cta.enter }}" onMouseLeave="{{ cta.leave }}" style="display:flex;align-items:center;gap:14px;padding:20px 34px;border-radius:999px;background:{{ cta.bg }};color:{{ cta.fg }};font-size:15px;font-weight:600;transition:background .4s,color .4s,transform .6s cubic-bezier(.16,1,.3,1)">Explore programmes<span style="display:inline-block;transform:{{ cta.arrow }};transition:transform .6s cubic-bezier(.16,1,.3,1)">→</span></a>
+        <a href="#" data-mag="1" style="display:flex;align-items:center;padding:20px 32px;border-radius:999px;border:1px solid rgba(255,255,255,.6);color:#FFFFFF;font-size:15px;font-weight:600;transition:border-color .35s,background .35s,color .35s,transform .6s cubic-bezier(.16,1,.3,1)" style-hover="border-color:#FFFFFF;background:#FFFFFF;color:#E4041C">Read all 6,404 posts</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#0E0C0B;padding:clamp(40px,6vh,64px) clamp(18px,4vw,56px) clamp(60px,8vh,80px);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
+    <span style="font-size:23px;font-weight:700;letter-spacing:-.04em;color:#E4041C">upGrad</span>
+    <span style="max-width:520px;font-size:13px;line-height:1.55;color:rgba(243,238,230,.66);text-wrap:pretty">Every post on this page links to the live original on its author’s profile. We didn’t edit a word.</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { hv: '', saIdx: 0, solid: false, hide: false, sec: '', narrow: false };
+
+  cl(n) { return n < 0 ? 0 : n > 1 ? 1 : n; }
+  set(el, k, v) { if (!el) return; const c = el.__c || (el.__c = {}); if (c[k] !== v) { el.style[k] = v; c[k] = v; } }
+
+  componentDidMount() {
+    const $ = this.$ = id => document.getElementById(id);
+    this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.fine = matchMedia('(pointer: fine)').matches;
+    this.off = [];
+    const on = (t, ev, fn, o) => { t.addEventListener(ev, fn, o); this.off.push(() => t.removeEventListener(ev, fn, o)); };
+    const v = $('p5-video');
+    if (v) { v.muted = true; v.defaultMuted = true; v.playsInline = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+    this.sy = scrollY; this.ly = scrollY; this.hy = scrollY; this.vel = 0; this.skew = 0; this.saT = 0;
+    this.vb = this.reduced ? 1.06 : 1.2; this.vbT = this.vb;
+    this.mx = -200; this.my = -200; this.cx = -200; this.cy = -200; this.cs = 0; this.ct = 0;
+    this.mqs = new Map(); this.rails = [];
+    const E = 'cubic-bezier(.16,1,.3,1)';
+    if (!this.reduced && 'IntersectionObserver' in window) {
+      document.querySelectorAll('[data-ln]').forEach(el => { el.style.transform = 'translate3d(0,112%,0)'; el.style.transition = 'transform 1.5s ' + E; });
+      document.querySelectorAll('[data-hf]').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translate3d(0,18px,0)'; el.style.transition = 'opacity 1.2s ' + E + ', transform 1.3s ' + E; });
+      document.querySelectorAll('[data-rv]').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translate3d(0,44px,0)'; el.style.transition = 'opacity 1.2s ' + E + ', transform 1.4s ' + E; });
+      document.querySelectorAll('[data-ir]').forEach(el => { el.style.clipPath = 'inset(100% 0 0 0 round ' + el.dataset.ir + 'px)'; });
+      this.io = new IntersectionObserver(en => en.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target; this.io.unobserve(el);
+        if (el.hasAttribute('data-lines')) el.querySelectorAll('[data-ln]').forEach((l, i) => { l.style.transitionDelay = (i * 0.1) + 's'; l.style.transform = 'translate3d(0,0,0)'; });
+        if (el.hasAttribute('data-rv')) { el.style.transitionDelay = '.08s'; el.style.opacity = '1'; el.style.transform = 'none'; }
+        if (el.hasAttribute('data-ir')) el.style.clipPath = 'inset(0% 0 0 0 round ' + el.dataset.ir + 'px)';
+      }), { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('[data-lines]:not([data-lines="hero"]),[data-rv],[data-ir]').forEach(el => this.io.observe(el));
+    }
+    on(window, 'pointermove', e => { this.mx = e.clientX; this.my = e.clientY; this.magnet(e); }, { passive: true });
+    on(document, 'pointerover', e => {
+      const t = e.target && e.target.closest ? e.target.closest('[data-cur]') : null;
+      const lab = t ? t.getAttribute('data-cur') : '';
+      if (lab === this.curLab) return;
+      this.curLab = lab; this.ct = lab ? 1 : 0;
+      const l = $('p5-cur-l'); if (l && lab) l.textContent = lab;
+    });
+    on(document.documentElement, 'mouseleave', () => { this.ct = 0; this.curLab = ''; });
+    if (this.fine && !this.reduced) { const c = $('p5-cur'); if (c) c.style.display = 'flex'; }
+    on(window, 'resize', () => { const narrow = innerWidth < 900; if (narrow !== this.state.narrow) this.setState({ narrow }); this.measure(); });
+    on(window, 'load', () => this.measure());
+    this.setState({ narrow: innerWidth < 900 });
+    if (window.ResizeObserver) { this.ro = new ResizeObserver(() => this.measure()); const r = $('p5-root'); if (r) this.ro.observe(r); }
+    ['al5', 'im5'].forEach(px => this.bindTilt(px, on));
+    this.bindRails(on); this.bindMarquees(on); this.bindSwipe(on);
+    this.measure();
+    let last = performance.now();
+    const loop = now => { this.raf = requestAnimationFrame(loop); const dt = Math.min(64, now - last); last = now; this.frame(dt); };
+    this.raf = requestAnimationFrame(loop);
+    this.preload(on);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.measure());
+  }
+
+  componentWillUnmount() {
+    (this.off || []).forEach(f => f());
+    cancelAnimationFrame(this.raf); cancelAnimationFrame(this.cRaf); cancelAnimationFrame(this.pRaf);
+    clearTimeout(this.tm1); clearTimeout(this.tm2);
+    if (this.io) this.io.disconnect();
+    if (this.ro) this.ro.disconnect();
+  }
+
+  preload(on) {
+    const pl = this.$('p5-pre'), pct = this.$('p5-pct'), bar = this.$('p5-pbar');
+    if (!pl || this.reduced || getComputedStyle(pl).visibility === 'hidden') { if (pl) pl.style.display = 'none'; return this.intro(); }
+    pl.style.animation = 'none';
+    const T = 1400, t0 = performance.now();
+    let done = false;
+    const finish = () => {
+      if (done) return; done = true;
+      cancelAnimationFrame(this.pRaf);
+      if (pct) pct.textContent = '100';
+      pl.style.transition = 'clip-path 1.15s cubic-bezier(.76,0,.24,1)';
+      pl.style.clipPath = 'inset(0 0 100% 0)';
+      pl.style.pointerEvents = 'none';
+      this.tm1 = setTimeout(() => this.intro(), 360);
+      this.tm2 = setTimeout(() => { pl.style.display = 'none'; }, 1250);
+    };
+    on(pl, 'click', finish);
+    const f = now => {
+      const p = this.cl((now - t0) / T), e = 1 - Math.pow(1 - p, 3);
+      if (pct) pct.textContent = String(Math.round(e * 100)).padStart(3, '0');
+      if (bar) bar.style.transform = 'scaleX(' + e.toFixed(4) + ')';
+      if (p < 1) this.pRaf = requestAnimationFrame(f); else finish();
+    };
+    this.pRaf = requestAnimationFrame(f);
+  }
+
+  intro() {
+    document.querySelectorAll('[data-lines="hero"] [data-ln]').forEach((el, i) => { el.style.transitionDelay = (i * 0.11) + 's'; el.style.transform = 'translate3d(0,0,0)'; });
+    document.querySelectorAll('[data-hf]').forEach((el, i) => { el.style.transitionDelay = (0.5 + i * 0.1) + 's'; el.style.opacity = '1'; el.style.transform = 'none'; });
+    this.vbT = 1.06;
+    this.countUp();
+  }
+
+  countUp() {
+    const el = this.$('p5-count');
+    if (!el || this.reduced) return;
+    const T = 2000, t0 = performance.now() + 500;
+    el.textContent = '0';
+    const f = now => {
+      const p = this.cl((now - t0) / T), e = 1 - Math.pow(1 - p, 4);
+      el.textContent = Math.round(6404 * e).toLocaleString('en-IN');
+      if (p < 1) this.cRaf = requestAnimationFrame(f);
+    };
+    this.cRaf = requestAnimationFrame(f);
+  }
+
+  measure() {
+    const g = id => { const el = this.$(id); if (!el) return null; const r = el.getBoundingClientRect(); return { id, el, top: r.top + scrollY, h: r.height }; };
+    this.m = { hero: g('p5-hero'), words: g('p5-words-p'), cv: g('cv5-stage'), al: g('al5-stage'), im: g('im5-stage'), ab: g('ab5-panel'), close: g('p5-close') };
+    this.secs = ['p5-conv', 'p5-alumni', 'p5-abroad', 'p5-imm', 'p5-words'].map(g).filter(Boolean);
+    this.words = [...document.querySelectorAll('[data-w]')];
+    const tr = this.$('cv5-track');
+    if (tr) {
+      this.cvTravel = Math.max(0, tr.scrollWidth - tr.parentElement.clientWidth);
+      this.cvImgs = [...tr.querySelectorAll('[data-cvimg="1"]')].map(img => { const f = img.closest('figure'); return { img, x: f.offsetLeft, w: f.offsetWidth }; });
+    }
+    this.mqs.forEach((o, el) => { o.half = el.scrollWidth / 2; });
+    this.docH = document.documentElement.scrollHeight - innerHeight;
+  }
+
+  frame(dt) {
+    const $ = this.$, y = scrollY, vh = innerHeight, vw = innerWidth, m = this.m || {}, k = dt / 16.67;
+    this.sy = this.reduced ? y : this.sy + (y - this.sy) * Math.min(1, 0.1 * k);
+    if (Math.abs(y - this.sy) < 0.1) this.sy = y;
+    const sy = this.sy;
+    this.vel += ((y - this.ly) - this.vel) * 0.12; this.ly = y;
+
+    const heroH = m.hero ? m.hero.h : vh;
+    const solid = y > heroH * 0.8;
+    let hide = this.state.hide;
+    if (Math.abs(y - this.hy) > 12) { hide = y > heroH && y > this.hy; this.hy = y; }
+    if (y < heroH) hide = false;
+    let sec = '';
+    (this.secs || []).forEach(s => { if (y + vh * 0.4 >= s.top && y + vh * 0.4 < s.top + s.h) sec = s.id; });
+    if (solid !== this.state.solid || hide !== this.state.hide || sec !== this.state.sec) this.setState({ solid, hide, sec });
+    this.set($('p5-prog'), 'transform', 'scaleX(' + (this.docH > 0 ? this.cl(y / this.docH) : 0).toFixed(4) + ')');
+
+    if (m.hero && sy < heroH + 50) {
+      const p = this.cl(sy / heroH);
+      this.vb += (this.vbT - this.vb) * 0.035 * k;
+      this.set($('p5-vwrap'), 'clipPath', 'inset(' + (p * 9).toFixed(2) + 'vh ' + (p * 5).toFixed(2) + 'vw ' + (p * 9).toFixed(2) + 'vh round ' + (p * 40).toFixed(1) + 'px)');
+      this.set($('p5-video'), 'transform', 'scale(' + (this.vb + p * 0.08).toFixed(4) + ')');
+      const c = $('p5-hero-c');
+      this.set(c, 'transform', 'translate3d(0,' + (-p * 140).toFixed(1) + 'px,0)');
+      this.set(c, 'opacity', String(Math.max(0, 1 - p * 1.7).toFixed(3)));
+    }
+
+    if (m.words && this.words.length) {
+      const N = this.words.length;
+      const q = this.cl((sy + vh * 0.82 - m.words.top) / (vh * 0.45 + m.words.h * 0.7));
+      const reach = q * (N + 6);
+      this.words.forEach((w, i) => this.set(w, 'opacity', (0.14 + 0.86 * this.cl((reach - i) / 6)).toFixed(2)));
+    }
+
+    const tr = $('cv5-track');
+    if (m.cv && tr && sy + vh * 2 > m.cv.top && sy < m.cv.top + m.cv.h + vh) {
+      const t = this.cl((sy - m.cv.top) / Math.max(1, m.cv.h - vh)), tx = -t * (this.cvTravel || 0);
+      const ts = this.reduced ? 0 : Math.max(-4, Math.min(4, -this.vel * 0.1));
+      this.skew += (ts - this.skew) * 0.1 * k;
+      this.set(tr, 'transform', 'translate3d(' + tx.toFixed(1) + 'px,0,0) skewX(' + this.skew.toFixed(2) + 'deg)');
+      (this.cvImgs || []).forEach(o => { const r = (o.x + tx + o.w / 2 - vw / 2) / vw; this.set(o.img, 'transform', 'translate3d(' + (-r * 7).toFixed(2) + '%,0,0) scale(1.16)'); });
+      this.set($('cv5-bar'), 'transform', 'scaleX(' + t.toFixed(4) + ')');
+    }
+
+    this.pin('al5', m.al, sy); this.pin('im5', m.im, sy);
+
+    if (m.ab && sy + vh > m.ab.top && sy < m.ab.top + m.ab.h) {
+      const q = this.cl((sy + vh - m.ab.top) / (vh + m.ab.h));
+      this.set($('ab5-bg'), 'transform', 'translate3d(0,' + ((q - 0.5) * -110).toFixed(1) + 'px,0) scale(1.06)');
+    }
+    if (m.close) {
+      const q = this.cl((sy + vh - m.close.top) / (vh * 0.9));
+      this.set($('p5-close-h'), 'transform', 'scale(' + (0.86 + 0.14 * q).toFixed(4) + ')');
+    }
+
+    this.mqs.forEach((o, el) => {
+      if (!o.half) return;
+      const target = this.reduced || o.hover ? 0 : o.dir * (0.5 + Math.min(Math.abs(this.vel) * 0.32, 14));
+      o.sp += (target - o.sp) * 0.08 * k;
+      o.x += o.sp * k;
+      if (o.x <= -o.half) o.x += o.half;
+      if (o.x > 0) o.x -= o.half;
+      this.set(el, 'transform', 'translate3d(' + o.x.toFixed(1) + 'px,0,0)');
+    });
+
+    this.rails.forEach(r => { if (!r.down && Math.abs(r.v) > 0.15) { r.el.scrollLeft -= r.v * k; r.v *= Math.pow(0.93, k); } });
+
+    const cur = $('p5-cur');
+    if (cur && this.fine && !this.reduced) {
+      this.cx += (this.mx - this.cx) * Math.min(1, 0.2 * k); this.cy += (this.my - this.cy) * Math.min(1, 0.2 * k);
+      this.cs += (this.ct - this.cs) * Math.min(1, 0.16 * k);
+      if (this.cs < 0.005) this.cs = 0;
+      this.set(cur, 'transform', 'translate3d(' + (this.cx - 44).toFixed(1) + 'px,' + (this.cy - 44).toFixed(1) + 'px,0) scale(' + this.cs.toFixed(3) + ')');
+    }
+
+    const st = $('ab5-stage');
+    if (st) {
+      const r = st.getBoundingClientRect(), D = 5600;
+      if (!this.reduced && r.bottom > 0 && r.top < vh && !this.saPaused && !document.hidden) this.saT += dt;
+      if (this.saT >= D) { this.saT = 0; this.setState(s => ({ saIdx: (s.saIdx + 1) % 5 })); }
+      const f = document.querySelector('[data-safill="' + this.state.saIdx + '"]');
+      if (this.lastFill && this.lastFill !== f) this.lastFill.style.transform = 'scaleX(0)';
+      if (f) f.style.transform = 'scaleX(' + (this.saT / D).toFixed(4) + ')';
+      this.lastFill = f;
+    }
+  }
+
+  pin(px, mm, sy) {
+    if (!mm || !mm.h) return;
+    const $ = this.$, vh = innerHeight;
+    if (sy + vh * 1.5 < mm.top || sy > mm.top + mm.h + vh * 0.5) return;
+    const N = +mm.el.dataset.n || 3, span = Math.max(1, mm.h - vh);
+    const t = this.cl((sy - mm.top) / span), raw = t * (N - 1);
+    const k = Math.min(N - 2, Math.floor(raw)), f = raw - k;
+    const e = x => { x = this.cl((x - 0.16) / 0.68); return x * x * (3 - 2 * x); };
+    const seg = raw >= N - 1 ? N - 1 : k + e(f);
+    const act = Math.round(seg);
+    this.act = this.act || {}; this.act[px] = act;
+    for (let i = 0; i < N; i++) {
+      const d = seg - i, c = $(px + '-c' + i), tx = $(px + '-t' + i), s = $(px + '-s' + i);
+      if (c) {
+        if (d < 0) {
+          const p = Math.min(1, -d);
+          this.set(c, 'transform', 'translate3d(0,' + (p * 110).toFixed(2) + '%,0) rotate(' + (p * 5).toFixed(2) + 'deg) scale(' + (1 + p * 0.06).toFixed(4) + ')');
+          this.set(c, 'filter', 'none'); this.set(c, 'opacity', '1');
+        } else {
+          const q = Math.min(1, d);
+          this.set(c, 'transform', 'translate3d(0,' + (-q * 4).toFixed(2) + '%,0) scale(' + (1 - q * 0.08).toFixed(4) + ')');
+          this.set(c, 'filter', q > 0.002 ? 'blur(' + (q * 6).toFixed(2) + 'px)' : 'none');
+          this.set(c, 'opacity', (1 - q * 0.5).toFixed(3));
+        }
+      }
+      if (tx) {
+        const a = this.cl(1 - Math.abs(d) * 2.4);
+        this.set(tx, 'opacity', a.toFixed(3));
+        this.set(tx, 'transform', 'translate3d(0,' + (-d * 32).toFixed(1) + 'px,0)');
+        this.set(tx, 'filter', a < 0.995 ? 'blur(' + ((1 - a) * 8).toFixed(2) + 'px)' : 'none');
+        this.set(tx, 'pointerEvents', a > 0.5 ? 'auto' : 'none');
+      }
+      if (s) {
+        this.set(s, 'opacity', i === act ? '1' : '.55');
+        const fl = s.querySelector('[data-fill]');
+        this.set(fl, 'transform', 'scaleX(' + this.cl(seg - i + 1).toFixed(4) + ')');
+      }
+    }
+    this.set($(px + '-roll'), 'transform', 'translate3d(0,' + (-seg).toFixed(4) + 'em,0)');
+    this.set($(px + '-bg'), 'transform', 'scale(' + (1.14 - t * 0.12).toFixed(4) + ')');
+  }
+
+  magnet(e) {
+    if (this.reduced || e.pointerType !== 'mouse') return;
+    const mg = e.target && e.target.closest ? e.target.closest('[data-mag]') : null;
+    if (this.mag && this.mag !== mg) { this.mag.style.transform = 'translate3d(0,0,0)'; this.mag.__mx = 0; this.mag.__my = 0; }
+    this.mag = mg;
+    if (!mg) return;
+    const r = mg.getBoundingClientRect();
+    const cx = r.left + r.width / 2 - (mg.__mx || 0), cy = r.top + r.height / 2 - (mg.__my || 0);
+    const dx = (e.clientX - cx) * 0.3, dy = (e.clientY - cy) * 0.4;
+    mg.__mx = dx; mg.__my = dy;
+    mg.style.transform = 'translate3d(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px,0)';
+  }
+
+  bindTilt(px, on) {
+    const m = this.$(px + '-media');
+    if (!m || this.reduced) return;
+    on(m, 'pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      const img = this.$(px + '-i' + ((this.act || {})[px] || 0)); if (!img) return;
+      const r = m.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+      if (this.tiltEl && this.tiltEl !== img) this.tiltEl.style.transform = '';
+      this.tiltEl = img;
+      img.style.transition = 'transform .35s ease-out';
+      img.style.transform = 'perspective(1400px) rotateX(' + (-ny * 6).toFixed(2) + 'deg) rotateY(' + (nx * 8).toFixed(2) + 'deg) scale(1.02)';
+    });
+    on(m, 'pointerleave', () => {
+      if (!this.tiltEl) return;
+      this.tiltEl.style.transition = 'transform 1s cubic-bezier(.16,1,.3,1)';
+      this.tiltEl.style.transform = '';
+    });
+  }
+
+  bindRails(on) {
+    document.querySelectorAll('[data-drag]').forEach(el => {
+      const r = { el, down: false, x: 0, l: 0, v: 0, lx: 0, moved: 0 };
+      this.rails.push(r);
+      on(el, 'pointerdown', e => { if (e.pointerType !== 'mouse' || e.button !== 0) return; r.down = true; r.x = r.lx = e.clientX; r.l = el.scrollLeft; r.v = 0; r.moved = 0; el.style.cursor = 'grabbing'; });
+      on(window, 'pointermove', e => { if (!r.down) return; const dx = e.clientX - r.x; r.moved = Math.max(r.moved, Math.abs(dx)); el.scrollLeft = r.l - dx; r.v = (e.clientX - r.lx) * 0.9; r.lx = e.clientX; });
+      on(window, 'pointerup', () => { if (!r.down) return; r.down = false; el.style.cursor = 'grab'; });
+      on(el, 'click', e => { if (r.moved > 6) { e.preventDefault(); e.stopPropagation(); } r.moved = 0; }, true);
+      on(el, 'dragstart', e => e.preventDefault());
+    });
+  }
+
+  bindMarquees(on) {
+    document.querySelectorAll('[data-mq]').forEach(el => {
+      const o = { dir: +el.dataset.mq || -1, x: 0, sp: 0, half: el.scrollWidth / 2, hover: false };
+      if (o.dir > 0) o.x = -o.half / 2;
+      this.mqs.set(el, o);
+      on(el, 'mouseenter', () => { o.hover = true; });
+      on(el, 'mouseleave', () => { o.hover = false; });
+    });
+  }
+
+  bindSwipe(on) {
+    const st = this.$('ab5-stage'); if (!st) return;
+    let x0 = null;
+    on(st, 'pointerdown', e => { x0 = e.clientX; });
+    on(window, 'pointerup', e => {
+      if (x0 === null) return;
+      const dx = e.clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) this.saGo(this.state.saIdx + (dx < 0 ? 1 : -1));
+    });
+  }
+
+  saGo(i) { this.saT = 0; const n = 5; this.setState({ saIdx: ((i % n) + n) % n }); }
+
+  goStep(px, i) {
+    const st = this.$(px + '-stage'); if (!st) return;
+    const N = +st.dataset.n || 3, span = st.offsetHeight - innerHeight;
+    scrollTo({ top: st.getBoundingClientRect().top + scrollY + span * (i / (N - 1)) + 2, behavior: 'smooth' });
+  }
+
+  goTo(id) {
+    const el = this.$(id); if (!el) return;
+    scrollTo({ top: el.getBoundingClientRect().top + scrollY, behavior: 'smooth' });
+  }
+
+  renderVals() {
+    const hv = this.state.hv;
+    const H = key => ({ on: hv === key, enter: () => this.setState({ hv: key }), leave: () => this.setState(s => s.hv === key ? { hv: '' } : null) });
+    const solid = this.state.solid;
+
+    const NAV = [['p5-conv', 'Convocation'], ['p5-alumni', 'Alumni'], ['p5-abroad', 'Study abroad'], ['p5-imm', 'Immersion'], ['p5-words', 'Voices']];
+    const navItems = NAV.map(([id, label]) => {
+      const h = H('n-' + id), act = this.state.sec === id;
+      return { label, href: '#' + id, enter: h.enter, leave: h.leave,
+        go: e => { e.preventDefault(); this.goTo(id); },
+        fg: act || h.on ? '#F3EEE6' : 'rgba(243,238,230,.7)', dot: act ? 1 : h.on ? 0.6 : 0 };
+    });
+
+    const heroCta = (() => { const h = H('heroCta'); return { enter: h.enter, leave: h.leave, bg: h.on ? '#E4041C' : '#FFFFFF', fg: h.on ? '#FFFFFF' : '#0E0C0B', arrow: h.on ? 'translateY(4px)' : 'none' }; })();
+    const cta = (() => { const h = H('cta'); return { enter: h.enter, leave: h.leave, bg: h.on ? '#FFFFFF' : '#0E0C0B', fg: h.on ? '#0E0C0B' : '#FFFFFF', arrow: h.on ? 'translateX(6px)' : 'none' }; })();
+
+    const TOC = [
+      ['p5-conv', 'Convocation', 'IIT Bombay · IIIT Bangalore', 'conv-l1.png'],
+      ['p5-alumni', 'Alumni', 'upGrad Mixers · Career Crossroads', 'alumni-ballroom.png'],
+      ['p5-abroad', 'Study abroad', 'Posts written from overseas', 'sa-plane.png'],
+      ['p5-imm', 'Immersion', 'A week on campus', 'im-5.png'],
+      ['p5-words', 'Voices', 'Unedited LinkedIn posts', 'im-2.png']
+    ];
+    const tocRows = TOC.map(([id, title, meta, src], i) => {
+      const h = H('toc' + i);
+      return { num: '0' + (i + 1), title, meta, src: './assets/' + src, href: '#' + id, enter: h.enter, leave: h.leave,
+        go: e => { e.preventDefault(); this.goTo(id); },
+        fg: h.on ? '#F3EEE6' : 'rgba(243,238,230,.62)', numFg: h.on ? '#FF3B4A' : 'rgba(243,238,230,.62)',
+        shift: h.on ? 'translateX(18px)' : 'translateX(0)',
+        ring: h.on ? '#F3EEE6' : 'rgba(243,238,230,.28)', arrowBg: h.on ? '#F3EEE6' : 'rgba(243,238,230,0)',
+        arrowRot: h.on ? 'rotate(0deg)' : 'rotate(-45deg)',
+        clip: h.on ? 'inset(0% 0% 0% 0% round 12px)' : 'inset(50% 50% 50% 50% round 12px)',
+        tilt: h.on ? 'rotate(-3deg)' : 'rotate(4deg)' };
+    });
+
+    const CV = [
+      ['conv-l1.png', 'Graduate at IIT Bombay convocation', 'IIT Bombay', '2026', '670/436'],
+      ['conv-l3.png', 'Graduate at the annual convocation', 'Annual convocation', '2026', '670/436'],
+      null,
+      ['conv-p2.png', 'Graduate holding a degree folder', 'Degree in hand', '2026', '596/658'],
+      ['conv-l5.png', 'Three graduates at IIIT Bangalore', 'IIIT Bangalore', '2026', '670/436'],
+      ['cv-card-sharp.png', 'LinkedIn post by Gunavardhan Dandi on graduating from IIIT Bangalore', 'Gunavardhan Dandi, on LinkedIn', 'IIIT Bangalore', '654/410', true],
+      ['conv-l4.png', 'Annual convocation group photograph', 'The whole cohort', '2026', '670/436'],
+      ['conv-l2.png', 'Graduate at IIT Bombay convocation', 'IIT Bombay', '2026', '670/436']
+    ];
+    const convItems = CV.map((g, i) => {
+      if (!g) return { isQuote: true, isImg: false };
+      const [f, alt, place, year, ar, post] = g, h = H('cv' + i);
+      return { isImg: true, isQuote: false, src: './assets/' + f, alt, place, year, ar, px: post ? '0' : '1',
+        bg: post ? '#DAD2C4' : '#2A2723', fit: post ? 'contain' : 'cover', pad: post ? '6%' : '0',
+        zoom: h.on ? 'scale(1.06)' : 'scale(1)', capFg: h.on ? '#0E0C0B' : '#6A645C',
+        shadow: h.on ? '0 44px 80px -30px rgba(14,12,11,.55)' : '0 0 0 rgba(0,0,0,0)', enter: h.enter, leave: h.leave };
+    });
+
+    const steps = (px, list) => list.map(([label, tag, line, src, alt], i) => ({
+      label, tag, line, src: './assets/' + src, alt, num: '0' + (i + 1), z: i + 1,
+      tf0: i === 0 ? 'none' : 'translate3d(0,110%,0)', op0: i === 0 ? 1 : 0, op: i === 0 ? 1 : 0.55, fill: i === 0 ? 1 : 0,
+      go: () => this.goStep(px, i)
+    }));
+    const alSteps = steps('al5', [
+      ['upGrad Mixers', 'upGrad Mixers · Mumbai', 'Two years of study calls. One evening to put faces to the names.', 'al3-harish.png', "Harish Bhat's LinkedIn post from upGrad Mixers, with a selfie alongside Ashish Hathi"],
+      ['The highlights', 'Holiday Inn · 21 June 2025', 'One ballroom, several cohorts, and a camera roll everyone wanted a copy of.', 'al3-mixers.png', 'Collage of selfies from upGrad Mixers at Holiday Inn Mumbai'],
+      ['Career Crossroads', 'Career Crossroads · 29 August', 'An evening for ambitious folks looking for their next big shot.', 'al3-crossroads.png', "Career Crossroads by upGrad poster and Saral Purohit's LinkedIn post announcing it"]
+    ]);
+    const imSteps = steps('im5', [
+      ['From the Ground Up', 'Immersion · From the Ground Up', 'A week on campus turns classmates into a cohort you can shake hands with.', 'im3-first.png', "Saral Purohit's LinkedIn post, From the Ground Up"],
+      ['Mumbai & Hyderabad', 'Mumbai · Hyderabad', 'Two cities, one format: a room full of people who had only met on screen.', 'im3-cities.png', 'Immersion meetups in Mumbai and Hyderabad'],
+      ['In their words', 'Ankur Nagar, on LinkedIn', '“It was a superb event!”', 'im3-voices.png', "Ankur Nagar's LinkedIn post and WhatsApp messages from attendees of From the Ground Up, Mumbai"]
+    ]);
+
+    const lift = (on, y, dark) => ({ lift: on ? 'translateY(-' + (y || 8) + 'px)' : 'translateY(0)', shadow: on ? (dark ? '0 36px 60px -24px rgba(0,0,0,.8)' : '0 36px 60px -24px rgba(14,12,11,.5)') : '0 0 0 rgba(0,0,0,0)' });
+    const careers = [0, 1, 2, 3, 4, 5].map(i => { const h = H('car' + i); return { ...lift(h.on, 10, true), enter: h.enter, leave: h.leave }; });
+    const railBy = (id, dir) => { const t = this.$(id); if (t) t.scrollBy({ left: dir * Math.min(t.clientWidth * 0.8, 620), behavior: 'smooth' }); };
+
+    const saAlt = ['Learner speaking by a window', 'Learner on being ghosted by a freelancer', 'Learner sharing a suggestion', 'Learner seated in a studio', 'Learner on handling visas and paperwork', 'Learner in a blue blazer', 'Learner sharing advice'];
+    const saDesc = [
+      'Why they chose to study abroad, and what finally made the move feel possible.',
+      'The setback that nearly stopped them, and how they got back on track.',
+      'The one piece of advice they would give anyone applying next year.',
+      'What their first semester overseas was really like.',
+      'How they handled visas, deadlines and the paperwork in between.',
+      'From admit letter to first day on campus, in their own words.',
+      'What they wish they had known before they left home.'
+    ];
+    const saCards = saAlt.map((alt, i) => { const h = H('sa' + i); return {
+      src: './assets/sa-v' + i + '.png', alt, desc: saDesc[i], enter: h.enter, leave: h.leave, ...lift(h.on, 12),
+      zoom: h.on ? 'scale(1.08)' : 'scale(1)', shade: h.on ? 1 : 0.5,
+      playBg: h.on ? '#E4041C' : 'rgba(255,255,255,.2)', playScale: h.on ? 'scale(1.14)' : 'scale(1)',
+      capOp: h.on ? 1 : 0, capY: h.on ? 'translateY(0)' : 'translateY(18px)' }; });
+
+    const imBase = [
+      ['im-2.png', 'Speaker addressing learners at an immersion session', 'IIT Bombay', 'Faculty sessions on campus, with the questions you save up all term.'],
+      ['im-3.png', 'Mentor speaking with a microphone', 'IIT Bombay', 'Mentors who marked your assignments, now answering you face to face.'],
+      ['im-4.png', 'upGrad founders together', 'IIT Bombay', 'The founders drop in to hear what the cohort is building.'],
+      ['im-5.png', 'Immersion group photo', 'IIIT Bangalore', 'One week, one campus, and a group photo that finally has everyone in it.'],
+      ['im-1.png', 'upGrad team at the office', 'IIT Bombay', 'The team behind the programme, meeting the learners it was built for.']
+    ];
+    const imCards = imBase.map(([f, alt, place, desc], i) => { const h = H('im' + i); return {
+      src: './assets/' + f, alt, place, year: '2026', desc, enter: h.enter, leave: h.leave, ...lift(h.on, 8, true),
+      zoom: h.on ? 'scale(1.07)' : 'scale(1)', fg: h.on ? '#F3EEE6' : 'rgba(243,238,230,.8)' }; });
+    const ticker = ['Immersion week', 'IIT Bombay', 'IIIT Bangalore', 'Mumbai', 'Hyderabad', 'Bangalore', 'Delhi', 'Pune'];
+    const tickerTwice = [...ticker, ...ticker, ...ticker, ...ticker];
+
+    const W = [
+      ['Harish Bhat', 'Data Engineer, PhonePe', 'a5', "A thank-you I've been putting off. When I enrolled I was sceptical. I'd tried online courses before and finished none of them. The difference this time was the mentor calls."],
+      ['Arjun Saxena', 'Operations Manager, Delhivery', null, 'Honest review after finishing: the projects are the point. Skip the videos if you must, never skip the projects.'],
+      ['Aditya Iyer', 'Supply Chain Manager, Reliance Retail', 'a0', 'Received my degree at the convocation ceremony today. Quietly proud.'],
+      ['Ananya Nair', 'HR Business Partner, Wipro', null, "My buddy group from the programme still meets on a call every Sunday, eight months after graduating. That wasn't in the brochure."],
+      ['Sneha Gupta', 'Operations Manager, Delhivery', 'a1', "If you're a working professional scared of quitting your job for a master's: this format works. I kept my salary, my role, and still finished."],
+      ['Nikhil Iyer', 'Product Manager, Swiggy', 'a2', 'Six months ago I finished the programme. Today I got promoted to lead the team I used to report to.'],
+      ['Neha Joshi', 'HR Business Partner, Wipro', 'a3', 'Just back from campus immersion week. Meeting 60 people from my cohort after a year of little squares on a screen. I did not expect it to matter this much. It did.'],
+      ['Lakshmi Reddy', 'Data Engineer, PhonePe', 'a4', 'Walked the stage today. Two years of weekend classes, assignments submitted at midnight after putting the kids to bed, and one very patient family.'],
+      ['Rohan Menon', 'Marketing Lead, Nykaa', 'a6', 'Meeting my cohort in person after a year on screen changed how I think about the whole programme.'],
+      ['Lakshmi Iyer', 'Sales Head, Asian Paints', 'a7', 'Eight months after graduating, the study group is still the first chat I open in the morning.'],
+      ['Nisha Nair', 'Growth Manager, Zomato', 'a8', 'People keep asking if the programme is worth it, so, publicly: yes, if you do the work. No, if you want a certificate to happen to you.'],
+      ['Aditya Sharma', 'Scrum Master, Tech Mahindra', 'a2', 'Having someone check in every fortnight, who actually read my submissions, changed everything.']
+    ].map(([name, role, av, text]) => ({ name, role, text, ini: name.split(' ').map(s => s[0]).join(''), hasAv: !!av, av: av ? './assets/avatars/' + av + '.png' : '' }));
+    const A = W.slice(0, 6), B = W.slice(6);
+    const rowA = [...A, ...A], rowB = [...B, ...B];
+
+    const SP = [
+      [W[0], '12 Aug 2026', '1,528', '78 comments', "A thank-you I've been putting off. When I enrolled I was sceptical. I'd tried online courses before and finished none of them. The difference this time was the mentor calls. Having someone check in every fortnight, who actually read my submissions, changed everything. I finished. First time ever."],
+      [W[6], '3 Aug 2026', '964', '41 comments', W[6].text],
+      [W[4], '28 Jul 2026', '1,102', '56 comments', W[4].text],
+      [W[10], '19 Jul 2026', '2,310', '134 comments', W[10].text],
+      [W[7], '8 Jul 2026', '1,847', '92 comments', W[7].text]
+    ];
+    const n = SP.length, cur = this.state.saIdx;
+    const saPosts = SP.map(([w, date, likes, comments, text], i) => {
+      let o = i - cur; if (o > n / 2) o -= n; if (o < -n / 2) o += n;
+      const a = Math.abs(o), sg = Math.sign(o);
+      return { ...w, date, likes, comments, text,
+        tf: 'translate3d(-50%,-50%,0) translateX(' + (sg * (a === 0 ? 0 : a === 1 ? 66 : 112)) + '%) rotateY(' + (-sg * (a === 0 ? 0 : 18)) + 'deg) scale(' + (a === 0 ? 1 : a === 1 ? 0.84 : 0.7) + ')',
+        op: a === 0 ? 1 : a === 1 ? 0.6 : 0, blur: a === 0 ? 'none' : 'blur(' + (a * 2) + 'px)', z: 10 - a * 3,
+        pe: a > 1 ? 'none' : 'auto', cursor: a === 0 ? 'default' : 'pointer', hidden: String(a !== 0),
+        shadow: a === 0 ? '0 50px 90px -30px rgba(10,14,30,.6)' : '0 20px 40px -24px rgba(10,14,30,.4)',
+        go: () => { if (a !== 0) this.saGo(i); } };
+    });
+    const saDots = SP.map((_, i) => ({ w: i === cur ? '44px' : '8px', label: 'Show post ' + (i + 1), go: () => this.saGo(i) }));
+
+    return {
+      hdrBg: solid ? 'rgba(14,12,11,.72)' : 'rgba(14,12,11,0)', hdrLine: solid ? 'rgba(243,238,230,.1)' : 'rgba(243,238,230,0)',
+      hdrTf: this.state.hide ? 'translateY(-100%)' : 'translateY(0)',
+      navDisplay: this.state.narrow ? 'none' : 'flex', navItems,
+      goTop: e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); },
+      goMan: e => { e.preventDefault(); this.goTo('p5-man'); },
+      heroCta, cta, tocRows, convItems, alSteps, imSteps, careers,
+      alPrev: () => railBy('al5-rail', -1), alNext: () => railBy('al5-rail', 1),
+      saPosts, saDots, saPrev: () => this.saGo(cur - 1), saNext: () => this.saGo(cur + 1),
+      saKey: e => { if (e.key === 'ArrowLeft') { e.preventDefault(); this.saGo(cur - 1); } if (e.key === 'ArrowRight') { e.preventDefault(); this.saGo(cur + 1); } },
+      saPause: () => { this.saPaused = true; }, saResume: () => { this.saPaused = false; },
+      saCards, imCards, tickerTwice, rowA, rowB
+    };
+  }
+}
+</script>
+</body>
+</html>
