@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/*
+  Chess design tokens. Swap these for your Figma variables — every board,
+  highlight and piece-size utility reads from here, so no component edits are
+  needed. Tailwind v4 turns each --color-* into utilities (bg-square-light,
+  ring-highlight-selected, …) and each --spacing-* into sizing utilities.
+  Values below are sampled from the Figma board frame (1083:39209) as a start.
+*/
+@theme {
+  /* Squares */
+  --color-square-light: #e8eaf6;
+  --color-square-dark: #b7bed9;
+  --color-coord-on-light: #9aa2c4;
+  --color-coord-on-dark: #eef0fa;
+
+  /* Highlights (Step 3) */
+  --color-highlight-selected: rgb(255 214 102 / 0.55);
+  --color-highlight-last-move: rgb(255 234 128 / 0.45);
+  --color-highlight-legal: rgb(40 44 72 / 0.22);
+  --color-highlight-capture: rgb(40 44 72 / 0.28);
+  --color-highlight-check: rgb(229 32 46 / 0.55);
+
+  /* Pieces */
+  --color-piece-dark: #2b2d42;
+  --color-piece-light: #f7f8fc;
+
+  /* Sizing */
+  --spacing-square: 64px;
+  --spacing-board: calc(var(--spacing-square) * 8);
+}
