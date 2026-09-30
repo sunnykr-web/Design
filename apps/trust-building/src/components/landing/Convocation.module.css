@@ -12,30 +12,23 @@
 .frame {
   position: relative; height: min(39vh,336px); border-radius: 18px; overflow: hidden;
   box-shadow: 0 2px 4px rgba(14,12,11,0), 0 12px 24px -8px rgba(14,12,11,0), 0 40px 72px -28px rgba(14,12,11,0);
-  transition: box-shadow .8s var(--ease);
+  transition: transform var(--hover-t), box-shadow var(--hover-t);
 }
-.zoom { position: absolute; inset: 0; transition: transform 1.4s var(--ease); }
+.zoom { position: absolute; inset: 0; transition: transform var(--hover-t); }
 .img { display: block; will-change: transform; }
 .pill {
-  position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; height: 44px;
-  padding: 0 6px 0 6px; border-radius: 999px; background: rgba(243,238,230,.94); color: var(--ink);
-  box-shadow: 0 8px 20px -6px rgba(14,12,11,.4); font-size: 13px; font-weight: 600; white-space: nowrap;
-  transition: background .4s, color .4s, padding .5s var(--ease);
+  position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+  border-radius: 999px; background: rgba(243,238,230,.94); color: var(--ink);
+  box-shadow: 0 8px 20px -6px rgba(14,12,11,.4); font-size: 17px; font-weight: 700;
+  transition: background var(--hover-t), color var(--hover-t);
 }
-.pillText { max-width: 0; overflow: hidden; opacity: 0; transition: max-width .5s var(--ease), opacity .4s; }
-.pillArrow {
-  display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; font-size: 17px; font-weight: 700;
-  transform: rotate(-45deg); transition: transform .5s var(--ease);
-}
-.cap { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; font-weight: 500; color: var(--muted); transition: color .4s; }
+.pillArrow { display: inline-block; transform: rotate(-45deg); }
+.cap { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; font-weight: 500; color: var(--muted); }
 .year { font-variant-numeric: tabular-nums; }
 
-.card:hover .frame, .card:focus-visible .frame { box-shadow: var(--shadow-card); }
-.card:hover .zoom, .card:focus-visible .zoom { transform: scale(1.06); }
-.card:hover .pill, .card:focus-visible .pill { background: var(--red); color: var(--white); padding-left: 18px; }
-.card:hover .pillText, .card:focus-visible .pillText { max-width: 90px; opacity: 1; }
-.card:hover .pillArrow, .card:focus-visible .pillArrow { transform: rotate(0deg); }
-.card:hover .cap, .card:focus-visible .cap { color: var(--ink); }
+.card:hover .frame, .card:focus-visible .frame { transform: var(--hover-lift); box-shadow: var(--hover-shadow); }
+.card:hover .zoom, .card:focus-visible .zoom { transform: var(--hover-zoom); }
+.card:hover .pill, .card:focus-visible .pill { background: var(--red); color: var(--white); }
 .card:focus-visible { outline: none; }
 .card:focus-visible .frame { outline: 2px solid var(--red); outline-offset: 3px; }
 
@@ -52,7 +45,7 @@
 .qCap { font-size: 13px; font-weight: 500; }
 .underline {
   display: inline-flex; gap: 6px; color: var(--ink); border-bottom: 1px solid #C9C0B2; padding-bottom: 2px;
-  transition: color .3s, border-color .3s;
+  transition: color var(--hover-t), border-color var(--hover-t);
 }
 .underline:hover { color: var(--red-deep); border-bottom-color: var(--red-deep); }
 

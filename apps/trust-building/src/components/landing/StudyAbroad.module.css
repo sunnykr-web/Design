@@ -42,16 +42,16 @@
   margin: 0 -28px; padding: 15px 28px; border-top: 1px solid #E6E0D8; display: flex; align-items: center;
   justify-content: space-between; font-size: 14px; font-weight: 600; color: #1F1F1F;
 }
-.courseArrow { display: inline-block; transition: transform .4s var(--ease); }
-.course:hover .courseArrow { transform: rotate(45deg); }
+.courseArrow { display: inline-block; transition: transform var(--hover-t); }
+.course:hover .courseArrow { transform: translate(calc(var(--nudge) / 2), calc(var(--nudge) / -2)); }
 
 .controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: clamp(20px,2vw,28px); }
 .arrowBtn {
   width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45); background: rgba(255,255,255,.14);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #FFFFFF; font-size: 16px; cursor: pointer;
-  transition: background .35s, color .35s, translate .6s var(--ease);
+  transition: background var(--hover-t), border-color var(--hover-t);
 }
-.arrowBtn:hover { background: #FFFFFF; color: var(--ink); }
+.arrowBtn:hover { background: var(--red); border-color: var(--red); }
 .dots { display: flex; align-items: center; gap: 8px; }
 /* The bar is 6px tall; the button around it keeps a 44px hit target. */
 .dot { width: 8px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; transition: width .7s var(--ease); }
@@ -68,23 +68,19 @@
 .video {
   position: relative; flex: none; width: clamp(230px,19vw,284px); aspect-ratio: 265/472; border-radius: 22px;
   overflow: hidden; background: var(--card-dark); --ir: 22px;
-  transition: transform .7s var(--ease), box-shadow .7s var(--ease), clip-path 1.4s var(--ease);
+  transition: transform var(--hover-t), box-shadow var(--hover-t), clip-path 1.4s var(--ease);
 }
-.videoImg { object-fit: cover; transition: transform 1.4s var(--ease); }
-.videoShade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,10,9,0) 38%, rgba(12,10,9,.92) 100%); opacity: .5; transition: opacity .6s; }
+.videoImg { object-fit: cover; transition: transform var(--hover-t); }
+.videoShade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,10,9,0) 38%, rgba(12,10,9,.92) 100%); }
 .play {
   position: absolute; left: 50%; top: 50%; margin: -30px 0 0 -30px; display: flex; align-items: center; justify-content: center;
   width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.4);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  transition: background .45s, transform .7s var(--ease);
+  transition: background var(--hover-t);
 }
 .videoCap {
   position: absolute; left: 20px; right: 20px; bottom: 20px; margin: 0; font-size: 15px; line-height: 1.45; color: #FFFFFF;
-  opacity: 0; transform: translateY(18px); transition: opacity .5s, transform .8s var(--ease);
 }
-.video:hover { transform: translateY(-12px); box-shadow: 0 36px 60px -24px rgba(14,12,11,.5); }
-.video:hover .videoImg { transform: scale(1.08); }
-.video:hover .videoShade { opacity: 1; }
-.video:hover .play { background: var(--red); transform: scale(1.14); }
-.video:hover .videoCap { opacity: 1; transform: translateY(0); }
-@media (hover: none) { .videoCap { opacity: 1; transform: none; } .videoShade { opacity: 1; } }
+.video:hover { transform: var(--hover-lift); box-shadow: var(--hover-shadow); }
+.video:hover .videoImg { transform: var(--hover-zoom); }
+.video:hover .play { background: var(--red); }

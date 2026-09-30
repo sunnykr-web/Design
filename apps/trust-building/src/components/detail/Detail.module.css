@@ -10,7 +10,7 @@
 }
 .light .header { background: rgba(243,238,230,.8); border-bottom: 1px solid rgba(14,12,11,.08); }
 .dark .header { background: rgba(14,12,11,.72); border-bottom: 1px solid rgba(243,238,230,.08); }
-.back { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; transition: color .3s; }
+.back { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; transition: color var(--hover-t); }
 .light .back { color: var(--body); }
 .light .back:hover { color: var(--ink); }
 .dark .back { color: rgba(243,238,230,.72); }
@@ -26,15 +26,15 @@
 .light .desc { color: var(--body); }
 .dark .desc { color: rgba(255,255,255,.8); }
 .btns { display: flex; flex-wrap: wrap; gap: 12px; }
-.primary { display: flex; align-items: center; gap: 14px; padding: 16px 28px; border-radius: 999px; font-size: 15px; font-weight: 600; transition: background .4s, color .4s; }
-.primaryArrow { display: inline-block; transition: transform .6s var(--ease); }
-.primary:hover .primaryArrow { transform: translateX(6px); }
+.primary { display: flex; align-items: center; gap: 14px; padding: 16px 28px; border-radius: 999px; font-size: 15px; font-weight: 600; transition: background var(--hover-t), color var(--hover-t); }
+.primaryArrow { display: inline-block; transition: transform var(--hover-t); }
+.primary:hover .primaryArrow { transform: translateX(var(--nudge)); }
 /* Convocation: red → ink. Immersion: cream → red. */
 .light .primary { background: var(--red); color: #FFFFFF; }
 .light .primary:hover { background: var(--ink); }
 .dark .primary { background: var(--cream); color: var(--ink); }
 .dark .primary:hover { background: var(--red); color: #FFFFFF; }
-.outline { display: flex; align-items: center; padding: 16px 24px; border-radius: 999px; font-size: 15px; font-weight: 600; transition: border-color .3s; }
+.outline { display: flex; align-items: center; padding: 16px 24px; border-radius: 999px; font-size: 15px; font-weight: 600; transition: border-color var(--hover-t); }
 .light .outline { border: 1px solid rgba(14,12,11,.24); color: var(--ink); }
 .light .outline:hover { border-color: var(--ink); }
 .dark .outline { border: 1px solid rgba(243,238,230,.24); color: var(--cream); }
@@ -66,12 +66,12 @@
 .card { display: flex; flex-direction: column; gap: 16px; color: var(--cream); }
 .cardImg {
   position: relative; border-radius: 16px; overflow: hidden;
-  transition: transform .7s var(--ease), box-shadow .7s var(--ease);
+  transition: transform var(--hover-t), box-shadow var(--hover-t);
 }
-.cardPic { transition: transform 1.4s var(--ease); }
+.cardPic { transition: transform var(--hover-t); }
 .cardMeta { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(243,238,230,.66); }
-.cardArrow { display: inline-block; transition: transform .6s var(--ease); }
+.cardArrow { display: inline-block; transition: transform var(--hover-t); }
 .cardTitle { font-family: var(--serif); font-size: clamp(24px,2vw,30px); line-height: 1.08; letter-spacing: -.01em; }
-.card:hover .cardImg, .card:focus-visible .cardImg { transform: translateY(-8px); box-shadow: 0 40px 70px -30px rgba(0,0,0,.8); }
-.card:hover .cardPic, .card:focus-visible .cardPic { transform: scale(1.07); }
-.card:hover .cardArrow, .card:focus-visible .cardArrow { transform: translateX(6px); }
+.card:hover .cardImg, .card:focus-visible .cardImg { transform: var(--hover-lift); box-shadow: var(--hover-shadow-dark); }
+.card:hover .cardPic, .card:focus-visible .cardPic { transform: var(--hover-zoom); }
+.card:hover .cardArrow, .card:focus-visible .cardArrow { transform: translateX(var(--nudge)); }

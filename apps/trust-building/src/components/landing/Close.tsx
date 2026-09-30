@@ -31,8 +31,8 @@ export function Close() {
         </h2>
         <p data-rv="" className={s.p}>Tell us where you’re starting from and we’ll show you the programmes the people in these posts took.</p>
         <div data-rv="" className={s.ctas}>
-          <a href={LINKS.programmes} data-mag="" className={s.primary}>Explore programmes<span className={s.arrow} aria-hidden="true">→</span></a>
-          <a href={LINKS.allPosts} data-mag="" className={s.secondary}>Read all {POST_COUNT_LABEL} posts</a>
+          <a href={LINKS.programmes} className={s.primary}>Explore programmes<span className={s.arrow} aria-hidden="true">→</span></a>
+          <a href={LINKS.allPosts} className={s.secondary}>Read all {POST_COUNT_LABEL} posts</a>
         </div>
       </div>
     </section>

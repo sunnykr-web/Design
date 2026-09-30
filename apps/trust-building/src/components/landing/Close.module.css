@@ -6,14 +6,15 @@
 .ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 8px; }
 .primary {
   display: flex; align-items: center; gap: 14px; padding: 20px 34px; border-radius: 999px; background: var(--ink); color: #FFFFFF;
-  font-size: 15px; font-weight: 600; transition: background .4s, color .4s, translate .6s var(--ease);
+  font-size: 15px; font-weight: 600; transition: background var(--hover-t), color var(--hover-t);
 }
-.arrow { display: inline-block; transition: transform .6s var(--ease); }
-.primary:hover { background: #FFFFFF; color: var(--ink); }
-.primary:hover .arrow { transform: translateX(6px); }
+.arrow { display: inline-block; transition: transform var(--hover-t); }
+/* On the red section, filled buttons turn white instead of red. */
+.primary:hover { background: #FFFFFF; color: var(--red); }
+.primary:hover .arrow { transform: translateX(var(--nudge)); }
 .secondary {
   display: flex; align-items: center; padding: 20px 32px; border-radius: 999px; border: 1px solid rgba(255,255,255,.6); color: #FFFFFF;
-  font-size: 15px; font-weight: 600; transition: border-color .35s, background .35s, color .35s, translate .6s var(--ease);
+  font-size: 15px; font-weight: 600; transition: border-color var(--hover-t), background var(--hover-t), color var(--hover-t);
 }
 .secondary:hover { border-color: #FFFFFF; background: #FFFFFF; color: var(--red); }
 

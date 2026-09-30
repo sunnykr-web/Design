@@ -21,6 +21,14 @@
   --pad-x: clamp(18px, 6vw, 96px);
   --hdr-pad-x: clamp(18px, 4vw, 56px);
   --shadow-card: 0 2px 4px rgba(14,12,11,.06), 0 12px 24px -8px rgba(14,12,11,.14), 0 40px 72px -28px rgba(14,12,11,.32);
+
+  /* Hover: one rule everywhere. Cards lift and their image zooms slightly; buttons change colour; arrows nudge. */
+  --hover-t: .5s var(--ease);
+  --hover-lift: translateY(-6px);
+  --hover-zoom: scale(1.04);
+  --hover-shadow: 0 24px 48px -24px rgba(14,12,11,.45);
+  --hover-shadow-dark: 0 24px 48px -24px rgba(0,0,0,.85);
+  --nudge: 4px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

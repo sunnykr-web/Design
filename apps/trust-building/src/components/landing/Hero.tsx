@@ -12,12 +12,10 @@ const AUTO_MS = 5200;
 type Slot = { x: number; y: number; z: number; ry: number; s: number; blur: number; op: number; zi: number };
 
 /** Where a card sits for offset `o` from the active card. */
-function slotFor(o: number, hovered: boolean): Slot {
+function slotFor(o: number): Slot {
   const a = Math.abs(o), d = Math.sign(o);
   if (o === 0) return { x: 0, y: 0, z: 90, ry: 0, s: 1, blur: 0, op: 1, zi: 30 };
-  const b = { x: d * (a === 1 ? 300 : 520), y: a * 14, z: -150 * a - 70 * a * a, ry: -d * (22 + 8 * a), s: 1 - 0.08 * a, blur: 2 * a + Math.max(a - 1, 0), op: a > 2 ? 0 : 1 - 0.14 * a, zi: 20 - a };
-  if (hovered) return { x: b.x * 0.95, y: 0, z: b.z + 100, ry: b.ry * 0.5, s: b.s + 0.04, blur: 0, op: 1, zi: 25 };
-  return b;
+  return { x: d * (a === 1 ? 300 : 520), y: a * 14, z: -150 * a - 70 * a * a, ry: -d * (22 + 8 * a), s: 1 - 0.08 * a, blur: 2 * a + Math.max(a - 1, 0), op: a > 2 ? 0 : 1 - 0.14 * a, zi: 20 - a };
 }
 
 export function Hero() {
@@ -30,13 +28,11 @@ export function Hero() {
   const haloRef = useRef<HTMLDivElement>(null);
   const countRef = useRef<HTMLSpanElement>(null);
   const slotRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const veilRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const stage = stageRef.current!, rig = rigRef.current!, swipe = swipeRef.current!;
     const slots = slotRefs.current as HTMLDivElement[];
-    const cards = cardRefs.current as HTMLElement[];
     const veils = veilRefs.current as HTMLDivElement[];
     const N = slots.length;
     const reduced = prefersReducedMotion();
@@ -53,7 +49,7 @@ export function Hero() {
     const render = () => {
       slots.forEach((el, i) => {
         if (!sc.ready) { el.style.opacity = '0'; return; }
-        const o = off(i), t = slotFor(o, sc.hovered === i);
+        const o = off(i), t = slotFor(o);
         el.style.transform = `translate3d(${t.x}px,${t.y}px,${t.z}px) rotateY(${t.ry}deg) scale(${t.s})`;
         el.style.opacity = String(t.op);
         el.style.filter = t.blur ? `blur(${t.blur}px)` : 'none';
@@ -66,7 +62,6 @@ export function Hero() {
     };
     const go = (i: number) => {
       sc.hovered = null; sc.t = 0;
-      cards.forEach(c => { c.style.transform = ''; });
       sc.active = ((i % N) + N) % N;
       render();
     };
@@ -81,14 +76,6 @@ export function Hero() {
       on(el, 'pointerenter', () => { if (off(i) !== 0) { sc.hovered = i; render(); } });
       on(el, 'pointerleave', () => { if (sc.hovered === i) { sc.hovered = null; render(); } });
       on(el, 'click', () => { if (off(i) !== 0) go(i); });
-      const card = cards[i];
-      on(card, 'pointermove', e => {
-        if (reduced || off(i) !== 0) return;
-        const r = card.getBoundingClientRect(), nx = clamp01((e.clientX - r.left) / r.width), ny = clamp01((e.clientY - r.top) / r.height);
-        card.style.transition = 'transform .2s ease-out';
-        card.style.transform = `rotateX(${((0.5 - ny) * 12).toFixed(2)}deg) rotateY(${((nx - 0.5) * 16).toFixed(2)}deg) translateZ(20px)`;
-      });
-      on(card, 'pointerleave', () => { card.style.transition = 'transform .8s cubic-bezier(.16,1,.3,1)'; card.style.transform = ''; });
     });
 
     // Swipe the empty stage to rotate.
@@ -180,7 +167,7 @@ export function Hero() {
           <div ref={haloRef} className={s.halo} aria-hidden="true" />
           {HERO_POSTS.map((p, i) => (
             <div key={p.name} ref={el => { slotRefs.current[i] = el; }} className={s.slot}>
-              <PostCard post={p} cardRef={el => { cardRefs.current[i] = el; }} />
+              <PostCard post={p} />
               <div ref={el => { veilRefs.current[i] = el; }} className={s.veil} />
             </div>
           ))}
@@ -201,9 +188,9 @@ export function Hero() {
   );
 }
 
-function PostCard({ post: p, cardRef }: { post: HeroPost; cardRef: (el: HTMLElement | null) => void }) {
+function PostCard({ post: p }: { post: HeroPost }) {
   return (
-    <article ref={cardRef} className={s.card}>
+    <article className={s.card}>
       <header className={s.cardHead}>
         <span className={s.av} style={{ background: p.avBg }}>
           <span className={s.avIni}>{p.ini}</span>

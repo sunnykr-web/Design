@@ -4,7 +4,7 @@
 .h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(46px,5.8vw,92px); line-height: .94; letter-spacing: -.035em; }
 .all {
   display: flex; gap: 10px; padding-bottom: 5px; border-bottom: 1px solid #C9C0B2; font-size: 15px; font-weight: 600; color: var(--ink);
-  transition: color .3s, border-color .3s;
+  transition: color var(--hover-t), border-color var(--hover-t);
 }
 .all:hover { color: var(--red-deep); border-bottom-color: var(--red-deep); }
 .rows { display: flex; flex-direction: column; gap: 18px; }
@@ -12,9 +12,9 @@
 .card {
   flex: none; width: clamp(300px,27vw,400px); margin-right: 18px; padding: 24px; background: #FFFFFF; border: 1px solid #E2DBD0;
   border-radius: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
-  transition: border-color .4s, transform .7s var(--ease), box-shadow .7s;
+  transition: transform var(--hover-t), box-shadow var(--hover-t);
 }
-.card:hover { border-color: var(--ink); transform: translateY(-6px); box-shadow: 0 24px 40px -24px rgba(14,12,11,.35); }
+.card:hover { transform: var(--hover-lift); box-shadow: var(--hover-shadow); }
 .text {
   margin: 0; font-family: var(--serif); font-size: 22px; line-height: 1.28; color: var(--ink);
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; line-clamp: 4; overflow: hidden;

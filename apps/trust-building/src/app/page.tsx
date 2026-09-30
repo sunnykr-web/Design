@@ -1,5 +1,4 @@
 import { Grain } from '@/components/Grain';
-import { Magnetic } from '@/components/Magnetic';
 import { Preloader } from '@/components/Preloader';
 import { RevealObserver } from '@/components/RevealObserver';
 import { Close, Footer } from '@/components/landing/Close';
@@ -28,7 +27,6 @@ export default function Home() {
       </main>
       <Footer />
       <RevealObserver />
-      <Magnetic />
     </div>
   );
 }

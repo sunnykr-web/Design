@@ -59,7 +59,7 @@ export function Header() {
           </a>
         ))}
       </nav>
-      <a href={LINKS.programmes} data-mag="" className={s.cta}>Explore programmes</a>
+      <a href={LINKS.programmes} className={s.cta}>Explore programmes</a>
       <span ref={progRef} className={s.prog} aria-hidden="true" />
     </header>
   );

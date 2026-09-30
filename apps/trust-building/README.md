@@ -46,8 +46,8 @@ The prototype (`Trust Building V6.dc.html`) and its README disagree in a few pla
 - **Hero TOC rows.** The README describes a 4-row table of contents with hover thumbnails. The V6 template renders that list empty, so it isn't built. Say if you want it back.
 - **Custom cursor follower** (`#p5-cur`). It is `display:none` in V6, so it isn't built.
 - **V1–V6 version switcher.** Prototype-only, dropped.
-- **Magnetic CTAs** (`data-mag`). The README lists them but the prototype never wired the handler. They are implemented here (`components/Magnetic.tsx`).
-- **Immersion step arrows.** Built per the README: solid red with a glow on the active step, outline otherwise, and the glyph leans toward the cursor on hover. The prototype showed outline arrows that only turned red on hover.
+- **Immersion step arrows.** Built per the README: solid red with a glow on the active step, outline otherwise. The prototype showed outline arrows that only turned red on hover.
+- **Hover.** One rule everywhere (tokens in `globals.css`): cards lift 6px with a soft shadow and their image zooms 4%; filled buttons turn red (white on the red section); outline buttons and links change colour; arrows nudge 4px. The prototype's magnetic buttons, 3D card tilts, expanding "View story" pill and hover-only video captions were dropped.
 - **"All cities" back link.** Goes to `/#p5-imm`. In the prototype it went to `#im-<city>`, which the landing page immediately redirected back to the detail page.
 - **Mobile (< 900px).** The prototype wrapped the Immersion images below the pinned viewport, where they could never be seen. They now stack between the steps and the caption. The hero's "Read their posts" button no longer wraps on phones.
 - **Accessibility.** Real links for cards and arrows instead of `role=button` spans nested in buttons. Carousel keyboard support is kept. The duplicated marquee copy is hidden from screen readers. Carousel dots have a 44px hit area.

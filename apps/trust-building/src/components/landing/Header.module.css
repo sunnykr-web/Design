@@ -14,7 +14,7 @@
 @media (max-width: 899px) { .nav { display: none; } }
 .navLink {
   position: relative; display: flex; align-items: center; gap: 8px; padding: 6px 0;
-  font-size: 14px; font-weight: 500; color: rgba(243,238,230,.7); transition: color .4s;
+  font-size: 14px; font-weight: 500; color: rgba(243,238,230,.7); transition: color var(--hover-t);
 }
 .navDot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); transform: scale(0); transition: transform .5s var(--ease); }
 .navLink:hover { color: var(--cream); }
@@ -25,7 +25,7 @@
 .cta {
   flex: none; padding: 11px 20px; border-radius: 999px; background: var(--cream); color: var(--ink);
   font-size: 13px; font-weight: 600;
-  transition: background .35s, color .35s, translate .6s var(--ease);
+  transition: background var(--hover-t), color var(--hover-t);
 }
 .cta:hover { background: var(--red); color: var(--white); }
 

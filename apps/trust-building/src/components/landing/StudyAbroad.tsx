@@ -149,7 +149,7 @@ export function StudyAbroad() {
         </div>
 
         <div className={s.controls}>
-          <button type="button" aria-label="Previous post" data-mag="" className={s.arrowBtn} onClick={() => go(idx - 1)}>←</button>
+          <button type="button" aria-label="Previous post" className={s.arrowBtn} onClick={() => go(idx - 1)}>←</button>
           <div className={s.dots}>
             {ABROAD_POSTS.map((_, i) => (
               <button key={i} type="button" aria-label={`Show post ${i + 1}`} aria-current={i === idx ? 'true' : undefined} className={cx(s.dot, i === idx && s.on)} onClick={() => go(i)}>
@@ -157,7 +157,7 @@ export function StudyAbroad() {
               </button>
             ))}
           </div>
-          <button type="button" aria-label="Next post" data-mag="" className={s.arrowBtn} onClick={() => go(idx + 1)}>→</button>
+          <button type="button" aria-label="Next post" className={s.arrowBtn} onClick={() => go(idx + 1)}>→</button>
         </div>
       </div>
 

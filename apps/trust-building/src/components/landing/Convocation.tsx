@@ -61,10 +61,7 @@ export function Convocation() {
                         style={{ objectFit: look.fit, padding: look.pad }}
                       />
                     </div>
-                    <span className={s.pill} aria-hidden="true">
-                      <span className={s.pillText}>View story</span>
-                      <span className={s.pillArrow}>→</span>
-                    </span>
+                    <span className={s.pill} aria-hidden="true"><span className={s.pillArrow}>→</span></span>
                   </div>
                   <span className={s.cap}><span>{place}</span><span className={s.year}>{year}</span></span>
                 </Link>

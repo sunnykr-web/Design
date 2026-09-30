@@ -86,11 +86,11 @@
 .countLabel { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.72); }
 .cta {
   justify-self: end; display: flex; align-items: center; gap: 14px; padding: 15px 26px; border-radius: 999px;
-  background: var(--white); color: var(--ink); font-size: 14px; font-weight: 600; transition: background .4s, color .4s;
+  background: var(--white); color: var(--ink); font-size: 14px; font-weight: 600; transition: background var(--hover-t), color var(--hover-t);
 }
-.ctaArrow { display: inline-block; transition: transform .6s var(--ease); }
+.ctaArrow { display: inline-block; transition: transform var(--hover-t); }
 .cta:hover { background: var(--red); color: var(--white); }
-.cta:hover .ctaArrow { transform: translateY(4px); }
+.cta:hover .ctaArrow { transform: translateY(var(--nudge)); }
 
 @media (max-width: 599px) {
   .bar { grid-template-columns: minmax(0,1fr) auto; }

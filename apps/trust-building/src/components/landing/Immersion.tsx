@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
-import { clamp01, onFrame, onMeasure, pageRect, prefersReducedMotion, setStyle, smoothScrollTo } from '@/lib/motion';
+import { clamp01, onFrame, onMeasure, pageRect, setStyle, smoothScrollTo } from '@/lib/motion';
 import { useDragRail } from '@/lib/useDragRail';
 import { IMMERSION_CARDS, IMMERSION_STEPS } from '@/lib/data/landing';
 import { IMMERSIONS, immersionHref } from '@/lib/data/immersions';
@@ -21,15 +21,12 @@ const cityName = (slug: string) => IMMERSIONS.find(i => i.slug === slug)?.city ?
 export function Immersion() {
   const stageRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
-  const mediaRef = useRef<HTMLDivElement>(null);
   const rollRef = useRef<HTMLSpanElement>(null);
   const layerRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const imgRefs = useRef<(HTMLImageElement | null)[]>([]);
   const textRefs = useRef<(HTMLDivElement | null)[]>([]);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const fillRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const railRef = useRef<HTMLDivElement>(null);
-  const act = useRef(0);
   useDragRail(railRef);
 
   const goStep = (i: number) => {
@@ -40,8 +37,7 @@ export function Immersion() {
   };
 
   useEffect(() => {
-    const stage = stageRef.current!, media = mediaRef.current!;
-    const reduced = prefersReducedMotion();
+    const stage = stageRef.current!;
     let m = { top: 0, h: 0 };
     let lastAct = -1;
     const offMeasure = onMeasure(() => { m = pageRect(stage); });
@@ -55,7 +51,6 @@ export function Immersion() {
       // Hold on each step, then ease to the next.
       const seg = raw >= N - 1 ? N - 1 : k + smooth(f);
       const a = Math.round(seg);
-      act.current = a;
       for (let i = 0; i < N; i++) {
         const d = seg - i, c = layerRefs.current[i], tx = textRefs.current[i], row = stepRefs.current[i];
         if (c) {
@@ -87,30 +82,7 @@ export function Immersion() {
       setStyle(bgRef.current, 'transform', `scale(${(1.14 - t * 0.12).toFixed(4)})`);
     });
 
-    // Tilt the active image toward the cursor.
-    let tiltEl: HTMLElement | null = null;
-    const move = (e: PointerEvent) => {
-      if (reduced || e.pointerType !== 'mouse') return;
-      const img = imgRefs.current[act.current];
-      if (!img) return;
-      const r = media.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
-      if (tiltEl && tiltEl !== img) tiltEl.style.transform = '';
-      tiltEl = img;
-      img.style.transition = 'transform .35s ease-out';
-      img.style.transform = `perspective(1400px) rotateX(${(-ny * 6).toFixed(2)}deg) rotateY(${(nx * 8).toFixed(2)}deg) scale(1.02)`;
-    };
-    const leave = () => {
-      if (!tiltEl) return;
-      tiltEl.style.transition = 'transform 1s cubic-bezier(.16,1,.3,1)';
-      tiltEl.style.transform = '';
-    };
-    media.addEventListener('pointermove', move);
-    media.addEventListener('pointerleave', leave);
-    return () => {
-      offMeasure(); offFrame();
-      media.removeEventListener('pointermove', move);
-      media.removeEventListener('pointerleave', leave);
-    };
+    return () => { offMeasure(); offFrame(); };
   }, []);
 
   return (
@@ -154,11 +126,10 @@ export function Immersion() {
                 </div>
               </div>
             </div>
-            <div ref={mediaRef} className={s.media}>
+            <div className={s.media}>
               {IMMERSION_STEPS.map((st, i) => (
                 <div key={st.label} ref={el => { layerRefs.current[i] = el; }} className={s.layer} style={{ zIndex: i + 1, transform: i === 0 ? 'none' : 'translate3d(0,110%,0)' }}>
                   <Image
-                    ref={el => { imgRefs.current[i] = el; }}
                     src={st.src} alt={st.alt} sizes="(max-width: 900px) 100vw, 60vw" draggable={false}
                     className={s.layerImg} priority={i === 0}
                   />
@@ -193,25 +164,11 @@ export function Immersion() {
   );
 }
 
-/** Round arrow that opens the city's detail page. Its glyph leans toward the cursor while hovered. */
+/** Round arrow that opens the city's detail page. */
 function StepArrow({ href, label }: { href: string; label: string }) {
-  const glyph = useRef<HTMLSpanElement>(null);
   return (
-    <Link
-      href={href}
-      aria-label={label}
-      title="View event details"
-      className={s.go}
-      onPointerMove={e => {
-        if (e.pointerType !== 'mouse' || !glyph.current) return;
-        const r = e.currentTarget.getBoundingClientRect();
-        const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
-        const ang = Math.max(-60, Math.min(60, (Math.atan2(dy, dx) * 180) / Math.PI));
-        glyph.current.style.transform = `translate(${(dx * 0.18).toFixed(1)}px,${(dy * 0.18).toFixed(1)}px) rotate(${ang.toFixed(1)}deg)`;
-      }}
-      onPointerLeave={() => { if (glyph.current) glyph.current.style.transform = ''; }}
-    >
-      <span ref={glyph} className={s.goGlyph} aria-hidden="true">→</span>
+    <Link href={href} aria-label={label} title="View event details" className={s.go}>
+      <span className={s.goGlyph} aria-hidden="true">→</span>
     </Link>
   );
 }
