@@ -8,3 +8,7 @@ This repo holds the spec of record and the token source that the build must matc
 - `tokens/wov.css` — the token set, mirroring the `WOV Tokens` variable collection in Figma
 
 **Nothing ships until the consent questions in §12 of the spec are answered in writing.**
+
+## Other handoffs
+
+- `handoffs/trust-building-v6/` — upGrad **Trust Building** landing page (V6) with its Convocation Detail and Immersion Detail templates. These are HTML prototypes (`*.dc.html`, open them in a browser) plus assets and data. Start with `handoffs/trust-building-v6/README.md`. The convocation copy and some showcase posts are placeholder or sample content.

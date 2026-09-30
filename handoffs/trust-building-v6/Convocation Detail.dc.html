@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;display=swap" rel="stylesheet">
+<script src="./convocations.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #F3EEE6; color: #0E0C0B; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: inherit; }
+  ::selection { background: #E4041C; color: #FFFFFF; }
+</style>
+</helmet>
+<div style="width:100%;overflow-x:clip;background:#F3EEE6">
+  <header style="position:fixed;top:0;left:0;right:0;z-index:60;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 clamp(18px,4vw,56px);background:rgba(243,238,230,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(14,12,11,.08)">
+    <a href="Trust%20Building%20V6.dc.html" style="font-size:23px;font-weight:700;letter-spacing:-.04em;color:#E4041C">upGrad</a>
+    <a href="Trust%20Building%20V6.dc.html#p5-conv" style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#4A453F;transition:color .3s" style-hover="color:#0E0C0B">← All moments</a>
+  </header>
+
+  <section data-screen-label="01 Convocation Hero" style="position:relative;padding:clamp(120px,16vh,160px) clamp(18px,6vw,96px) clamp(80px,11vh,120px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,5vw,80px);align-items:end">
+      <div style="display:flex;flex-direction:column;gap:26px">
+        <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#B80317"><span style="width:7px;height:7px;border-radius:50%;background:#E4041C"></span>Convocation · {{ u.place }}</span>
+        <h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(48px,6vw,100px);line-height:.92;letter-spacing:-.035em;color:#0E0C0B;text-wrap:balance">
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">{{ u.title }}</span></span>
+        </h1>
+        <p data-rv="1" style="margin:0;max-width:480px;font-size:clamp(15px,1.2vw,18px);line-height:1.6;color:#4A453F;text-wrap:pretty">{{ u.desc }}</p>
+        <div data-rv="1" style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="{{ next.href }}" onMouseEnter="{{ regIn }}" onMouseLeave="{{ regOut }}" style="display:flex;align-items:center;gap:14px;padding:16px 28px;border-radius:999px;background:{{ regBg }};color:#FFFFFF;font-size:15px;font-weight:600;transition:background .4s">Next moment<span style="display:inline-block;transform:{{ regArrow }};transition:transform .6s cubic-bezier(.16,1,.3,1)">→</span></a>
+          <a href="Trust%20Building%20V6.dc.html#p5-conv" style="display:flex;align-items:center;padding:16px 24px;border-radius:999px;border:1px solid rgba(14,12,11,.24);font-size:15px;font-weight:600;color:#0E0C0B;transition:border-color .3s" style-hover="border-color:#0E0C0B">Back to convocation</a>
+        </div>
+      </div>
+      <div data-rv="1" style="display:flex;justify-content:center;align-items:center;min-width:0">
+        <div style="position:relative;max-width:100%;border-radius:24px;overflow:hidden;background:{{ u.bg }};box-shadow:0 2px 4px rgba(14,12,11,.06),0 12px 24px -8px rgba(14,12,11,.14),0 40px 72px -28px rgba(14,12,11,.32)">
+          <img src="{{ u.img }}" alt="{{ u.alt }}" data-kb="1" style="display:block;width:auto;height:auto;max-width:100%;max-height:min(72vh,640px);padding:{{ u.pad }}">
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:24px;margin-top:clamp(56px,8vh,96px)">
+      <sc-for list="{{ u.factList }}" as="f" hint-placeholder-count="3">
+        <div data-rv="1" style="display:flex;flex-direction:column;gap:10px;padding-top:20px;border-top:1px solid #D9D1C4">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#6A645C">{{ f.k }}</span>
+          <span style="font-family:'Instrument Serif',serif;font-size:clamp(28px,2.8vw,42px);line-height:1.02;letter-spacing:-.02em">{{ f.v }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Convocation About" style="position:relative;z-index:2;background:#FFFFFF;border-radius:32px 32px 0 0;padding:clamp(96px,13vh,150px) clamp(18px,6vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(40px,6vw,96px);align-items:start">
+      <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B80317"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>01 · The moment</span>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <sc-for list="{{ u.about }}" as="p" hint-placeholder-count="2">
+          <p data-rv="1" style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(24px,2.2vw,32px);line-height:1.28;letter-spacing:-.005em;color:#2C2824;text-wrap:pretty">{{ p }}</p>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="03 More Moments" style="position:relative;z-index:3;margin-top:-32px;background:#0E0C0B;color:#F3EEE6;border-radius:32px 32px 0 0;padding:clamp(96px,13vh,150px) clamp(18px,6vw,96px)">
+    <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(36px,4vw,56px)">
+      <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,238,230,.72)"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>02 · More from convocation</span>
+      <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,4.6vw,72px);line-height:.94;letter-spacing:-.035em">
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Every graduate,</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#FF3B4A">on stage.</span></span>
+      </h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(16px,1.6vw,24px)">
+      <sc-for list="{{ others }}" as="o" hint-placeholder-count="3">
+        <a data-rv="1" href="{{ o.href }}" onMouseEnter="{{ o.enter }}" onMouseLeave="{{ o.leave }}" style="display:flex;flex-direction:column;gap:16px;color:#F3EEE6">
+          <div style="position:relative;aspect-ratio:670/436;border-radius:16px;overflow:hidden;background:{{ o.bg }};transform:{{ o.lift }};box-shadow:{{ o.shadow }};transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1)">
+            <img src="{{ o.img }}" alt="{{ o.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:{{ o.fit }};object-position:{{ o.pos }};padding:{{ o.pad }};display:block;transform:{{ o.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
+          </div>
+          <span style="display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(243,238,230,.66)"><span>{{ o.place }}</span><span style="display:inline-block;transform:{{ o.arrow }};transition:transform .6s cubic-bezier(.16,1,.3,1)">→</span></span>
+          <span style="font-family:'Instrument Serif',serif;font-size:clamp(24px,2vw,30px);line-height:1.08;letter-spacing:-.01em">{{ o.title }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;slug&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;iit-bombay-stage&quot;,&quot;annual-convocation&quot;,&quot;degree-in-hand&quot;,&quot;iiit-bangalore&quot;,&quot;gunavardhan-dandi&quot;,&quot;whole-cohort&quot;,&quot;iit-bombay-2026&quot;],&quot;default&quot;:&quot;iit-bombay-stage&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { reg: false, hov: -1 };
+  componentDidMount() {
+    this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { this.reveal(e.target); this.io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    this.scan = () => document.querySelectorAll('[data-ln]:not([data-seen]),[data-rv]:not([data-seen])').forEach(el => { el.setAttribute('data-seen', ''); if (this.reduced) return; el.style.opacity = '0'; this.io.observe(el); });
+    this.scan(); setTimeout(this.scan, 400);
+    setTimeout(() => { const kb = document.querySelector('[data-kb]'); kb && !this.reduced && kb.animate([{ transform: 'scale(1.12)' }, { transform: 'scale(1)' }], { duration: 2200, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' }); }, 100);
+  }
+  componentWillUnmount() { this.io && this.io.disconnect(); }
+  reveal(el) {
+    const ln = el.hasAttribute('data-ln'), h = ln && el.closest('h1,h2,h3'), sib = h ? [...h.querySelectorAll('[data-ln]')].indexOf(el) : 0;
+    el.style.opacity = '';
+    el.animate(ln ? [{ transform: 'translateY(110%) rotate(2deg)' }, { transform: 'none' }] : [{ opacity: 0, transform: 'translateY(24px)', filter: 'blur(6px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }],
+      { duration: ln ? 1200 : 1000, delay: 120 + sib * 110, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
+  }
+  renderVals() {
+    const D = window.CONV_DATA;
+    if (!D) { clearTimeout(this.w); this.w = setTimeout(() => this.forceUpdate(), 60); return {}; }
+    const slug = new URLSearchParams(location.search).get('c') || this.props.slug;
+    const i = Math.max(0, D.findIndex(x => x.slug === slug)), u = D[i], { reg, hov } = this.state;
+    const look = x => ({ bg: x.post ? '#DAD2C4' : '#2A2723', fit: x.post ? 'contain' : 'cover', pad: x.post ? '6%' : '0', pos: x.slug === 'degree-in-hand' ? 'center 30%' : 'center' });
+    const href = x => 'Convocation%20Detail.dc.html?c=' + x.slug;
+    return {
+      u: { ...u, ...look(u), ar: u.post ? '654/410' : '670/436', factList: u.facts.map(([k, v]) => ({ k, v })) },
+      next: { href: href(D[(i + 1) % D.length]) },
+      regBg: reg ? '#0E0C0B' : '#E4041C', regArrow: reg ? 'translateX(6px)' : 'translateX(0)',
+      regIn: () => this.setState({ reg: true }), regOut: () => this.setState({ reg: false }),
+      others: D.filter(x => x !== u).map((x, k) => ({
+        ...x, ...look(x), href: href(x),
+        enter: () => this.setState({ hov: k }), leave: () => this.setState({ hov: -1 }),
+        lift: hov === k ? 'translateY(-8px)' : 'translateY(0)', shadow: hov === k ? '0 40px 70px -30px rgba(0,0,0,.8)' : '0 0 0 rgba(0,0,0,0)',
+        zoom: hov === k ? 'scale(1.07)' : 'scale(1)', arrow: hov === k ? 'translateX(6px)' : 'translateX(0)'
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

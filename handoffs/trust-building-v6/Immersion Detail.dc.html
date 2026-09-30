@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;display=swap" rel="stylesheet">
+<script src="./immersions.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #0E0C0B; color: #F3EEE6; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: inherit; }
+  ::selection { background: #E4041C; color: #FFFFFF; }
+  @keyframes im-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+</style>
+</helmet>
+<div style="width:100%;overflow-x:clip;background:#0E0C0B">
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:250;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27180%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.85%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')"></div>
+
+  <header style="position:fixed;top:0;left:0;right:0;z-index:60;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 clamp(18px,4vw,56px);background:rgba(14,12,11,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(243,238,230,.08)">
+    <a href="Trust%20Building%20V6.dc.html" style="font-size:23px;font-weight:700;letter-spacing:-.04em;color:#E4041C">upGrad</a>
+    <a href="{{ backHref }}" style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:rgba(243,238,230,.72);transition:color .3s" style-hover="color:#F3EEE6">← All cities</a>
+  </header>
+
+  <section data-screen-label="01 Detail Hero" style="position:relative;padding:clamp(120px,16vh,160px) clamp(18px,6vw,96px) clamp(80px,11vh,120px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,5vw,80px);align-items:end">
+      <div style="display:flex;flex-direction:column;gap:26px">
+        <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.86)"><span style="width:7px;height:7px;border-radius:50%;background:#E4041C;animation:im-pulse 2.4s ease-in-out infinite"></span>{{ u.place }}</span>
+        <h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(48px,6vw,100px);line-height:.92;letter-spacing:-.035em;color:#FFFFFF;text-wrap:balance">
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">{{ u.title }}</span></span>
+        </h1>
+        <p data-rv="1" style="margin:0;max-width:480px;font-size:clamp(15px,1.2vw,18px);line-height:1.6;color:rgba(255,255,255,.8);text-wrap:pretty">{{ u.desc }}</p>
+        <div data-rv="1" style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="{{ u.url }}" target="_blank" rel="noopener" onMouseEnter="{{ regIn }}" onMouseLeave="{{ regOut }}" style="display:flex;align-items:center;gap:14px;padding:16px 28px;border-radius:999px;background:{{ regBg }};color:{{ regFg }};font-size:15px;font-weight:600;transition:background .4s,color .4s">Request to join<span style="display:inline-block;transform:{{ regArrow }};transition:transform .6s cubic-bezier(.16,1,.3,1)">→</span></a>
+          <a href="{{ backHref }}" style="display:flex;align-items:center;padding:16px 24px;border-radius:999px;border:1px solid rgba(243,238,230,.24);font-size:15px;font-weight:600;color:#F3EEE6;transition:border-color .3s" style-hover="border-color:#F3EEE6">Other cities</a>
+        </div>
+      </div>
+      <div data-rv="1" style="position:relative;aspect-ratio:40/21;border-radius:24px;overflow:hidden;background:#1A1816;box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06)">
+        <img src="{{ u.imgSrc }}" alt="{{ u.alt }}" data-kb="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:24px;margin-top:clamp(56px,8vh,96px)">
+      <sc-for list="{{ u.facts }}" as="f" hint-placeholder-count="3">
+        <div data-rv="1" style="display:flex;flex-direction:column;gap:10px;padding-top:20px;border-top:1px solid rgba(243,238,230,.18)">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(243,238,230,.66)">{{ f.k }}</span>
+          <span style="font-family:'Instrument Serif',serif;font-size:clamp(28px,2.8vw,42px);line-height:1.02;letter-spacing:-.02em">{{ f.v }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Detail Plan" style="position:relative;z-index:2;background:#F3EEE6;color:#0E0C0B;border-radius:32px 32px 0 0;padding:clamp(96px,13vh,150px) clamp(18px,6vw,96px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(40px,6vw,96px);align-items:start">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B80317"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>01 · Here’s what’s brewing</span>
+        <div style="display:flex;flex-direction:column;border-bottom:1px solid #D9D1C4">
+          <sc-for list="{{ u.brew }}" as="d" hint-placeholder-count="4">
+            <div data-rv="1" style="display:grid;grid-template-columns:56px minmax(0,1fr);align-items:baseline;gap:18px;padding:22px 0;border-top:1px solid #D9D1C4;color:#0E0C0B">
+              <span style="font-family:'Instrument Serif',serif;font-size:clamp(32px,3vw,44px);line-height:.9;letter-spacing:-.03em;font-style:italic;color:#B80317">{{ d.d }}</span>
+              <span style="font-family:'Instrument Serif',serif;font-size:clamp(22px,1.9vw,28px);line-height:1.2;text-wrap:pretty">{{ d.t }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:40px">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B80317"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>02 · About</span>
+          <sc-for list="{{ u.about }}" as="p" hint-placeholder-count="2">
+            <p data-rv="1" style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(22px,1.9vw,28px);line-height:1.3;letter-spacing:-.005em;color:#2C2824;text-wrap:pretty">{{ p }}</p>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B80317"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>03 · Good to know</span>
+          <div style="display:flex;flex-direction:column;border-bottom:1px solid #D9D1C4">
+            <sc-for list="{{ u.agenda }}" as="a" hint-placeholder-count="4">
+              <div data-rv="1" style="display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid #D9D1C4;font-size:15px">
+                <span style="font-weight:600;color:#B80317">{{ a.d }}</span><span>{{ a.t }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="03 Other Immersions" style="position:relative;z-index:3;margin-top:-32px;background:#0E0C0B;color:#F3EEE6;border-radius:32px 32px 0 0;padding:clamp(96px,13vh,150px) clamp(18px,6vw,96px)">
+    <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:clamp(36px,4vw,56px)">
+      <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,238,230,.72)"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>Other cities</span>
+      <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,4.6vw,72px);line-height:.94;letter-spacing:-.035em">
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Not your city?</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#FF3B4A">Try another one.</span></span>
+      </h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(16px,1.6vw,24px)">
+      <sc-for list="{{ others }}" as="o" hint-placeholder-count="2">
+        <a data-rv="1" href="{{ o.href }}" onMouseEnter="{{ o.enter }}" onMouseLeave="{{ o.leave }}" style="display:flex;flex-direction:column;gap:16px;color:#F3EEE6">
+          <div style="position:relative;aspect-ratio:40/21;border-radius:16px;overflow:hidden;background:#1A1816;transform:{{ o.lift }};box-shadow:{{ o.shadow }};transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1)">
+            <img src="{{ o.src }}" alt="{{ o.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:{{ o.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
+          </div>
+          <span style="display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(243,238,230,.66)"><span>{{ o.place }}</span><span style="display:inline-block;transform:{{ o.arrow }};transition:transform .6s cubic-bezier(.16,1,.3,1)">→</span></span>
+          <span style="font-family:'Instrument Serif',serif;font-size:clamp(24px,2vw,30px);line-height:1.08;letter-spacing:-.01em">{{ o.title }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;slug&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;chennai&quot;,&quot;chandigarh&quot;,&quot;ahmedabad&quot;],&quot;default&quot;:&quot;chennai&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { reg: false, hov: -1 };
+  componentDidMount() {
+    this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { this.reveal(e.target); this.io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    this.scan = () => document.querySelectorAll('[data-ln]:not([data-seen]),[data-rv]:not([data-seen])').forEach(el => { el.setAttribute('data-seen', ''); if (this.reduced) return; el.style.opacity = '0'; this.io.observe(el); });
+    this.scan(); setTimeout(this.scan, 400);
+    setTimeout(() => { const kb = document.querySelector('[data-kb]'); kb && !this.reduced && kb.animate([{ transform: 'scale(1.16)' }, { transform: 'scale(1)' }], { duration: 2200, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' }); }, 100);
+  }
+  componentWillUnmount() { this.io && this.io.disconnect(); }
+  reveal(el) {
+    const ln = el.hasAttribute('data-ln'), h = ln && el.closest('h1,h2,h3'), sib = h ? [...h.querySelectorAll('[data-ln]')].indexOf(el) : 0;
+    el.style.opacity = '';
+    el.animate(ln ? [{ transform: 'translateY(110%) rotate(2deg)' }, { transform: 'none' }] : [{ opacity: 0, transform: 'translateY(24px)', filter: 'blur(6px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }],
+      { duration: ln ? 1200 : 1000, delay: 120 + sib * 110, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
+  }
+  renderVals() {
+    const D = window.IMM_DATA;
+    if (!D) { clearTimeout(this.w); this.w = setTimeout(() => this.forceUpdate(), 60); return {}; }
+    const slug = new URLSearchParams(location.search).get('u') || this.props.slug;
+    const u = D.find(x => x.slug === slug) || D[0], { reg, hov } = this.state;
+    return {
+      u: { ...u, imgSrc: u.img },
+      backHref: 'Trust%20Building%20V6.dc.html#im-' + u.slug,
+      regBg: reg ? '#E4041C' : '#F3EEE6', regFg: reg ? '#FFFFFF' : '#0E0C0B', regArrow: reg ? 'translateX(6px)' : 'translateX(0)',
+      regIn: () => this.setState({ reg: true }), regOut: () => this.setState({ reg: false }),
+      others: D.filter(x => x !== u).map((x, k) => ({
+        title: x.title, place: x.place, alt: x.alt, src: x.img, href: 'Immersion%20Detail.dc.html?u=' + x.slug,
+        enter: () => this.setState({ hov: k }), leave: () => this.setState({ hov: -1 }),
+        lift: hov === k ? 'translateY(-8px)' : 'translateY(0)', shadow: hov === k ? '0 40px 70px -30px rgba(0,0,0,.8)' : '0 0 0 rgba(0,0,0,0)',
+        zoom: hov === k ? 'scale(1.07)' : 'scale(1)', arrow: hov === k ? 'translateX(6px)' : 'translateX(0)'
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
