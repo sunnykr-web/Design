@@ -7,6 +7,7 @@ npm install
 npm run dev        # http://localhost:3000
 npm run build && npm start
 npm run typecheck  # needs one `dev` or `build` first, which generates next-env.d.ts
+npm run export     # static site in out/, for previews
 ```
 
 ## Routes
