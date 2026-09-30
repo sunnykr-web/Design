@@ -12,3 +12,4 @@ This repo holds the spec of record and the token source that the build must matc
 ## Other handoffs
 
 - `handoffs/trust-building-v6/` — upGrad **Trust Building** landing page (V6) with its Convocation Detail and Immersion Detail templates. These are HTML prototypes (`*.dc.html`, open them in a browser) plus assets and data. Start with `handoffs/trust-building-v6/README.md`. The convocation copy and some showcase posts are placeholder or sample content.
+  - Built as a Next.js app in `apps/trust-building/`. See its README for how to run it and where it differs from the prototype.

@@ -1,0 +1,99 @@
+.hero { position: relative; height: 100vh; min-height: 900px; background: var(--ink); color: var(--white); overflow: hidden; }
+.glow {
+  position: absolute; left: 0; top: 0; width: 1000px; height: 1000px; margin: -500px 0 0 -500px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(228,4,28,.2), rgba(228,4,28,0));
+  pointer-events: none; transform: translate3d(50vw,64vh,0); will-change: transform;
+}
+.floor {
+  position: absolute; left: 50%; bottom: -34%; width: 150%; height: 62%; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(243,238,230,.07), rgba(243,238,230,0)); pointer-events: none;
+}
+.content {
+  position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px;
+  padding: clamp(104px,13vh,128px) 20px 0; will-change: transform, opacity;
+}
+.h1 {
+  margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(46px,6vw,104px);
+  line-height: .92; letter-spacing: -.035em; color: var(--white);
+}
+.accent { font-style: italic; color: var(--red-bright); }
+.lede { margin: 0; max-width: 520px; font-size: clamp(15px,1.2vw,18px); line-height: 1.55; color: rgba(255,255,255,.8); text-wrap: pretty; }
+
+.stage {
+  position: relative; z-index: 1; height: 440px; margin-top: 4px; perspective: 1200px; perspective-origin: 50% 40%;
+  touch-action: pan-y; outline: none; will-change: transform, opacity;
+}
+.stage:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+.swipe { position: absolute; inset: 0; z-index: 10; cursor: grab; }
+.rig { position: absolute; left: 50%; top: 50%; z-index: 20; width: 0; height: 0; transform-style: preserve-3d; }
+.halo {
+  position: absolute; left: -240px; top: -210px; width: 480px; height: 420px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(228,4,28,.42), rgba(228,4,28,0)); filter: blur(24px);
+  opacity: 0; transform: translateZ(-60px); transition: opacity 1.4s var(--ease); pointer-events: none;
+}
+.slot {
+  position: absolute; left: -150px; top: -190px; width: 300px; transform-style: preserve-3d; opacity: 0;
+  transform: translate3d(0,140px,-1600px) rotateX(24deg);
+  transition: transform 1s var(--ease), opacity 1s var(--ease), filter 1s var(--ease);
+}
+.veil { position: absolute; inset: 0; border-radius: 14px; background: var(--ink); opacity: 0; pointer-events: none; transition: opacity .9s var(--ease); }
+
+/* LinkedIn-style post card */
+.card {
+  position: relative; width: 300px; font-family: var(--li); background: #FFFFFF; border-radius: 14px; overflow: hidden;
+  text-align: left; user-select: none; transform-style: preserve-3d; box-shadow: 0 30px 60px -20px rgba(0,0,0,.7);
+}
+.cardHead { display: flex; align-items: flex-start; gap: 10px; padding: 16px 16px 0; }
+.av { position: relative; flex: none; width: 34px; height: 34px; border-radius: 50%; overflow: hidden; }
+.avIni { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #FFFFFF; }
+.avImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.who { min-width: 0; flex: 1; display: block; }
+.name { display: block; font-size: 12px; font-weight: 600; color: #111827; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.role { display: block; font-size: 10px; color: #5b626e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.date { flex: none; padding-top: 2px; font-size: 10px; color: #767d89; white-space: nowrap; }
+.body { display: flex; flex-direction: column; gap: 9px; padding: 10px 16px 12px; font-size: 10.5px; line-height: 1.6; color: #1f2937; }
+.body p { margin: 0; }
+.badge { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; background: #E8F0FE; }
+.shield {
+  display: flex; align-items: center; justify-content: center; width: 72px; height: 72px; background: #2563eb;
+  clip-path: polygon(0 0,100% 0,100% 78%,50% 100%,0 78%);
+  font-size: 18px; font-weight: 800; letter-spacing: .9px; color: #FFFFFF;
+}
+.badgeLabel { margin-top: 6px; font-size: 9px; font-weight: 500; color: #475569; }
+.photo { width: 100%; height: 150px; object-fit: cover; display: block; }
+.stats { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; font-size: 10px; color: #5b626e; }
+.reacts { display: flex; align-items: center; gap: 6px; }
+.reactRow { display: flex; }
+.react {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px;
+  border-radius: 50%; font-size: 7px; box-shadow: 0 0 0 1.5px #fff;
+}
+.react + .react { margin-left: -4.5px; }
+.likes { font-weight: 500; color: #4b5563; }
+.nowrap { white-space: nowrap; }
+.cardFoot { border-top: 1px solid #f3f4f6; }
+.read { display: flex; align-items: center; gap: 5px; padding: 11px 16px; font-size: 11px; font-weight: 600; color: #111827; }
+
+.bar {
+  position: absolute; left: var(--hdr-pad-x); right: var(--hdr-pad-x); bottom: clamp(24px,4vh,40px); z-index: 30;
+  display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: end; gap: 20px;
+}
+.countWrap { display: flex; flex-direction: column; gap: 8px; }
+.count {
+  font-family: var(--serif); font-size: clamp(40px,4vw,64px); line-height: .85; letter-spacing: -.03em;
+  color: var(--white); font-variant-numeric: tabular-nums;
+}
+.countLabel { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.72); }
+.cta {
+  justify-self: end; display: flex; align-items: center; gap: 14px; padding: 15px 26px; border-radius: 999px;
+  background: var(--white); color: var(--ink); font-size: 14px; font-weight: 600; transition: background .4s, color .4s;
+}
+.ctaArrow { display: inline-block; transition: transform .6s var(--ease); }
+.cta:hover { background: var(--red); color: var(--white); }
+.cta:hover .ctaArrow { transform: translateY(4px); }
+
+@media (max-width: 599px) {
+  .bar { grid-template-columns: minmax(0,1fr) auto; }
+  .bar > span[aria-hidden] { display: none; }
+  .cta { white-space: nowrap; padding: 14px 20px; }
+}

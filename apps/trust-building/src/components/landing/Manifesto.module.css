@@ -1,0 +1,7 @@
+.man { position: relative; background: var(--ink); color: var(--cream); padding: clamp(120px,20vh,220px) var(--pad-x) clamp(96px,14vh,160px); }
+.inner { max-width: 1320px; display: flex; flex-direction: column; gap: clamp(32px,4vw,56px); }
+.text {
+  margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(36px,4.8vw,80px);
+  line-height: 1.06; letter-spacing: -.025em; color: var(--cream); text-wrap: pretty;
+}
+.accent { color: var(--red-bright); }

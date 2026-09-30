@@ -1,0 +1,142 @@
+import type { StaticImageData } from 'next/image';
+import a0 from '@/assets/avatars/a0.png';
+import a1 from '@/assets/avatars/a1.png';
+import a2 from '@/assets/avatars/a2.png';
+import a3 from '@/assets/avatars/a3.png';
+import a4 from '@/assets/avatars/a4.png';
+import a5 from '@/assets/avatars/a5.png';
+import a6 from '@/assets/avatars/a6.png';
+import a7 from '@/assets/avatars/a7.png';
+import a8 from '@/assets/avatars/a8.png';
+import davidChen from '@/assets/showcase/avatars/david-chen.jpg';
+import nikitaMenon from '@/assets/showcase/avatars/nikita-menon.jpg';
+import gunavardhanDandi from '@/assets/showcase/avatars/gunavardhan-dandi.jpg';
+import apexSolutions from '@/assets/showcase/avatars/apex-solutions.svg';
+import aishaOkafor from '@/assets/showcase/avatars/aisha-okafor.jpg';
+import teamOffsite from '@/assets/showcase/media/team-offsite.jpg';
+import graduation from '@/assets/showcase/media/graduation-ceremony.jpg';
+import dataAnalytics from '@/assets/showcase/media/data-analytics.jpg';
+import hackathon from '@/assets/showcase/media/hackathon.jpg';
+import saV0 from '@/assets/sa-v0.png';
+import saV1 from '@/assets/sa-v1.png';
+import saV2 from '@/assets/sa-v2.png';
+import saV3 from '@/assets/sa-v3.png';
+import saV4 from '@/assets/sa-v4.png';
+import saV5 from '@/assets/sa-v5.png';
+import saV6 from '@/assets/sa-v6.png';
+import im1 from '@/assets/im-1.png';
+import im2 from '@/assets/im-2.png';
+import im3 from '@/assets/im-3.png';
+import im4 from '@/assets/im-4.png';
+import im5 from '@/assets/im-5.png';
+import im3First from '@/assets/im3-first.png';
+import im3Cities from '@/assets/im3-cities.png';
+import im3Voices from '@/assets/im3-voices.png';
+import { CONVOCATIONS, type Convocation } from './convocations';
+
+export const POST_COUNT = 6404;
+export const POST_COUNT_LABEL = '6,404';
+
+export const NAV = [
+  { id: 'p5-conv', label: 'Convocation' },
+  { id: 'p5-abroad', label: 'Study abroad' },
+  { id: 'p5-imm', label: 'Immersion' },
+  { id: 'p5-words', label: 'Voices' },
+];
+
+/* ---------- Hero: floating LinkedIn post cards ---------- */
+// ⚠ Sample content (David Chen, Apex Solutions, …). Replace with real learner posts.
+export type HeroPost = {
+  name: string; role: string; date: string; ini: string; avBg: string; av: StaticImageData;
+  t1: string; t2: string; badge?: boolean; photo?: StaticImageData; photoAlt?: string; likes: string; stats: string;
+};
+export const HERO_POSTS: HeroPost[] = [
+  { name: 'David Chen', role: 'Senior Project Manager @ TechCorp', date: '28 Jul 2025', ini: 'DC', avBg: '#2563eb', av: davidChen, t1: 'Just completed my PMP certification! 6 months of hard work paid off. Grateful for the mentorship and support from @Sarah Jenkins and @TechCorp.', t2: 'Ready to tackle new project management challenges! #PMP #ProjectManagement', badge: true, likes: '218', stats: '34 comments · 12 shares' },
+  { name: 'Nikita Menon', role: 'Engineering Lead · Building Data Platforms', date: '4 Aug 2025', ini: 'NM', avBg: '#7c3aed', av: nikitaMenon, t1: 'What a week at our annual engineering offsite! Three days of architecture deep-dives, hack sessions, and honest retrospectives.', t2: 'Proud of this team and everything we shipped this year. 🚀', photo: teamOffsite, photoAlt: 'Team offsite 2025', likes: '187', stats: '26 comments · 9 shares' },
+  { name: 'Gunavardhan Dandi', role: 'Mendix Advanced Certified Developer', date: '12 Aug 2025', ini: 'GD', avBg: '#0e7490', av: gunavardhanDandi, t1: 'Thrilled to officially graduate with my Executive Post Graduate Diploma in Software Development from IIIT Bangalore.', t2: 'Balancing a full-time role with a rigorous architecture curriculum was hard, and worth every weekend it cost me.', photo: graduation, photoAlt: 'Graduation ceremony', likes: '342', stats: '41 comments · 18 shares' },
+  { name: 'Apex Solutions Inc.', role: '12,481 followers', date: '18 Aug 2025', ini: 'AS', avBg: '#0f766e', av: apexSolutions, t1: 'Unlocking the potential of your data is closer than you think.', t2: "Join us for a free webinar on 'Advanced Data Analytics in Supply Chain Management'. Learn from industry experts and see real-world case studies. Register now! [Link]", photo: dataAnalytics, photoAlt: 'Advanced Data Analytics', likes: '143', stats: '19 comments · 31 shares' },
+  { name: 'Aisha Okafor', role: 'Full-Stack Developer · AI Enthusiast', date: '25 Aug 2025', ini: 'AO', avBg: '#be185d', av: aishaOkafor, t1: 'We won! 🏆 Our team took first place at the Global AI Hackathon with an accessibility-first voice assistant.', t2: '48 hours, zero sleep, and one very proud team. Huge thanks to the organizers and my incredible teammates.', photo: hackathon, photoAlt: 'Global AI Hackathon', likes: '296', stats: '52 comments · 24 shares' },
+];
+
+/* ---------- Manifesto ---------- */
+const MANIFESTO_PLAIN_1 = `${POST_COUNT_LABEL} learners wrote about their programme on LinkedIn.`;
+const MANIFESTO_ACCENT = 'Nobody asked them to. Nobody paid them.';
+const MANIFESTO_PLAIN_2 = 'We collected the posts, left every word as it was, and linked each one back to the original.';
+export const MANIFESTO_WORDS: { w: string; accent: boolean }[] = [
+  ...MANIFESTO_PLAIN_1.split(' ').map(w => ({ w, accent: false })),
+  ...MANIFESTO_ACCENT.split(' ').map(w => ({ w, accent: true })),
+  ...MANIFESTO_PLAIN_2.split(' ').map(w => ({ w, accent: false })),
+];
+
+/* ---------- Convocation strip ---------- */
+export type ConvStripItem =
+  | { kind: 'img'; conv: Convocation; place: string; year: string; ar: string }
+  | { kind: 'quote' };
+const bySlug = (s: string) => CONVOCATIONS.find(c => c.slug === s)!;
+export const CONV_STRIP: ConvStripItem[] = [
+  { kind: 'img', conv: bySlug('iit-bombay-stage'), place: 'IIT Bombay', year: '2026', ar: '670/436' },
+  { kind: 'img', conv: bySlug('annual-convocation'), place: 'Annual convocation', year: '2026', ar: '670/436' },
+  { kind: 'quote' },
+  { kind: 'img', conv: bySlug('degree-in-hand'), place: 'Degree in hand', year: '2026', ar: '596/658' },
+  { kind: 'img', conv: bySlug('iiit-bangalore'), place: 'IIIT Bangalore', year: '2026', ar: '670/436' },
+  { kind: 'img', conv: bySlug('gunavardhan-dandi'), place: 'Gunavardhan Dandi, on LinkedIn', year: 'Course Details', ar: '654/410' },
+  { kind: 'img', conv: bySlug('whole-cohort'), place: 'The whole cohort', year: '2026', ar: '670/436' },
+  { kind: 'img', conv: bySlug('iit-bombay-2026'), place: 'IIT Bombay', year: '2026', ar: '670/436' },
+];
+
+/* ---------- Voices (testimonials) ---------- */
+export type Voice = { name: string; role: string; ini: string; av: StaticImageData | null; text: string };
+const voice = (name: string, role: string, av: StaticImageData | null, text: string): Voice => ({
+  name, role, av, text, ini: name.split(' ').map(s => s[0]).join(''),
+});
+export const VOICES: Voice[] = [
+  voice('Harish Bhat', 'Data Engineer, PhonePe', a5, "A thank-you I've been putting off. When I enrolled I was sceptical. I'd tried online courses before and finished none of them. The difference this time was the mentor calls."),
+  voice('Arjun Saxena', 'Operations Manager, Delhivery', null, 'Honest review after finishing: the projects are the point. Skip the videos if you must, never skip the projects.'),
+  voice('Aditya Iyer', 'Supply Chain Manager, Reliance Retail', a0, 'Received my degree at the convocation ceremony today. Quietly proud.'),
+  voice('Ananya Nair', 'HR Business Partner, Wipro', null, "My buddy group from the programme still meets on a call every Sunday, eight months after graduating. That wasn't in the brochure."),
+  voice('Sneha Gupta', 'Operations Manager, Delhivery', a1, "If you're a working professional scared of quitting your job for a master's: this format works. I kept my salary, my role, and still finished."),
+  voice('Nikhil Iyer', 'Product Manager, Swiggy', a2, 'Six months ago I finished the programme. Today I got promoted to lead the team I used to report to.'),
+  voice('Neha Joshi', 'HR Business Partner, Wipro', a3, 'Just back from campus immersion week. Meeting 60 people from my cohort after a year of little squares on a screen. I did not expect it to matter this much. It did.'),
+  voice('Lakshmi Reddy', 'Data Engineer, PhonePe', a4, 'Walked the stage today. Two years of weekend classes, assignments submitted at midnight after putting the kids to bed, and one very patient family.'),
+  voice('Rohan Menon', 'Marketing Lead, Nykaa', a6, 'Meeting my cohort in person after a year on screen changed how I think about the whole programme.'),
+  voice('Lakshmi Iyer', 'Sales Head, Asian Paints', a7, 'Eight months after graduating, the study group is still the first chat I open in the morning.'),
+  voice('Nisha Nair', 'Growth Manager, Zomato', a8, 'People keep asking if the programme is worth it, so, publicly: yes, if you do the work. No, if you want a certificate to happen to you.'),
+  voice('Aditya Sharma', 'Scrum Master, Tech Mahindra', a2, 'Having someone check in every fortnight, who actually read my submissions, changed everything.'),
+];
+
+/* ---------- Study abroad ---------- */
+export type AbroadPost = Voice & { date: string; likes: string; comments: string; body: string };
+export const ABROAD_POSTS: AbroadPost[] = [
+  { ...VOICES[0], date: '12 Aug 2026', likes: '1,528', comments: '78 comments', body: "A thank-you I've been putting off. When I enrolled I was sceptical. I'd tried online courses before and finished none of them. The difference this time was the mentor calls. Having someone check in every fortnight, who actually read my submissions, changed everything. I finished. First time ever." },
+  { ...VOICES[6], date: '3 Aug 2026', likes: '964', comments: '41 comments', body: VOICES[6].text },
+  { ...VOICES[4], date: '28 Jul 2026', likes: '1,102', comments: '56 comments', body: VOICES[4].text },
+  { ...VOICES[10], date: '19 Jul 2026', likes: '2,310', comments: '134 comments', body: VOICES[10].text },
+  { ...VOICES[7], date: '8 Jul 2026', likes: '1,847', comments: '92 comments', body: VOICES[7].text },
+];
+
+export const ABROAD_VIDEOS: { src: StaticImageData; alt: string; desc: string }[] = [
+  { src: saV0, alt: 'Learner speaking by a window', desc: 'Why they chose to study abroad, and what finally made the move feel possible.' },
+  { src: saV1, alt: 'Learner on being ghosted by a freelancer', desc: 'The setback that nearly stopped them, and how they got back on track.' },
+  { src: saV2, alt: 'Learner sharing a suggestion', desc: 'The one piece of advice they would give anyone applying next year.' },
+  { src: saV3, alt: 'Learner seated in a studio', desc: 'What their first semester overseas was really like.' },
+  { src: saV4, alt: 'Learner on handling visas and paperwork', desc: 'How they handled visas, deadlines and the paperwork in between.' },
+  { src: saV5, alt: 'Learner in a blue blazer', desc: 'From admit letter to first day on campus, in their own words.' },
+  { src: saV6, alt: 'Learner sharing advice', desc: 'What they wish they had known before they left home.' },
+];
+
+/* ---------- Immersion ---------- */
+export type ImmersionStep = { label: string; tag: string; line: string; src: StaticImageData; alt: string; city: string };
+// Step → city: 01 Chennai, 02 Chandigarh, 03 Ahmedabad.
+export const IMMERSION_STEPS: ImmersionStep[] = [
+  { label: 'From the Ground Up', tag: 'Immersion · From the Ground Up', line: 'A week on campus turns classmates into a cohort you can shake hands with.', src: im3First, alt: "Saral Purohit's LinkedIn post, From the Ground Up", city: 'chennai' },
+  { label: 'Mumbai & Hyderabad', tag: 'Mumbai · Hyderabad', line: 'Two cities, one format: a room full of people who had only met on screen.', src: im3Cities, alt: 'Immersion meetups in Mumbai and Hyderabad', city: 'chandigarh' },
+  { label: 'In their words', tag: 'Ankur Nagar, on LinkedIn', line: '“It was a superb event!”', src: im3Voices, alt: "Ankur Nagar's LinkedIn post and WhatsApp messages from attendees of From the Ground Up, Mumbai", city: 'ahmedabad' },
+];
+
+export const IMMERSION_CARDS: { src: StaticImageData; alt: string; place: string; year: string; desc: string; city: string }[] = [
+  { src: im2, alt: 'Speaker addressing learners at an immersion session', place: 'IIT Bombay', year: '2026', desc: 'Faculty sessions on campus, with the questions you save up all term.', city: 'chennai' },
+  { src: im3, alt: 'Mentor speaking with a microphone', place: 'IIT Bombay', year: '2026', desc: 'Mentors who marked your assignments, now answering you face to face.', city: 'chandigarh' },
+  { src: im4, alt: 'upGrad founders together', place: 'IIT Bombay', year: '2026', desc: 'The founders drop in to hear what the cohort is building.', city: 'ahmedabad' },
+  { src: im5, alt: 'Immersion group photo', place: 'IIIT Bangalore', year: '2026', desc: 'One week, one campus, and a group photo that finally has everyone in it.', city: 'chennai' },
+  { src: im1, alt: 'upGrad team at the office', place: 'IIT Bombay', year: '2026', desc: 'The team behind the programme, meeting the learners it was built for.', city: 'chandigarh' },
+];

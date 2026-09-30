@@ -1,0 +1,20 @@
+.eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
+}
+.eyebrow.lg { font-size: 13px; }
+.eyebrow.wide { letter-spacing: .28em; }
+.dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+.wide .dot { width: 7px; height: 7px; }
+.pulse { animation: pulse 2.4s ease-in-out infinite; }
+
+.mask { display: block; overflow: hidden; padding-bottom: .07em; }
+.mask.tall { padding-bottom: .08em; }
+.line { display: block; }
+
+.logo { font-size: 23px; font-weight: 700; letter-spacing: -.04em; color: var(--red); }
+.li {
+  flex: none; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; background: #0A66C2; color: #FFFFFF;
+  font-family: Arial, sans-serif; font-weight: 700;
+}

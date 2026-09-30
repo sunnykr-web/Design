@@ -1,0 +1,64 @@
+.conv { position: relative; background: var(--cream); color: var(--ink); border-radius: 32px 32px 0 0; }
+.col { display: flex; flex-direction: column; gap: clamp(24px,4vh,40px); padding: clamp(96px,13vh,140px) 0 clamp(64px,9vh,110px); }
+
+/* Scroll padding lets card shadows fade out instead of clipping at the rail edges. */
+.scroll { overflow-x: auto; cursor: grab; margin: -60px 0 -110px; }
+.track {
+  position: relative; display: flex; align-items: flex-end; gap: clamp(18px,2vw,32px); width: max-content;
+  padding: 60px var(--pad-x) 110px;
+}
+
+.card { flex: none; margin: 0; display: flex; flex-direction: column; gap: 14px; cursor: pointer; }
+.frame {
+  position: relative; height: min(39vh,336px); border-radius: 18px; overflow: hidden;
+  box-shadow: 0 2px 4px rgba(14,12,11,0), 0 12px 24px -8px rgba(14,12,11,0), 0 40px 72px -28px rgba(14,12,11,0);
+  transition: box-shadow .8s var(--ease);
+}
+.zoom { position: absolute; inset: 0; transition: transform 1.4s var(--ease); }
+.img { display: block; will-change: transform; }
+.pill {
+  position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; height: 44px;
+  padding: 0 6px 0 6px; border-radius: 999px; background: rgba(243,238,230,.94); color: var(--ink);
+  box-shadow: 0 8px 20px -6px rgba(14,12,11,.4); font-size: 13px; font-weight: 600; white-space: nowrap;
+  transition: background .4s, color .4s, padding .5s var(--ease);
+}
+.pillText { max-width: 0; overflow: hidden; opacity: 0; transition: max-width .5s var(--ease), opacity .4s; }
+.pillArrow {
+  display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; font-size: 17px; font-weight: 700;
+  transform: rotate(-45deg); transition: transform .5s var(--ease);
+}
+.cap { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; font-weight: 500; color: var(--muted); transition: color .4s; }
+.year { font-variant-numeric: tabular-nums; }
+
+.card:hover .frame, .card:focus-visible .frame { box-shadow: var(--shadow-card); }
+.card:hover .zoom, .card:focus-visible .zoom { transform: scale(1.06); }
+.card:hover .pill, .card:focus-visible .pill { background: var(--red); color: var(--white); padding-left: 18px; }
+.card:hover .pillText, .card:focus-visible .pillText { max-width: 90px; opacity: 1; }
+.card:hover .pillArrow, .card:focus-visible .pillArrow { transform: rotate(0deg); }
+.card:hover .cap, .card:focus-visible .cap { color: var(--ink); }
+.card:focus-visible { outline: none; }
+.card:focus-visible .frame { outline: 2px solid var(--red); outline-offset: 3px; }
+
+.quoteFig { flex: none; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.quote {
+  margin: 0; height: min(39vh,336px); width: clamp(210px,21vw,315px); display: flex; flex-direction: column;
+  justify-content: space-between; gap: 24px; padding: clamp(28px,2.6vw,42px); border-radius: 18px;
+  background: var(--ink); color: var(--cream);
+}
+.qMark { font-family: var(--serif); font-size: 96px; line-height: .55; color: var(--red); }
+.qText { margin: 0; font-family: var(--serif); font-size: clamp(26px,2.3vw,38px); line-height: 1.16; letter-spacing: -.015em; text-wrap: pretty; }
+.qFoot { display: flex; flex-direction: column; gap: 6px; font-size: 13px; line-height: 1.4; color: rgba(243,238,230,.72); }
+.qName { font-weight: 600; color: var(--cream); }
+.qCap { font-size: 13px; font-weight: 500; }
+.underline {
+  display: inline-flex; gap: 6px; color: var(--ink); border-bottom: 1px solid #C9C0B2; padding-bottom: 2px;
+  transition: color .3s, border-color .3s;
+}
+.underline:hover { color: var(--red-deep); border-bottom-color: var(--red-deep); }
+
+.foot {
+  display: flex; align-items: center; gap: 20px; padding: 0 var(--pad-x);
+  font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+}
+.barTrack { flex: 1; height: 1px; background: var(--hairline); overflow: hidden; }
+.bar { height: 100%; background: var(--ink); transform-origin: left; transform: scaleX(0); }

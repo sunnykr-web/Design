@@ -1,0 +1,11 @@
+.head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; padding: 0 var(--pad-x); }
+.title { display: flex; flex-direction: column; gap: clamp(12px,1.4vw,20px); }
+.h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px,6.4vw,104px); line-height: .86; letter-spacing: -.045em; }
+.sub { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(22px,2.2vw,34px); line-height: 1.1; letter-spacing: -.015em; }
+.subAccent { font-style: italic; color: var(--muted); }
+.dark .subAccent { color: rgba(255,255,255,.82); }
+.side { margin: 0; max-width: 400px; font-size: clamp(16px,1.2vw,18px); line-height: 1.6; color: var(--body); text-wrap: pretty; }
+
+.rowHead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 40px; }
+.h3 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(38px,4.2vw,64px); line-height: 1; letter-spacing: -.03em; }
+.rowSide { margin: 0; max-width: 440px; font-size: 15px; line-height: 1.6; color: var(--body); text-wrap: pretty; }

@@ -1,0 +1,87 @@
+:root {
+  --ink: #0E0C0B;
+  --cream: #F3EEE6;
+  --white: #FFFFFF;
+  --red: #E4041C;
+  --red-deep: #B80317;
+  --red-bright: #FF3B4A;
+  --body: #4A453F;
+  --muted: #6A645C;
+  --hairline: #D9D1C4;
+  --warm-grey: #2A2723;
+  --post-bg: #DAD2C4;
+  --card-dark: #1A1816;
+
+  --ease: cubic-bezier(.16,1,.3,1);
+  --ease-io: cubic-bezier(.76,0,.24,1);
+  --serif: var(--font-serif), 'Instrument Serif', serif;
+  --sans: var(--font-sans), 'DM Sans', system-ui, sans-serif;
+  --li: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  --pad-x: clamp(18px, 6vw, 96px);
+  --hdr-pad-x: clamp(18px, 4vw, 56px);
+  --shadow-card: 0 2px 4px rgba(14,12,11,.06), 0 12px 24px -8px rgba(14,12,11,.14), 0 40px 72px -28px rgba(14,12,11,.32);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { color: inherit; }
+button { font: inherit; }
+img { user-select: none; -webkit-user-drag: none; }
+::selection { background: var(--red); color: var(--white); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+[data-drag] { scrollbar-width: none; }
+[data-drag]::-webkit-scrollbar { display: none; }
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes ken-burns { from { transform: scale(var(--kb-from, 1.12)); } to { transform: scale(1); } }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Reveals ----------
+   Hidden states only apply once JS has tagged <html class="js">, so content is never lost without JS.
+   RevealObserver adds .in when an element scrolls into view; the preloader adds html.intro for the hero. */
+
+/* Headline lines slide up out of an overflow mask. */
+html.js [data-ln] { transform: translate3d(0,112%,0); transition: transform 1.5s var(--ease); transition-delay: calc(var(--i, 0) * .1s); }
+html.js [data-lines].in [data-ln] { transform: translate3d(0,0,0); }
+html.js [data-lines="hero"] [data-ln] { transition-delay: calc(var(--i, 0) * .11s); }
+html.js.intro [data-lines="hero"] [data-ln] { transform: translate3d(0,0,0); }
+
+/* Hero furniture fades in after the preloader. */
+html.js [data-hf] { opacity: 0; transform: translate3d(0,18px,0); transition: opacity 1.2s var(--ease), transform 1.3s var(--ease); transition-delay: calc(.5s + var(--i, 0) * .1s); }
+html.js.intro [data-hf] { opacity: 1; transform: none; }
+
+/* Blocks fade and rise. */
+html.js [data-rv] { opacity: 0; transform: translate3d(0,44px,0); transition: opacity 1.2s var(--ease), transform 1.4s var(--ease); }
+html.js [data-rv].in { opacity: 1; transform: none; transition-delay: .08s; }
+
+/* Image cards wipe up. The element's own transition carries clip-path. */
+html.js [data-ir] { clip-path: inset(100% 0 0 0 round var(--ir)); }
+html.js [data-ir].in { clip-path: inset(0% 0 0 0 round var(--ir)); }
+
+/* Detail pages use a softer variant: 24px rise with a blur, lines tilt in. */
+html.js .detail [data-rv] { transform: translateY(24px); filter: blur(6px); transition: opacity 1s var(--ease), transform 1s var(--ease), filter 1s var(--ease); transition-delay: .12s; }
+html.js .detail [data-rv].in { transform: none; filter: blur(0); transition-delay: .12s; }
+html.js .detail [data-ln] { transform: translateY(110%) rotate(2deg); transition: transform 1.2s var(--ease); transition-delay: calc(.12s + var(--i, 0) * .11s); }
+html.js .detail [data-lines].in [data-ln] { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-ln], html.js [data-hf], html.js [data-rv], html.js [data-ir],
+  html.js .detail [data-rv], html.js .detail [data-ln] {
+    opacity: 1 !important; transform: none !important; clip-path: none !important; filter: none !important; transition: none !important;
+  }
+}
