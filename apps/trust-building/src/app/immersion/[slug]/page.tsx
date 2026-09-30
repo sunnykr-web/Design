@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { DetailHeader } from '@/components/detail/DetailHeader';
 import s from '@/components/detail/Detail.module.css';
+import { CoverImage } from '@/components/detail/CoverImage';
 import { Grain } from '@/components/Grain';
 import { RevealObserver } from '@/components/RevealObserver';
 import { Eyebrow, Lines, cx } from '@/components/ui';
@@ -19,9 +20,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const BACK = '/#p5-imm';
-
-/* Covers load straight from Luma's CDN, so they use a plain <img> rather than next/image. */
-/* eslint-disable @next/next/no-img-element */
 
 export default async function ImmersionDetail({ params }: Props) {
   const { slug } = await params;
@@ -50,10 +48,7 @@ export default async function ImmersionDetail({ params }: Props) {
               </div>
             </div>
             <div data-rv="" style={{ position: 'relative', aspectRatio: '40/21', borderRadius: 24, overflow: 'hidden', background: 'var(--card-dark)', boxShadow: '0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06)' }}>
-              <img
-                src={u.img} alt={u.alt} className={s.kb}
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', ['--kb-from' as string]: 1.16 }}
-              />
+              <CoverImage u={u} className={s.kb} style={{ ['--kb-from' as string]: 1.16 }} />
             </div>
           </div>
           {/* No event dates yet: Luma doesn't expose them. Add a date fact when available. */}
@@ -113,7 +108,7 @@ export default async function ImmersionDetail({ params }: Props) {
             {others.map(o => (
               <Link key={o.slug} data-rv="" href={immersionHref(o.slug)} className={s.card}>
                 <div className={s.cardImg} style={{ aspectRatio: '40/21', background: 'var(--card-dark)' }}>
-                  <img src={o.img} alt={o.alt} loading="lazy" className={s.cardPic} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <CoverImage u={o} lazy className={s.cardPic} />
                 </div>
                 <span className={s.cardMeta}><span>{o.place}</span><span className={s.cardArrow} aria-hidden="true">→</span></span>
                 <span className={s.cardTitle}>{o.title}</span>

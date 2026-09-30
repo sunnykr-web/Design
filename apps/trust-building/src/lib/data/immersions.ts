@@ -1,9 +1,14 @@
+import type { StaticImageData } from 'next/image';
+import cafeImg from '@/assets/cafe.png';
+
 export type Immersion = {
   slug: string;
   city: string;
   place: string;
   title: string;
   img: string;
+  /** Shown when the Luma cover can't load (blocked host, offline). Replace with the real covers when available. */
+  fallback: StaticImageData;
   alt: string;
   desc: string;
   facts: { k: string; v: string }[];
@@ -49,6 +54,7 @@ export const IMMERSIONS: Immersion[] = (
   place: city + ', India · Food & Drink',
   title: 'From the Ground Up | ' + city,
   img: lumaImg(p),
+  fallback: cafeImg,
   alt: 'From the Ground Up ' + city + ' event cover',
   desc: 'Coffee, but make it an experience. Two hours at a café counter with the founder of a specialty coffee spot. 20 spots only.',
   facts,
