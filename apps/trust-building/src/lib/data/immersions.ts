@@ -1,14 +1,8 @@
-import type { StaticImageData } from 'next/image';
-import cafeImg from '@/assets/cafe.png';
-
 export type Immersion = {
   slug: string;
   city: string;
   place: string;
   title: string;
-  img: string;
-  /** Shown when the Luma cover can't load (blocked host, offline). Replace with the real covers when available. */
-  fallback: StaticImageData;
   alt: string;
   desc: string;
   facts: { k: string; v: string }[];
@@ -20,8 +14,7 @@ export type Immersion = {
 };
 
 // Mirrors each Luma event page. Luma doesn't expose event dates, so none are shown yet.
-const lumaImg = (p: string) =>
-  'https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=800,height=420/event-social/' + p + '.png';
+// The cover is rebuilt in code (components/detail/ImmersionCover) from the design, so no Luma image is loaded.
 
 const brew = [
   { d: '01', t: 'Discover how coffee travels from estates to your cup' },
@@ -44,17 +37,15 @@ const agenda = (city: string) => [
 
 export const IMMERSIONS: Immersion[] = (
   [
-    ['chennai', 'Chennai', '2l8ql0s9', 'bl/99ff4190-9cb8-404a-9689-4e8f2cd89ce4', true],
-    ['chandigarh', 'Chandigarh', '9pj9ynh8', '0u/c2703532-188f-4027-a271-4f11d5568f3d', true],
-    ['ahmedabad', 'Ahmedabad', 'utusqyd1', '8g/8c145e69-aa81-43b0-9b92-4559527c0002', false],
+    ['chennai', 'Chennai', '2l8ql0s9', true],
+    ['chandigarh', 'Chandigarh', '9pj9ynh8', true],
+    ['ahmedabad', 'Ahmedabad', 'utusqyd1', false],
   ] as const
-).map(([slug, city, id, p, surprise]) => ({
+).map(([slug, city, id, surprise]) => ({
   slug,
   city,
   place: city + ', India · Food & Drink',
   title: 'From the Ground Up | ' + city,
-  img: lumaImg(p),
-  fallback: cafeImg,
   alt: 'From the Ground Up ' + city + ' event cover',
   desc: 'Coffee, but make it an experience. Two hours at a café counter with the founder of a specialty coffee spot. 20 spots only.',
   facts,

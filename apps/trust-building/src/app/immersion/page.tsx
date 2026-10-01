@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CoverImage } from '@/components/detail/CoverImage';
+import { ImmersionCover } from '@/components/detail/ImmersionCover';
 import { ListingCard, ListingPage, Pill, listingStyles as s } from '@/components/pages/ListingParts';
 import { IMMERSIONS, immersionHref } from '@/lib/data/immersions';
 
@@ -20,7 +20,7 @@ export default function ImmersionEvents() {
             desc={u.desc}
             media={
               <div className={s.media} style={{ aspectRatio: '800/420', background: 'var(--warm-grey)' }}>
-                <CoverImage u={u} lazy className={s.pic} />
+                <ImmersionCover u={u} className={s.pic} />
                 <Pill label="View event" />
               </div>
             }

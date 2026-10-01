@@ -1,0 +1,28 @@
+/* Luma event cover, rebuilt in code from the design so it renders without Luma's CDN.
+   Sized with container units so it scales with whatever box holds it. */
+.cover {
+  position: absolute; inset: 0; container-type: inline-size; overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(14,10,6,0) 45%, rgba(14,10,6,.32) 100%),
+    linear-gradient(180deg, #1f170e 0%, #3f2a1a 30%, #50361f 50%, #5c3c23 75%, #664129 100%);
+  color: #FFFFFF; font-family: var(--sans);
+}
+.luma {
+  position: absolute; left: 6.4cqw; top: 16.5%; display: flex; align-items: flex-start; gap: .1em;
+  font-size: 3.4cqw; font-weight: 400; letter-spacing: -.02em; line-height: 1; color: rgba(255,255,255,.55);
+}
+.spark { font-size: .5em; margin-top: -.05em; }
+.title {
+  position: absolute; left: 6.2cqw; top: 39.5%; width: 39cqw; margin: 0;
+  font-size: 4.6cqw; font-weight: 500; line-height: 1.18; letter-spacing: -.01em; color: #FFFFFF;
+}
+.rsvp {
+  position: absolute; left: 6.1cqw; top: 77.9%; display: flex; align-items: center; justify-content: center;
+  width: 11.8cqw; height: 4cqw; border-radius: 999px; background: #FFFFFF; color: #1A1A1A;
+  font-size: 1.7cqw; font-weight: 600; letter-spacing: .01em;
+}
+.poster {
+  position: absolute; right: 6cqw; top: 10.7%; height: 80%; aspect-ratio: 1; border-radius: 1.5cqw; overflow: hidden;
+  box-shadow: 0 1.2cqw 3cqw -1cqw rgba(0,0,0,.55);
+}
+.posterImg { object-fit: cover; }

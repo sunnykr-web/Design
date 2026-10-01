@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { DetailHeader } from '@/components/detail/DetailHeader';
 import s from '@/components/detail/Detail.module.css';
-import { CoverImage } from '@/components/detail/CoverImage';
+import { ImmersionCover } from '@/components/detail/ImmersionCover';
 import { Grain } from '@/components/Grain';
 import { RevealObserver } from '@/components/RevealObserver';
 import { LiPostCard } from '@/components/pages/LiPostCard';
@@ -51,7 +51,7 @@ export default async function ImmersionDetail({ params }: Props) {
               </div>
             </div>
             <div data-rv="" style={{ position: 'relative', aspectRatio: '40/21', borderRadius: 24, overflow: 'hidden', background: 'var(--card-dark)', boxShadow: '0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06)' }}>
-              <CoverImage u={u} className={s.kb} style={{ ['--kb-from' as string]: 1.16 }} />
+              <ImmersionCover u={u} className={s.kb} style={{ ['--kb-from' as string]: 1.16 }} />
             </div>
           </div>
           {/* No event dates yet: Luma doesn't expose them. Add a date fact when available. */}
@@ -126,7 +126,7 @@ export default async function ImmersionDetail({ params }: Props) {
             {others.map(o => (
               <Link key={o.slug} data-rv="" href={immersionHref(o.slug)} className={s.card}>
                 <div className={s.cardImg} style={{ aspectRatio: '40/21', background: 'var(--card-dark)' }}>
-                  <CoverImage u={o} lazy className={s.cardPic} />
+                  <ImmersionCover u={o} className={s.cardPic} />
                 </div>
                 <span className={s.cardMeta}><span>{o.place}</span><span className={s.cardArrow} aria-hidden="true">→</span></span>
                 <span className={s.cardTitle}>{o.title}</span>

@@ -21,7 +21,7 @@ await build({
   entryNames: 'bundle',
   assetNames: 'assets/[name]-[hash]',
   publicPath: './',
-  loader: { '.png': 'file', '.jpg': 'file', '.svg': 'file' },
+  loader: { '.png': 'file', '.jpg': 'file', '.svg': 'file', '.webp': 'file' },
   alias: {
     'next/image': resolve(here, 'shims/image.tsx'),
     'next/link': resolve(here, 'shims/link.tsx'),

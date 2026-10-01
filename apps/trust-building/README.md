@@ -41,7 +41,7 @@ These replace the prototype's `?c=` and `?u=` query strings. An unknown slug red
 - **Links.** Fill in `src/lib/links.ts`.
 - **Logo.** Swap the `upGrad` wordmark in `components/ui.tsx` (`Logo`) and the preloader for the real asset.
 - **Event dates.** Immersion pages show no dates because Luma doesn't expose them. Add a fact when you have them.
-- **Luma covers.** These load straight from `images.lumacdn.com` with a plain `<img>`. To optimise them, add the host to `images.remotePatterns` and switch to `next/image`.
+- **Immersion covers.** The Luma event card is rebuilt in code (`components/detail/ImmersionCover`) from the design, with the city name and the From the Ground Up poster (`src/assets/ftgu-poster.webp`), so no Luma image is loaded.
 
 ## Where this differs from the prototype
 
