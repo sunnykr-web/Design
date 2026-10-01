@@ -8,6 +8,8 @@ import { useDragRail } from '@/lib/useDragRail';
 import { IMMERSION_CARDS, IMMERSION_STEPS } from '@/lib/data/landing';
 import { IMMERSIONS, immersionHref } from '@/lib/data/immersions';
 import cafeImg from '@/assets/cafe.png';
+import { LINKS } from '@/lib/links';
+import { PostCard } from './PostCard';
 import { Lines, RowHead, SectionTitle } from './Section';
 import s from './Immersion.module.css';
 
@@ -93,6 +95,7 @@ export function Immersion() {
             <Image src={cafeImg} alt="" fill sizes="100vw" className={s.bgImg} />
           </div>
           <div className={s.shade} />
+          <a href={LINKS.immersionEvents} className={s.viewAll}>View all →</a>
           <div className={s.inner}>
             <div className={s.left}>
               <div className={s.top}>
@@ -149,14 +152,9 @@ export function Immersion() {
       />
       <div ref={railRef} data-drag="" className={s.rail}>
         {IMMERSION_CARDS.map(c => (
-          <Link key={c.desc} href={immersionHref(c.city)} className={s.card} draggable={false}>
-            <div data-ir="" className={s.cardImg}>
-              <Image src={c.src} alt={c.alt} fill sizes="400px" className={s.cardPic} draggable={false} />
-            </div>
-            <span className={s.cap}>
-              <span className={s.meta}><span>{c.place}</span><span>{c.year}</span></span>
-              <span className={s.desc}>{c.desc}</span>
-            </span>
+          <Link key={c.post.name} href={immersionHref(c.city)} className={`${s.card} post-hover`} aria-label={`LinkedIn post by ${c.post.name}`} draggable={false}>
+            <PostCard dark post={c.post} img={c.src} alt={c.alt} />
+            <span className={s.cap}><span>{c.post.name}, on LinkedIn</span><span>{c.place}</span></span>
           </Link>
         ))}
       </div>
@@ -168,6 +166,7 @@ export function Immersion() {
 function StepArrow({ href, label }: { href: string; label: string }) {
   return (
     <Link href={href} aria-label={label} title="View event details" className={s.go}>
+      <span className={s.goText} aria-hidden="true">View event</span>
       <span className={s.goGlyph} aria-hidden="true">→</span>
     </Link>
   );

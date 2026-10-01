@@ -8,6 +8,7 @@ import { useDragRail } from '@/lib/useDragRail';
 import { CONV_STRIP } from '@/lib/data/landing';
 import { convLook, convocationHref } from '@/lib/data/convocations';
 import { LINKS } from '@/lib/links';
+import { PostCard } from './PostCard';
 import { SectionHead } from './Section';
 import s from './Convocation.module.css';
 
@@ -45,10 +46,19 @@ export function Convocation() {
           id="conv-title" num="01" title="Convocation" sub="Months on screen." accent="One day on stage."
           side="Trade your virtual classroom for the campus grounds as you finally meet the peers you’ve studied alongside for months."
         />
+        <a data-rv="" href={LINKS.convocationStories} className={s.viewAll}>View all →</a>
         <div ref={scrollRef} data-drag="" className={s.scroll}>
           <div className={s.track}>
             {CONV_STRIP.map((item, i) => {
               if (item.kind === 'quote') return <QuoteCard key="quote" />;
+              if (item.kind === 'post') {
+                return (
+                  <Link key={i} href={convocationHref(item.conv.slug)} className={`${s.postFig} post-hover`} aria-label={`LinkedIn post by ${item.post.name}`} draggable={false}>
+                    <PostCard post={item.post} img={item.conv.img} alt={item.conv.alt} />
+                    <span className={s.postCap}><span>{item.post.name}, on LinkedIn</span><span className={s.year}>2026</span></span>
+                  </Link>
+                );
+              }
               const { conv, place, year, ar } = item;
               const look = convLook(conv);
               return (
@@ -61,7 +71,7 @@ export function Convocation() {
                         style={{ objectFit: look.fit, padding: look.pad }}
                       />
                     </div>
-                    <span className={s.pill} aria-hidden="true"><span className={s.pillArrow}>→</span></span>
+                    <span className={s.pill} aria-hidden="true">View story<span className={s.pillArrow}>→</span></span>
                   </div>
                   <span className={s.cap}><span>{place}</span><span className={s.year}>{year}</span></span>
                 </Link>

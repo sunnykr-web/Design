@@ -176,12 +176,13 @@
         </div>
       </div>
       <p data-rv="1" style="margin:0;max-width:400px;font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:#4A453F;text-wrap:pretty">Trade your virtual classroom for the campus grounds as you finally meet the peers you’ve studied alongside for months.</p>
+      <a data-rv="1" href="Convocation%20Stories.dc.html" style="position:absolute;top:clamp(96px,13vh,140px);right:clamp(18px,6vw,96px);display:flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid #C9C0B2;font-size:14px;font-weight:600;color:#0E0C0B;transition:color .3s,border-color .3s" style-hover="color:#B80317;border-bottom-color:#B80317">View all →</a>
     </div>
         <div id="cv5-scroll" data-drag="1" style="overflow-x:auto;scrollbar-width:none;cursor:grab;margin:-60px 0 -110px"><div id="cv5-track" style="position:relative;display:flex;align-items:flex-end;gap:clamp(18px,2vw,32px);width:max-content;padding:60px clamp(18px,6vw,96px) 110px;will-change:transform">
           <sc-for list="{{ convItems }}" as="g" hint-placeholder-count="6">
             <sc-if value="{{ g.isImg }}" hint-placeholder-val="{{ true }}">
               <figure data-cur="View" role="button" style-hover="cursor:pointer" tabindex="0" aria-label="View details: {{ g.place }}" onClick="{{ g.open }}" onKeyDown="{{ g.openKey }}" onMouseEnter="{{ g.enter }}" onMouseLeave="{{ g.leave }}" style="flex:none;margin:0;display:flex;flex-direction:column;gap:14px">
-                <div style="position:relative;height:min(39vh,336px);aspect-ratio:{{ g.ar }};border-radius:18px;overflow:hidden;background:{{ g.bg }};box-shadow:{{ g.shadow }};transition:box-shadow .8s cubic-bezier(.16,1,.3,1)">
+                <div style="position:relative;height:max(300px,min(39vh,336px));aspect-ratio:{{ g.ar }};border-radius:18px;overflow:hidden;background:{{ g.bg }};box-shadow:{{ g.shadow }};transition:box-shadow .8s cubic-bezier(.16,1,.3,1)">
                   <div style="position:absolute;inset:0;transform:{{ g.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
                     <img data-cvimg="{{ g.px }}" src="{{ g.src }}" alt="{{ g.alt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:{{ g.fit }};padding:{{ g.pad }};display:block;will-change:transform">
                   </div>
@@ -190,9 +191,33 @@
                 <figcaption style="display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:500;color:{{ g.capFg }};transition:color .4s"><span>{{ g.place }}</span><span style="font-variant-numeric:tabular-nums">{{ g.year }}</span></figcaption>
               </figure>
             </sc-if>
+            <sc-if value="{{ g.isPost }}" hint-placeholder-val="{{ false }}">
+              <figure data-cur="View" role="button" tabindex="0" aria-label="LinkedIn post by {{ g.name }}" onClick="{{ g.open }}" onKeyDown="{{ g.openKey }}" onMouseEnter="{{ g.enter }}" onMouseLeave="{{ g.leave }}" style="flex:none;margin:0;display:flex;flex-direction:column;gap:14px;cursor:pointer">
+                <article style="position:relative;height:max(300px,min(39vh,336px));width:min(35vh,300px);min-width:270px;display:flex;flex-direction:column;gap:8px;padding:14px 14px 10px;border-radius:18px;background:#FFFFFF;color:#1F1F1F;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;box-shadow:{{ g.shadow }};transform:{{ g.lift }};transition:box-shadow .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)">
+                  <header style="flex:none;display:flex;align-items:center;gap:10px">
+                    <span style="position:relative;flex:none;width:34px;height:34px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#46403A">{{ g.ini }}<img src="{{ g.avSrc }}" alt="" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></span>
+                    <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                      <span style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ g.name }}</span>
+                      <span style="font-size:11px;color:#666666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ g.role }} · {{ g.date }}</span>
+                    </span>
+                    <span style="flex:none;width:20px;height:20px;border-radius:3px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:Arial,sans-serif">in</span>
+                  </header>
+                  <p style="margin:0;flex:none;font-size:12.5px;line-height:1.45;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden">{{ g.text }}</p>
+                  <div style="position:relative;flex:1 1 0;min-height:52%;border-radius:10px;overflow:hidden;background:#2A2723">
+                    <img src="{{ g.src }}" alt="{{ g.alt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:{{ g.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
+                    <span aria-hidden="true" style="position:absolute;right:10px;bottom:10px;display:flex;align-items:center;gap:8px;height:36px;padding:0 4px 0 14px;border-radius:999px;background:{{ g.btnBg }};color:{{ g.btnFg }};box-shadow:0 8px 20px -6px rgba(14,12,11,.4);font-family:'DM Sans',system-ui,sans-serif;font-size:12px;font-weight:600;white-space:nowrap;transition:background .4s,color .4s">View story<span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;font-size:15px;font-weight:700">→</span></span>
+                  </div>
+                  <div style="flex:none;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#666666">
+                    <span style="display:flex;align-items:center;gap:8px"><span style="display:flex"><span style="width:13px;height:13px;border-radius:50%;background:#378FE9;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:13px;height:13px;border-radius:50%;background:#DF704D;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:13px;height:13px;border-radius:50%;background:#6DAE4F;box-shadow:0 0 0 1.5px #fff"></span></span>{{ g.likes }}</span>
+                    <span>{{ g.comments }}</span>
+                  </div>
+                </article>
+                <figcaption style="display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:500;color:#4A453F"><span>{{ g.name }}, on LinkedIn</span><span style="font-variant-numeric:tabular-nums">2026</span></figcaption>
+              </figure>
+            </sc-if>
             <sc-if value="{{ g.isQuote }}" hint-placeholder-val="{{ false }}">
               <figure style="flex:none;margin:0;display:flex;flex-direction:column;gap:14px">
-                <blockquote style="margin:0;height:min(39vh,336px);width:clamp(210px,21vw,315px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:clamp(28px,2.6vw,42px);border-radius:18px;background:#0E0C0B;color:#F3EEE6">
+                <blockquote style="margin:0;height:max(300px,min(39vh,336px));width:clamp(210px,21vw,315px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:clamp(28px,2.6vw,42px);border-radius:18px;background:#0E0C0B;color:#F3EEE6">
                   <span style="font-family:'Instrument Serif',serif;font-size:96px;line-height:.55;color:#E4041C">“</span>
                   <p style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(26px,2.3vw,38px);line-height:1.16;letter-spacing:-.015em;text-wrap:pretty">I didn’t tell anyone in my family I had enrolled. This post is how they found out I graduated.</p>
                   <footer style="display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.4;color:rgba(243,238,230,.72)"><span style="font-weight:600;color:#F3EEE6">Ramesh Iyer</span><span>Senior Manager, Tata Steel</span></footer>
@@ -225,49 +250,46 @@
       </div>
       <p data-rv="1" style="margin:0;max-width:400px;font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:#4A453F;text-wrap:pretty">Some learners took their programme further than their desk. These are the posts they wrote from the other side.</p>
     </div>
-    <div id="ab5-panel" data-rv="1" style="position:relative;margin:0 clamp(10px,1.6vw,24px);border-radius:32px;overflow:hidden;isolation:isolate;padding:clamp(44px,5vw,76px) 0 clamp(30px,3vw,44px)">
-      <img id="ab5-bg" src="./assets/sa-plane.png" alt="" style="position:absolute;left:0;right:0;top:-70px;z-index:-2;width:100%;height:calc(100% + 140px);object-fit:cover;object-position:center top;display:block;will-change:transform">
-      <div style="position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,22,38,.42) 0%,rgba(18,22,38,0) 42%,rgba(18,22,38,.24) 100%)"></div>
-      <h3 style="margin:0;padding:0 clamp(20px,5vw,76px);max-width:920px;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,3.4vw,52px);line-height:1.06;letter-spacing:-.015em;color:#FFFFFF;text-shadow:0 2px 24px rgba(0,0,0,.3);text-wrap:balance">They left for a degree. <em>They wrote home on LinkedIn.</em></h3>
-      <div id="ab5-stage" tabIndex="0" role="region" aria-roledescription="carousel" aria-label="LinkedIn posts from learners who studied abroad" onKeyDown="{{ saKey }}" onMouseEnter="{{ saPause }}" onMouseLeave="{{ saResume }}" style="position:relative;height:clamp(430px,34vw,480px);margin-top:clamp(24px,3vw,40px);perspective:1600px;touch-action:pan-y;outline:none">
+    <div id="ab5-panel" data-rv="1" style="position:relative;margin:0 clamp(10px,1.6vw,24px);border-radius:32px 32px 0 0;overflow-x:clip;overflow-y:visible;isolation:isolate;z-index:1;padding:clamp(44px,5vw,76px) 0 clamp(8px,1vw,16px)">
+      <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;overflow:hidden;border-radius:32px 32px 0 0;isolation:isolate">
+        <img id="ab5-bg" src="./assets/sa-plane.png" alt="" style="position:absolute;left:0;right:0;top:-70px;z-index:-2;width:100%;height:calc(100% + 140px);object-fit:cover;object-position:center top;display:block;will-change:transform">
+      <div style="position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,22,38,.42) 0%,rgba(18,22,38,0) 42%,rgba(255,255,255,0) 82%,#FFFFFF 100%)"></div>
+      </div>
+      <a href="Study%20Abroad%20Stories.dc.html" style="position:absolute;z-index:3;top:clamp(44px,5vw,76px);right:clamp(20px,5vw,76px);display:flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.55);font-size:14px;font-weight:600;color:#FFFFFF;text-shadow:0 1px 12px rgba(0,0,0,.3);transition:color .3s,border-color .3s" style-hover="color:#FFFFFF;border-bottom-color:#FFFFFF">View all →</a>
+      <h3 style="margin:0;padding:0 calc(clamp(20px,5vw,76px) + 96px) 0 clamp(20px,5vw,76px);max-width:1016px;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,3.4vw,52px);line-height:1.06;letter-spacing:-.015em;color:#FFFFFF;text-shadow:0 2px 24px rgba(0,0,0,.3);text-wrap:balance">They left for a degree. <em>They wrote home on LinkedIn.</em></h3>
+      <div id="ab5-stage" tabIndex="0" role="region" aria-roledescription="carousel" aria-label="LinkedIn posts from learners who studied abroad" onKeyDown="{{ saKey }}" onMouseEnter="{{ saPause }}" onMouseLeave="{{ saResume }}" style="position:relative;height:clamp(520px,40vw,560px);margin-top:clamp(24px,3vw,40px);perspective:1600px;touch-action:pan-y;outline:none">
         <sc-for list="{{ saPosts }}" as="p" hint-placeholder-count="3">
-          <article onClick="{{ p.go }}" aria-hidden="{{ p.hidden }}" style="position:absolute;left:50%;top:50%;width:min(440px,80vw);display:flex;flex-direction:column;padding:28px 28px 0;background:#FFFFFF;border-radius:20px;box-shadow:{{ p.shadow }};font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color:#1F1F1F;text-align:left;user-select:none;cursor:{{ p.cursor }};transform:{{ p.tf }};opacity:{{ p.op }};filter:{{ p.blur }};z-index:{{ p.z }};pointer-events:{{ p.pe }};transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity 1.1s cubic-bezier(.16,1,.3,1),filter 1.1s cubic-bezier(.16,1,.3,1),box-shadow .6s">
-            <header style="display:flex;align-items:flex-start;gap:14px">
-              <span style="position:relative;flex:none;width:56px;height:56px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:#46403A">{{ p.ini }}<sc-if value="{{ p.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ p.av }}" alt="" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
-              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
-                <span style="font-size:17px;font-weight:600">{{ p.name }}</span>
-                <span style="font-size:14px;color:#666666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.role }}</span>
-                <span style="font-size:13px;color:#666666">{{ p.date }}</span>
+          <article onClick="{{ p.go }}" aria-hidden="{{ p.hidden }}" style="position:absolute;left:50%;top:50%;width:min(400px,80vw);height:clamp(460px,36vw,500px);display:flex;flex-direction:column;gap:12px;padding:20px 20px 14px;background:#FFFFFF;border-radius:20px;box-shadow:{{ p.shadow }};font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color:#1F1F1F;text-align:left;user-select:none;cursor:{{ p.cursor }};transform:{{ p.tf }};opacity:{{ p.op }};filter:{{ p.blur }};z-index:{{ p.z }};pointer-events:{{ p.pe }};transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity 1.1s cubic-bezier(.16,1,.3,1),filter 1.1s cubic-bezier(.16,1,.3,1),box-shadow .6s">
+            <header style="flex:none;display:flex;align-items:center;gap:12px">
+              <span style="position:relative;flex:none;width:44px;height:44px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#46403A">{{ p.ini }}<sc-if value="{{ p.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ p.av }}" alt="" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.name }}</span>
+                <span style="font-size:12px;color:#666666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.role }} · {{ p.date }}</span>
               </span>
-              <span style="flex:none;width:26px;height:26px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;font-family:Arial,sans-serif">in</span>
+              <span style="flex:none;width:24px;height:24px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;font-family:Arial,sans-serif">in</span>
             </header>
-            <p style="margin:18px 0 0;font-size:16px;line-height:1.55;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;overflow:hidden">{{ p.text }}</p>
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 0 14px;font-size:13px;color:#666666">
-              <span style="display:flex;align-items:center;gap:10px"><span style="display:flex"><span style="width:16px;height:16px;border-radius:50%;background:#378FE9;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:16px;height:16px;border-radius:50%;background:#DF704D;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:16px;height:16px;border-radius:50%;background:#6DAE4F;box-shadow:0 0 0 1.5px #fff"></span></span>{{ p.likes }}</span>
+            <p style="margin:0;flex:none;font-size:14px;line-height:1.5;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden">{{ p.text }}</p>
+            <div style="position:relative;flex:1 1 0;min-height:52%;border-radius:12px;overflow:hidden;background:#2A2723">
+              <img src="{{ p.photo }}" alt="{{ p.photoAlt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block">
+              <a href="Study%20Abroad%20Stories.dc.html" style="position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:8px;height:40px;padding:0 4px 0 16px;border-radius:999px;background:#FFFFFF;color:#0E0C0B;box-shadow:0 8px 20px -6px rgba(14,12,11,.4);font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:600;white-space:nowrap;transition:background .4s,color .4s" style-hover="background:#E4041C;color:#FFFFFF">View story<span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;font-size:16px;font-weight:700">→</span></a>
+            </div>
+            <div style="flex:none;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#666666">
+              <span style="display:flex;align-items:center;gap:8px"><span style="display:flex"><span style="width:15px;height:15px;border-radius:50%;background:#378FE9;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:15px;height:15px;border-radius:50%;background:#DF704D;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:15px;height:15px;border-radius:50%;background:#6DAE4F;box-shadow:0 0 0 1.5px #fff"></span></span>{{ p.likes }}</span>
               <span>{{ p.comments }}</span>
             </div>
-            <a href="#" style="margin:0 -28px;padding:15px 28px;border-top:1px solid #E6E0D8;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;color:#1F1F1F" onMouseEnter="{{ arrowTilt }}" onMouseLeave="{{ arrowReset }}">View Course Details<span style="display:inline-block;transition:transform .4s cubic-bezier(.16,1,.3,1)">↗</span></a>
           </article>
         </sc-for>
       </div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-top:clamp(20px,2vw,28px)">
-        <button type="button" aria-label="Previous post" data-mag="1" onClick="{{ saPrev }}" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#FFFFFF;font-size:16px;cursor:pointer;transition:background .35s,color .35s,transform .6s cubic-bezier(.16,1,.3,1)" style-hover="background:#FFFFFF;color:#0E0C0B">←</button>
-        <div style="display:flex;align-items:center;gap:8px">
-          <sc-for list="{{ saDots }}" as="d" hint-placeholder-count="5">
-            <button type="button" aria-label="{{ d.label }}" onClick="{{ d.go }}" style="position:relative;width:{{ d.w }};height:6px;padding:0;border:0;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.45);cursor:pointer;transition:width .7s cubic-bezier(.16,1,.3,1)"><span data-safill="{{ $index }}" style="position:absolute;inset:0;background:#FFFFFF;transform:scaleX(0);transform-origin:left"></span></button>
-          </sc-for>
-        </div>
-        <button type="button" aria-label="Next post" data-mag="1" onClick="{{ saNext }}" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#FFFFFF;font-size:16px;cursor:pointer;transition:background .35s,color .35s,transform .6s cubic-bezier(.16,1,.3,1)" style-hover="background:#FFFFFF;color:#0E0C0B">→</button>
-      </div>
     </div>
 
-    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 40px;padding:clamp(80px,11vh,120px) clamp(18px,6vw,96px) 30px">
+    <div style="margin:0 clamp(10px,1.6vw,24px);border-radius:0 0 32px 32px;background:linear-gradient(180deg,#FFFFFF 0%,#F8F5F0 55%,#F3EEE6 100%)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 40px;padding:8px calc(clamp(18px,6vw,96px) - clamp(10px,1.6vw,24px)) 24px">
       <h3 data-lines="1" style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(38px,4.2vw,64px);line-height:1;letter-spacing:-.03em">
-        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Hear from the <span style="color:#B80317">upGrad</span> learner</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display: block; font-size: 38.91px">Hear from the <span style="color:#B80317">upGrad</span> learner</span></span>
       </h3>
       <p data-rv="1" style="margin:0;max-width:440px;font-size:15px;line-height:1.6;color:#4A453F;text-wrap:pretty">Real voices, real struggles, and triumphs. Hear the unscripted stories of learners who forged lifelong friendships through late-night study sessions.</p>
     </div>
-    <div data-drag="1" data-cur="Play" style="display:flex;gap:clamp(14px,1.4vw,22px);overflow-x:auto;overflow-y:visible;scrollbar-width:none;padding:14px clamp(18px,6vw,96px) 30px;cursor:grab">
+    <div data-drag="1" data-cur="Play" style="display:flex;gap:clamp(14px,1.4vw,22px);overflow-x:auto;overflow-y:visible;scrollbar-width:none;padding:14px calc(clamp(18px,6vw,96px) - clamp(10px,1.6vw,24px)) 30px;cursor:grab">
       <sc-for list="{{ saCards }}" as="v" hint-placeholder-count="5">
         <div data-ir="22" onMouseEnter="{{ v.enter }}" onMouseLeave="{{ v.leave }}" style="position:relative;flex:none;width:clamp(230px,19vw,284px);aspect-ratio:265/472;border-radius:22px;overflow:hidden;background:#1A1816;transform:{{ v.lift }};box-shadow:{{ v.shadow }};transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1),clip-path 1.4s cubic-bezier(.16,1,.3,1)">
           <img src="{{ v.src }}" alt="{{ v.alt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:{{ v.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
@@ -277,6 +299,7 @@
         </div>
       </sc-for>
     </div>
+    </div>
   </section>
 
   <section id="p5-imm" data-screen-label="04 Immersion" style="position:relative;background:#0E0C0B;color:#F3EEE6">
@@ -284,6 +307,7 @@
       <div style="position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;isolation:isolate">
         <img id="im5-bg" src="./assets/cafe.png" alt="" style="position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.14);will-change:transform">
         <div style="position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(18,10,5,.9) 0%,rgba(18,10,5,.62) 36%,rgba(18,10,5,.24) 100%),linear-gradient(180deg,rgba(18,10,5,.55) 0%,rgba(18,10,5,0) 28%,rgba(18,10,5,0) 70%,rgba(18,10,5,.6) 100%)"></div>
+        <a href="Immersion%20Events.dc.html" style="position:absolute;z-index:3;top:clamp(92px,13vh,120px);right:clamp(18px,5vw,80px);display:flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.45);font-size:14px;font-weight:600;color:#FFFFFF;transition:color .3s,border-color .3s" style-hover="color:#FF3B4A;border-bottom-color:#FF3B4A">View all →</a>
         <div style="position:absolute;inset:0;display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,72px);padding:clamp(92px,13vh,120px) clamp(18px,5vw,80px) clamp(24px,5vh,56px)">
           <div style="flex:1 1 300px;max-width:440px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:0;color:#FFFFFF">
             <div style="display:flex;flex-direction:column;gap:22px">
@@ -300,7 +324,7 @@
                 <sc-for list="{{ imSteps }}" as="s" hint-placeholder-count="3">
                   <button type="button" id="im5-s{{ $index }}" onClick="{{ s.go }}" style="position:relative;display:grid;grid-template-columns:40px 1fr auto;align-items:center;padding:13px 0;border:0;border-top:1px solid rgba(255,255,255,.2);background:transparent;color:#FFFFFF;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;text-align:left;cursor:pointer;opacity:{{ s.op }};transition:opacity .4s" style-hover="opacity:1">
                     <span data-fill="1" style="position:absolute;left:0;right:0;top:-1px;height:1px;background:#FFFFFF;transform:scaleX({{ s.fill }});transform-origin:left"></span>
-                    <span style="font-variant-numeric:tabular-nums;color:rgba(255,255,255,.72)">{{ s.num }}</span><span>{{ s.label }}</span><span role="link" tabindex="0" aria-label="Explore {{ s.label }} immersion" title="View event details" onClick="{{ s.open }}" onKeyDown="{{ s.openKey }}" style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7);font-size:19px;font-weight:700;cursor:pointer;transition:background .3s,color .3s,border-color .3s,transform .5s cubic-bezier(.16,1,.3,1)" style-hover="background:#E4041C;border-color:#E4041C;color:#FFFFFF;transform:rotate(-45deg)">→</span>
+                    <span style="font-variant-numeric:tabular-nums;color:rgba(255,255,255,.72)">{{ s.num }}</span><span>{{ s.label }}</span><span role="link" tabindex="0" aria-label="Explore {{ s.label }} immersion" title="View event details" onClick="{{ s.open }}" onKeyDown="{{ s.openKey }}" data-pill="1" style="flex:none;display:flex;align-items:center;height:44px;padding:0 6px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#FFFFFF;box-shadow:none;font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;white-space:nowrap;cursor:pointer;transition:background .45s,color .45s,border-color .45s,box-shadow .45s,padding .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)" style-hover="background:#E4041C;border-color:#E4041C;color:#FFFFFF;transform:translateX(4px)"><span data-pilltxt="1" style="display:block;max-width:0;opacity:0;overflow:hidden;transition:max-width .5s cubic-bezier(.16,1,.3,1),opacity .4s,margin .5s cubic-bezier(.16,1,.3,1)">View event</span><span style="display:flex;align-items:center;justify-content:center;width:30px;height:30px;font-size:15px;font-weight:700">→</span></span>
                   </button>
                 </sc-for>
               </div>
@@ -340,21 +364,34 @@
     
     <div data-drag="1" data-cur="Drag" style="display:flex;gap:clamp(16px,1.6vw,24px);overflow-x:auto;overflow-y:visible;scrollbar-width:none;padding:14px clamp(18px,6vw,96px) clamp(80px,11vh,120px);cursor:grab">
       <sc-for list="{{ imCards }}" as="c" hint-placeholder-count="5">
-        <a href="{{ c.href }}" draggable="false" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="flex:none;margin:0;width:clamp(290px,26vw,400px);display:flex;flex-direction:column;gap:16px;color:inherit">
-          <div data-ir="16" style="position:relative;aspect-ratio:335/218;border-radius:16px;overflow:hidden;background:#1A1816;transform:{{ c.lift }};box-shadow:{{ c.shadow }};transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1),clip-path 1.4s cubic-bezier(.16,1,.3,1)">
-            <img src="{{ c.src }}" alt="{{ c.alt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:{{ c.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
-          </div>
-          <figcaption style="display:flex;flex-direction:column;gap:8px">
-            <span style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(243,238,230,.66)"><span>{{ c.place }}</span><span>{{ c.year }}</span></span>
-            <span style="font-size:15px;line-height:1.5;color:{{ c.fg }};transition:color .4s;text-wrap:pretty">{{ c.desc }}</span>
-          </figcaption>
+        <a href="{{ c.href }}" draggable="false" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" aria-label="LinkedIn post by {{ c.name }}" style="flex:none;margin:0;display:flex;flex-direction:column;gap:14px;color:inherit">
+          <article style="position:relative;height:max(300px,min(39vh,336px));width:min(35vh,300px);min-width:270px;display:flex;flex-direction:column;gap:8px;padding:14px 14px 10px;border-radius:18px;background:#FFFFFF;color:#1F1F1F;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;box-shadow:{{ c.shadow }};transform:{{ c.lift }};transition:box-shadow .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)">
+            <header style="flex:none;display:flex;align-items:center;gap:10px">
+              <span style="position:relative;flex:none;width:34px;height:34px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#46403A">{{ c.ini }}<sc-if value="{{ c.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ c.avSrc }}" alt="" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</span>
+                <span style="font-size:11px;color:#666666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.role }} · {{ c.date }}</span>
+              </span>
+              <span style="flex:none;width:20px;height:20px;border-radius:3px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:Arial,sans-serif">in</span>
+            </header>
+            <p style="margin:0;flex:none;font-size:12.5px;line-height:1.45;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden">{{ c.text }}</p>
+            <div style="position:relative;flex:1 1 0;min-height:52%;border-radius:10px;overflow:hidden;background:#2A2723">
+              <img src="{{ c.src }}" alt="{{ c.alt }}" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:{{ c.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
+              <span aria-hidden="true" style="position:absolute;right:10px;bottom:10px;display:flex;align-items:center;gap:8px;height:36px;padding:0 4px 0 14px;border-radius:999px;background:{{ c.btnBg }};color:{{ c.btnFg }};box-shadow:0 8px 20px -6px rgba(14,12,11,.4);font-family:'DM Sans',system-ui,sans-serif;font-size:12px;font-weight:600;white-space:nowrap;transition:background .4s,color .4s">View story<span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;font-size:15px;font-weight:700">→</span></span>
+            </div>
+            <div style="flex:none;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#666666">
+              <span style="display:flex;align-items:center;gap:8px"><span style="display:flex"><span style="width:13px;height:13px;border-radius:50%;background:#378FE9;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:13px;height:13px;border-radius:50%;background:#DF704D;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:13px;height:13px;border-radius:50%;background:#6DAE4F;box-shadow:0 0 0 1.5px #fff"></span></span>{{ c.likes }}</span>
+              <span>{{ c.comments }}</span>
+            </div>
+          </article>
+          <span style="display:flex;justify-content:space-between;gap:16px;font-size:13px;font-weight:500;color:rgba(243,238,230,.72)"><span>{{ c.name }}, on LinkedIn</span><span>{{ c.place }}</span></span>
         </a>
       </sc-for>
     </div>
 
     
-    </div>
-  </section>
+    </section></div>
+  
 
   <section id="p5-words" data-screen-label="05 In Their Own Words" style="position:relative;background:#F3EEE6;color:#0E0C0B;overflow:hidden;padding:clamp(110px,15vh,170px) 0 clamp(88px,12vh,140px)">
     <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px;padding:0 clamp(18px,6vw,96px) clamp(40px,4.4vw,64px)">
@@ -365,29 +402,59 @@
           <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#6A645C">We didn’t edit a word.</span></span>
         </h2>
       </div>
-      <a href="#" data-rv="1" style="flex:none;display:flex;gap:10px;padding-bottom:5px;border-bottom:1px solid #C9C0B2;font-size:15px;font-weight:600;color:#0E0C0B;transition:color .3s,border-color .3s" style-hover="color:#B80317;border-bottom-color:#B80317">Read all 6,404 posts →</a>
+      <a href="LinkedIn%20Posts.dc.html" data-rv="1" style="flex:none;display:flex;gap:10px;padding-bottom:5px;border-bottom:1px solid #C9C0B2;font-size:15px;font-weight:600;color:#0E0C0B;transition:color .3s,border-color .3s" style-hover="color:#B80317;border-bottom-color:#B80317">Read all 6,404 posts →</a>
     </div>
     <div style="display:flex;flex-direction:column;gap:18px">
       <div data-mq="-1" style="display:flex;width:max-content;will-change:transform">
         <sc-for list="{{ rowA }}" as="w" hint-placeholder-count="6">
-          <article style="flex:none;width:clamp(300px,27vw,400px);margin-right:18px;padding:24px;background:#FFFFFF;border:1px solid #E2DBD0;border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;transition:border-color .4s,transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s" style-hover="border-color:#0E0C0B;transform:translateY(-6px);box-shadow:0 24px 40px -24px rgba(14,12,11,.35)">
-            <p style="margin:0;font-family:'Instrument Serif',serif;font-size:22px;line-height:1.28;color:#0E0C0B;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden">{{ w.text }}</p>
-            <div style="display:flex;align-items:center;gap:12px;min-width:0">
-              <span style="position:relative;flex:none;width:38px;height:38px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#46403A">{{ w.ini }}<sc-if value="{{ w.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ w.av }}" alt="{{ w.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
-              <span style="min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ w.name }}</span><span style="font-size:12.5px;color:#655F57;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.role }}</span></span>
-              <span style="margin-left:auto;flex:none;width:22px;height:22px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:Arial,sans-serif">in</span>
+          <article style="flex:none;width:clamp(300px,27vw,380px);margin-right:20px;display:flex;flex-direction:column;background:#FFFFFF;border-radius:18px;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color:#1F1F1F;box-shadow:0 1px 2px rgba(14,12,11,.06),0 10px 24px -12px rgba(14,12,11,.18);transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-4px);box-shadow:0 1px 3px rgba(14,12,11,.05),0 12px 24px -12px rgba(14,12,11,.16),0 28px 48px -28px rgba(14,12,11,.18)">
+            <header style="display:flex;align-items:center;gap:12px;padding:18px 18px 0">
+              <span style="position:relative;flex:none;width:44px;height:44px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#46403A">{{ w.ini }}<sc-if value="{{ w.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ w.av }}" alt="{{ w.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.name }}</span>
+                <span style="font-size:12px;color:#666666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.role }}</span>
+                <span style="font-size:11.5px;color:#888888">{{ w.date }} · Edited</span>
+              </span>
+              <span style="flex:none;align-self:flex-start;width:22px;height:22px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:Arial,sans-serif">in</span>
+            </header>
+            <p style="margin:0;padding:14px 18px 0;font-size:14px;line-height:1.55;color:#1F1F1F;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;text-wrap:pretty">{{ w.text }}</p>
+            <span style="padding:4px 18px 0;font-size:13px;font-weight:600;color:#666666">…see more</span>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:auto 18px 0;padding:16px 0 10px;border-bottom:1px solid #EBEBEB;font-size:12px;color:#666666">
+              <span style="display:flex;align-items:center;gap:8px"><span style="display:flex"><span style="width:15px;height:15px;border-radius:50%;background:#378FE9;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:15px;height:15px;border-radius:50%;background:#DF704D;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:15px;height:15px;border-radius:50%;background:#6DAE4F;box-shadow:0 0 0 1.5px #fff"></span></span>{{ w.likes }}</span>
+              <span>{{ w.comments }}</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);padding:4px 8px 8px;font-size:12.5px;font-weight:600;color:#666666">
+              <span style="display:flex;align-items:center;justify-content:center;height:36px">Like</span>
+              <span style="display:flex;align-items:center;justify-content:center;height:36px">Comment</span>
+              <span style="display:flex;align-items:center;justify-content:center;height:36px">Repost</span>
+              <span style="display:flex;align-items:center;justify-content:center;height:36px">Send</span>
             </div>
           </article>
         </sc-for>
       </div>
       <div data-mq="1" style="display:flex;width:max-content;will-change:transform">
         <sc-for list="{{ rowB }}" as="w" hint-placeholder-count="6">
-          <article style="flex:none;width:clamp(300px,27vw,400px);margin-right:18px;padding:24px;background:#FFFFFF;border:1px solid #E2DBD0;border-radius:18px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;transition:border-color .4s,transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s" style-hover="border-color:#0E0C0B;transform:translateY(-6px);box-shadow:0 24px 40px -24px rgba(14,12,11,.35)">
-            <p style="margin:0;font-family:'Instrument Serif',serif;font-size:22px;line-height:1.28;color:#0E0C0B;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden">{{ w.text }}</p>
-            <div style="display:flex;align-items:center;gap:12px;min-width:0">
-              <span style="position:relative;flex:none;width:38px;height:38px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#46403A">{{ w.ini }}<sc-if value="{{ w.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ w.av }}" alt="{{ w.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
-              <span style="min-width:0;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{ w.name }}</span><span style="font-size:12.5px;color:#655F57;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.role }}</span></span>
-              <span style="margin-left:auto;flex:none;width:22px;height:22px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:Arial,sans-serif">in</span>
+          <article style="flex:none;width:clamp(300px,27vw,380px);margin-right:20px;display:flex;flex-direction:column;background:#FFFFFF;border-radius:18px;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color:#1F1F1F;box-shadow:0 1px 2px rgba(14,12,11,.06),0 10px 24px -12px rgba(14,12,11,.18);transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-4px);box-shadow:0 1px 3px rgba(14,12,11,.05),0 12px 24px -12px rgba(14,12,11,.16),0 28px 48px -28px rgba(14,12,11,.18)">
+            <header style="display:flex;align-items:center;gap:12px;padding:18px 18px 0">
+              <span style="position:relative;flex:none;width:44px;height:44px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#46403A">{{ w.ini }}<sc-if value="{{ w.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ w.av }}" alt="{{ w.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.name }}</span>
+                <span style="font-size:12px;color:#666666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.role }}</span>
+                <span style="font-size:11.5px;color:#888888">{{ w.date }} · Edited</span>
+              </span>
+              <span style="flex:none;align-self:flex-start;width:22px;height:22px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:Arial,sans-serif">in</span>
+            </header>
+            <p style="margin:0;padding:14px 18px 0;font-size:14px;line-height:1.55;color:#1F1F1F;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;text-wrap:pretty">{{ w.text }}</p>
+            <span style="padding:4px 18px 0;font-size:13px;font-weight:600;color:#666666">…see more</span>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:auto 18px 0;padding:16px 0 10px;border-bottom:1px solid #EBEBEB;font-size:12px;color:#666666">
+              <span style="display:flex;align-items:center;gap:8px"><span style="display:flex"><span style="width:15px;height:15px;border-radius:50%;background:#378FE9;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:15px;height:15px;border-radius:50%;background:#DF704D;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:15px;height:15px;border-radius:50%;background:#6DAE4F;box-shadow:0 0 0 1.5px #fff"></span></span>{{ w.likes }}</span>
+              <span>{{ w.comments }}</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);padding:4px 8px 8px;font-size:12.5px;font-weight:600;color:#666666">
+              <span style="display:flex;align-items:center;justify-content:center;height:36px">Like</span>
+              <span style="display:flex;align-items:center;justify-content:center;height:36px">Comment</span>
+              <span style="display:flex;align-items:center;justify-content:center;height:36px">Repost</span>
+              <span style="display:flex;align-items:center;justify-content:center;height:36px">Send</span>
             </div>
           </article>
         </sc-for>
@@ -414,7 +481,7 @@
     <span style="font-size:23px;font-weight:700;letter-spacing:-.04em;color:#E4041C">upGrad</span>
     <span style="max-width:520px;font-size:13px;line-height:1.55;color:rgba(243,238,230,.66);text-wrap:pretty">Every post on this page links to the live original on its author’s profile. We didn’t edit a word.</span>
   </footer>
-</div>
+
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
@@ -556,26 +623,44 @@ class Component extends DCLogic {
 
   scRender() {
     const sc = this.sc; if (!sc) return;
-    sc.slots.forEach((el, i) => {
-      const o = sc.off(i), t = this.scSlot(o, sc.hovered === i);
-      if (!sc.ready) { el.style.opacity = '0'; return; }
-      el.style.transform = 'translate3d(' + t.x + 'px,' + t.y + 'px,' + t.z + 'px) rotateY(' + t.ry + 'deg) scale(' + t.s + ')';
-      el.style.opacity = t.op;
-      el.style.filter = t.blur ? 'blur(' + t.blur + 'px)' : 'none';
-      el.style.zIndex = t.zi;
-      el.style.pointerEvents = t.op === 0 ? 'none' : 'auto';
-      el.style.cursor = o === 0 ? 'default' : 'pointer';
-      el.setAttribute('aria-hidden', o === 0 ? 'false' : 'true');
-      el.querySelector('[data-veil]').style.opacity = (o === 0 || sc.hovered === i) ? 0 : (0.3 + 0.14 * Math.abs(o));
-    });
+    if (!sc.ready) sc.slots.forEach(el => { el.style.opacity = '0'; });
+    sc.slots.forEach((el, i) => { const o = sc.off(i); el.style.cursor = o === 0 ? 'default' : 'pointer'; el.setAttribute('aria-hidden', o === 0 ? 'false' : 'true'); });
     sc.dots.forEach((d, i) => { const on = i === sc.active; d.style.width = on ? '36px' : '6px'; d.setAttribute('aria-current', on ? 'true' : 'false'); if (!on && sc.fills[i]) sc.fills[i].style.transform = 'scaleX(0)'; });
+  }
+
+  scPaint(k) {
+    const sc = this.sc; if (!sc || !sc.ready) return;
+    if (sc.pos == null) { sc.pos = sc.active; sc.target = sc.active; sc.hv = sc.slots.map(() => 0); sc.readyAt = performance.now(); }
+    if (!sc.freed && performance.now() - sc.readyAt > 2400) { sc.freed = true; sc.slots.forEach(el => { el.style.transition = 'none'; }); }
+    const ease = this.reduced ? 1 : Math.min(1, 0.06 * k);
+    sc.pos += (sc.target - sc.pos) * ease; if (Math.abs(sc.target - sc.pos) < 0.0005) sc.pos = sc.target;
+    const N = sc.N, A = [0, 1, 2, 2.5];
+    const T = { x: [0, 300, 520, 600], y: [0, 14, 28, 35], z: [90, -220, -580, -760], ry: [0, 30, 38, 42], s: [1, 0.92, 0.84, 0.8], blur: [0, 2, 5, 6], op: [1, 0.86, 0.72, 0] };
+    const lerpT = (key, a) => { const v = T[key]; if (a >= 2.5) return v[3]; let j = 0; while (j < 2 && a > A[j + 1]) j++; const f = (a - A[j]) / (A[j + 1] - A[j]); return v[j] + (v[j + 1] - v[j]) * f; };
+    sc.slots.forEach((el, i) => {
+      let o = i - sc.pos; o = ((o % N) + N) % N; if (o > N / 2) o -= N;
+      const a = Math.abs(o), d = Math.sign(o);
+      sc.hv[i] += ((sc.hovered === i ? 1 : 0) - sc.hv[i]) * Math.min(1, 0.12 * k); const hv = sc.hv[i];
+      const x = d * lerpT('x', a) * (1 - 0.05 * hv), y = lerpT('y', a) * (1 - hv), z = lerpT('z', a) + 100 * hv, ry = -d * lerpT('ry', a) * (1 - 0.5 * hv), s = lerpT('s', a) + 0.04 * hv;
+      const bl = lerpT('blur', a) * (1 - hv), op0 = lerpT('op', a), op = op0 + (1 - op0) * hv * (a < 2.4 ? 1 : 0);
+      this.set(el, 'transform', 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg) scale(' + s.toFixed(4) + ')');
+      this.set(el, 'opacity', op.toFixed(3));
+      this.set(el, 'filter', bl > 0.05 ? 'blur(' + bl.toFixed(1) + 'px)' : 'none');
+      this.set(el, 'zIndex', String(Math.round(30 - a * 5 + hv * 5)));
+      this.set(el, 'pointerEvents', op < 0.05 ? 'none' : 'auto');
+      const vl = el.__veil || (el.__veil = el.querySelector('[data-veil]'));
+      if (vl) this.set(vl, 'opacity', (Math.min(1, a) * (0.3 + 0.14 * a) * (1 - hv)).toFixed(3));
+    });
   }
 
   scGo(i) {
     const sc = this.sc; if (!sc) return;
     sc.hovered = null; sc.t = 0;
     sc.slots.forEach(el => { el.querySelector('[data-card]').style.transform = ''; });
-    sc.active = ((i % sc.N) + sc.N) % sc.N;
+    const N = sc.N, next = ((i % N) + N) % N;
+    let dlt = next - sc.active; if (dlt > N / 2) dlt -= N; if (dlt < -N / 2) dlt += N;
+    if (sc.target == null) sc.target = sc.active;
+    sc.target += dlt; sc.active = next;
     this.scRender();
   }
 
@@ -583,6 +668,7 @@ class Component extends DCLogic {
     const sc = this.sc; if (!sc) return;
     const vw = innerWidth, vh = innerHeight, T = 5200;
     if (sc.ready && sc.auto && !sc.hover && p < 0.6) { sc.t += dt; if (sc.t >= T) this.scGo(sc.active + 1); }
+    this.scPaint(k);
     const f = sc.fills[sc.active]; if (f) this.set(f, 'transform', 'scaleX(' + (sc.auto ? this.cl(sc.t / T) : 1).toFixed(4) + ')');
     const has = this.fine && this.mx >= 0 && !this.reduced;
     const tx = has ? (this.mx / vw - 0.5) * 10 : 0, ty = has ? (this.my / vh - 0.5) * -6 : 0;
@@ -787,6 +873,12 @@ class Component extends DCLogic {
       }
       if (s) {
         this.set(s, 'opacity', i === act ? '1' : '.55');
+        const pl = s.querySelector('[data-pill]'), pt = s.querySelector('[data-pilltxt]');
+        if (pl && pt) { const on = i === act;
+          this.set(pl, 'background', on ? '#FFFFFF' : 'transparent'); this.set(pl, 'color', on ? '#0E0C0B' : '#FFFFFF');
+          this.set(pl, 'borderColor', on ? '#FFFFFF' : 'rgba(255,255,255,.35)'); this.set(pl, 'boxShadow', on ? '0 8px 20px -6px rgba(0,0,0,.45)' : 'none');
+          this.set(pl, 'paddingLeft', on ? '16px' : '6px');
+          this.set(pt, 'maxWidth', on ? '90px' : '0px'); this.set(pt, 'opacity', on ? '1' : '0'); this.set(pt, 'marginRight', on ? '6px' : '0px'); }
         const fl = s.querySelector('[data-fill]');
         this.set(fl, 'transform', 'scaleX(' + this.cl(seg - i + 1).toFixed(4) + ')');
       }
@@ -910,23 +1002,28 @@ class Component extends DCLogic {
     });
 
     const CV = [
+      ['conv-l2.png', 'Graduate at IIT Bombay convocation', 'IIT Bombay', '2026', '670/436', false, { name: 'Nisha Nair', role: 'Growth Manager, Zomato', av: 'a8', date: '15 Mar 2026', likes: '2,603', comments: '171 comments', text: 'My parents flew in for this. They watched me study on a laptop for two years. Today they watched me walk across the stage at IIT Bombay.' }],
       ['conv-l1.png', 'Graduate at IIT Bombay convocation', 'IIT Bombay', '2026', '670/436'],
-      ['conv-l3.png', 'Graduate at the annual convocation', 'Annual convocation', '2026', '670/436'],
+      ['conv-l3.png', 'Graduate at the annual convocation', 'Annual convocation', '2026', '670/436', false, { name: 'Lakshmi Reddy', role: 'Data Engineer, PhonePe', av: 'a4', date: '14 Mar 2026', likes: '2,184', comments: '146 comments', text: 'Walked the stage today. Two years of weekend classes, assignments submitted at midnight after putting the kids to bed, and one very patient family.' }],
       null,
+      ['conv-l5.png', 'Three graduates at IIIT Bangalore', 'IIIT Bangalore', '2026', '670/436', false, { name: 'Harish Bhat', role: 'Data Engineer, PhonePe', av: 'a5', date: '21 Mar 2026', likes: '1,947', comments: '112 comments', text: 'Met my study group in person for the first time at IIIT Bangalore. Eighteen months of late-night calls, and they are exactly who I thought they would be.' }],
       ['conv-p2.png', 'Graduate holding a degree folder', 'Degree in hand', '2026', '596/658'],
-      ['conv-l5.png', 'Three graduates at IIIT Bangalore', 'IIIT Bangalore', '2026', '670/436'],
-      ['cv-card-sharp.png', 'LinkedIn post by Gunavardhan Dandi on graduating from IIIT Bangalore', 'Gunavardhan Dandi, on LinkedIn', 'Course Details', '654/410', true],
-      ['conv-l4.png', 'Annual convocation group photograph', 'The whole cohort', '2026', '670/436'],
-      ['conv-l2.png', 'Graduate at IIT Bombay convocation', 'IIT Bombay', '2026', '670/436']
+      ['conv-l4.png', 'Annual convocation group photograph', 'The whole cohort', '2026', '670/436', false, { name: 'Rohan Menon', role: 'Marketing Lead, Nykaa', av: 'a6', date: '16 Mar 2026', likes: '1,362', comments: '88 comments', text: 'Class of 2026, in one frame. A year of breakout rooms and late-night group calls, and today we finally stood next to each other.' }]
     ];
-    const cvSlug = ['iit-bombay-stage', 'annual-convocation', null, 'degree-in-hand', 'iiit-bangalore', 'gunavardhan-dandi', 'whole-cohort', 'iit-bombay-2026'];
+    const cvSlug = ['iit-bombay-2026', 'iit-bombay-stage', 'annual-convocation', null, 'iiit-bangalore', 'degree-in-hand', 'whole-cohort'];
     const cvGo = i => { location.href = 'Convocation%20Detail.dc.html?c=' + cvSlug[i]; };
     const convItems = CV.map((g, i) => {
       if (!g) return { isQuote: true, isImg: false };
-      const [f, alt, place, year, ar, post] = g, h = H('cv' + i);
+      const [f, alt, place, year, ar, post, li] = g, h = H('cv' + i);
+      if (li) return { isPost: true, isImg: false, isQuote: false, src: './assets/' + f, alt, ...li, avSrc: './assets/avatars/' + li.av + '.png', ini: li.name.split(' ').map(s => s[0]).join(''),
+        open: () => cvGo(i), openKey: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cvGo(i); } },
+        enter: h.enter, leave: h.leave,
+        shadow: h.on ? '0 2px 4px rgba(14,12,11,.06),0 18px 32px -10px rgba(14,12,11,.22),0 48px 80px -30px rgba(14,12,11,.4)' : '0 1px 2px rgba(14,12,11,.06),0 10px 24px -12px rgba(14,12,11,.18)',
+        lift: h.on ? 'translateY(-6px)' : 'translateY(0)', zoom: h.on ? 'scale(1.06)' : 'scale(1)',
+        btnBg: h.on ? '#E4041C' : '#FFFFFF', btnFg: h.on ? '#FFFFFF' : '#0E0C0B' };
       return { open: () => cvGo(i), openKey: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cvGo(i); } }, isImg: true, isQuote: false, src: './assets/' + f, alt, place, year, ar, px: post ? '0' : '1',
         bg: post ? '#DAD2C4' : '#2A2723', fit: post ? 'contain' : 'cover', pad: post ? '6%' : '0',
-        btnBg: h.on ? '#E4041C' : 'rgba(243,238,230,.94)', btnFg: h.on ? '#FFFFFF' : '#0E0C0B', btnRot: h.on ? 'rotate(0deg)' : 'rotate(-45deg)', btnTxtW: h.on ? '90px' : '0px', btnTxtOp: h.on ? 1 : 0, btnPadL: h.on ? '18px' : '6px',
+        btnBg: h.on ? '#E4041C' : '#FFFFFF', btnFg: h.on ? '#FFFFFF' : '#0E0C0B', btnRot: 'rotate(0deg)', btnTxtW: '90px', btnTxtOp: 1, btnPadL: '18px',
         zoom: h.on ? 'scale(1.06)' : 'scale(1)', capFg: h.on ? '#0E0C0B' : '#6A645C',
         shadow: h.on ? '0 2px 4px rgba(14,12,11,.06), 0 12px 24px -8px rgba(14,12,11,.14), 0 40px 72px -28px rgba(14,12,11,.32)' : '0 2px 4px rgba(14,12,11,0), 0 12px 24px -8px rgba(14,12,11,0), 0 40px 72px -28px rgba(14,12,11,0)', enter: h.enter, leave: h.leave };
     });
@@ -975,9 +1072,19 @@ class Component extends DCLogic {
       ['im-1.png', 'upGrad team at the office', 'IIT Bombay', 'The team behind the programme, meeting the learners it was built for.']
     ];
     const imSlug = ['chennai', 'chandigarh', 'ahmedabad', 'chennai', 'chandigarh'];
-    const imCards = imBase.map(([f, alt, place, desc], i) => { const h = H('im' + i); return {
-      href: '#im-' + imSlug[i], src: './assets/' + f, alt, place, year: '2026', desc, enter: h.enter, leave: h.leave, ...lift(h.on, 8, true),
-      zoom: h.on ? 'scale(1.07)' : 'scale(1)', fg: h.on ? '#F3EEE6' : 'rgba(243,238,230,.8)' }; });
+    const imLi = [
+      { name: 'Priya Raman', role: 'Product Analyst, Freshworks', av: 'a3', date: '9 Feb 2026', likes: '1,284', comments: '64 comments', text: 'Finally got to ask the questions I had been saving up all term. Two hours with faculty on campus was worth more than a month of forum threads.' },
+      { name: 'Karan Malhotra', role: 'Consultant, Deloitte', av: 'a1', date: '11 Feb 2026', likes: '962', comments: '41 comments', text: 'The mentor who marked every one of my assignments, answering my questions face to face. Strange and brilliant in equal measure.' },
+      { name: 'Meera Pillai', role: 'Founder, Studio Kaapi', av: 'a7', date: '12 Feb 2026', likes: '2,031', comments: '118 comments', text: 'Did not expect the founders to show up and spend an hour listening to what our cohort is building. They took notes.' },
+      { name: 'Vikram Desai', role: 'Engineering Manager, Razorpay', av: 'a2', date: '14 Feb 2026', likes: '1,756', comments: '93 comments', text: 'One week, one campus, and a group photo that finally has everyone in it. See you all at convocation.' },
+      { name: 'Ananya Nair', role: 'HR Business Partner, Wipro', av: null, date: '16 Feb 2026', likes: '874', comments: '37 comments', text: 'Met the team behind the programme today. You can tell they built it for people like us, juggling a job and a family.' }
+    ];
+    const imCards = imBase.map(([f, alt, place, desc], i) => { const h = H('im' + i), li = imLi[i]; return {
+      ...li, avSrc: li.av ? './assets/avatars/' + li.av + '.png' : '', hasAv: !!li.av, ini: li.name.split(' ').map(s => s[0]).join(''),
+      href: 'Immersion%20Detail.dc.html?u=' + imSlug[i], src: './assets/' + f, alt, place, enter: h.enter, leave: h.leave,
+      shadow: h.on ? '0 2px 4px rgba(0,0,0,.2),0 18px 32px -10px rgba(0,0,0,.45),0 48px 80px -30px rgba(0,0,0,.7)' : '0 1px 2px rgba(0,0,0,.2),0 10px 24px -12px rgba(0,0,0,.4)',
+      lift: h.on ? 'translateY(-6px)' : 'translateY(0)', zoom: h.on ? 'scale(1.06)' : 'scale(1)',
+      btnBg: h.on ? '#E4041C' : '#FFFFFF', btnFg: h.on ? '#FFFFFF' : '#0E0C0B' }; });
     ['chennai', 'chandigarh', 'ahmedabad'].forEach((g, k) => { if (imSteps[k]) { imSteps[k].href = '#im-' + g; const toDetail = () => { location.href = 'Immersion%20Detail.dc.html?u=' + g; }; imSteps[k].open = e => { e.stopPropagation(); toDetail(); }; imSteps[k].openKey = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toDetail(); } }; } });
     const immLinks = [['iit-bombay', 'IIT Bombay campus'], ['iiit-bangalore', 'IIIT Bangalore campus'], ['city-meetups', 'City meetups'], ['mentors', 'Mentor sessions']].map(([g, label]) => ({ label, href: '#im-' + g }));
     const ticker = ['Immersion week', 'IIT Bombay', 'IIIT Bangalore', 'Mumbai', 'Hyderabad', 'Bangalore', 'Delhi', 'Pune'];
@@ -998,7 +1105,9 @@ class Component extends DCLogic {
       ['Aditya Sharma', 'Scrum Master, Tech Mahindra', 'a2', 'Having someone check in every fortnight, who actually read my submissions, changed everything.']
     ].map(([name, role, av, text]) => ({ name, role, text, ini: name.split(' ').map(s => s[0]).join(''), hasAv: !!av, av: av ? './assets/avatars/' + av + '.png' : '' }));
     const A = W.slice(0, 6), B = W.slice(6);
-    const rowA = [...A, ...A], rowB = [...B, ...B];
+    const wMeta = (w, k) => ({ ...w, date: ['2d', '5d', '1w', '1w', '2w', '3w'][k % 6], likes: ['1,284', '962', '2,031', '1,756', '874', '1,412'][k % 6], comments: ['64 comments', '41 comments', '118 comments', '93 comments', '37 comments', '72 comments'][k % 6] });
+    const A2 = A.map(wMeta), B2 = B.map((w, k) => wMeta(w, k + 3));
+    const rowA = [...A2, ...A2], rowB = [...B2, ...B2];
 
     const SP = [
       [W[0], '12 Aug 2026', '1,528', '78 comments', "A thank-you I've been putting off. When I enrolled I was sceptical. I'd tried online courses before and finished none of them. The difference this time was the mentor calls. Having someone check in every fortnight, who actually read my submissions, changed everything. I finished. First time ever."],
@@ -1007,11 +1116,12 @@ class Component extends DCLogic {
       [W[10], '19 Jul 2026', '2,310', '134 comments', W[10].text],
       [W[7], '8 Jul 2026', '1,847', '92 comments', W[7].text]
     ];
+    const SPI = [['sa-v0.png', 'Learner speaking by a window'], ['sa-v3.png', 'Learner seated in a studio'], ['sa-v5.png', 'Learner in a blue blazer'], ['sa-v1.png', 'Learner sharing their story'], ['sa-v6.png', 'Learner sharing advice']];
     const n = SP.length, cur = this.state.saIdx;
     const saPosts = SP.map(([w, date, likes, comments, text], i) => {
       let o = i - cur; if (o > n / 2) o -= n; if (o < -n / 2) o += n;
       const a = Math.abs(o), sg = Math.sign(o);
-      return { ...w, date, likes, comments, text,
+      return { ...w, date, likes, comments, text, photo: './assets/' + SPI[i][0], photoAlt: SPI[i][1],
         tf: 'translate3d(-50%,-50%,0) translateX(' + (sg * (a === 0 ? 0 : a === 1 ? 66 : 112)) + '%) rotateY(' + (-sg * (a === 0 ? 0 : 18)) + 'deg) scale(' + (a === 0 ? 1 : a === 1 ? 0.84 : 0.7) + ')',
         op: a === 0 ? 1 : a === 1 ? 0.6 : 0, blur: a === 0 ? 'none' : 'blur(' + (a * 2) + 'px)', z: 10 - a * 3,
         pe: a > 1 ? 'none' : 'auto', cursor: a === 0 ? 'default' : 'pointer', hidden: String(a !== 0),

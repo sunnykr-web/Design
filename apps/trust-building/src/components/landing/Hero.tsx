@@ -9,13 +9,30 @@ import s from './Hero.module.css';
 
 const AUTO_MS = 5200;
 
-type Slot = { x: number; y: number; z: number; ry: number; s: number; blur: number; op: number; zi: number };
+// Card pose at distance 0, 1, 2 and 2.5 from the front; poses in between are interpolated so the ring slides smoothly.
+const STOPS = [0, 1, 2, 2.5];
+const POSE = { x: [0, 300, 520, 600], y: [0, 14, 28, 35], z: [90, -220, -580, -760], ry: [0, 30, 38, 42], s: [1, 0.92, 0.84, 0.8], blur: [0, 2, 5, 6], op: [1, 0.86, 0.72, 0] };
+const lerpPose = (key: keyof typeof POSE, a: number) => {
+  const v = POSE[key];
+  if (a >= 2.5) return v[3];
+  let j = 0;
+  while (j < 2 && a > STOPS[j + 1]) j++;
+  const f = (a - STOPS[j]) / (STOPS[j + 1] - STOPS[j]);
+  return v[j] + (v[j + 1] - v[j]) * f;
+};
 
-/** Where a card sits for offset `o` from the active card. */
-function slotFor(o: number): Slot {
+/** Styles for a card at (possibly fractional) offset `o` from the front. `hv` (0–1) brightens a hovered side card. */
+function poseStyles(o: number, hv: number) {
   const a = Math.abs(o), d = Math.sign(o);
-  if (o === 0) return { x: 0, y: 0, z: 90, ry: 0, s: 1, blur: 0, op: 1, zi: 30 };
-  return { x: d * (a === 1 ? 300 : 520), y: a * 14, z: -150 * a - 70 * a * a, ry: -d * (22 + 8 * a), s: 1 - 0.08 * a, blur: 2 * a + Math.max(a - 1, 0), op: a > 2 ? 0 : 1 - 0.14 * a, zi: 20 - a };
+  const op = lerpPose('op', a);
+  return {
+    transform: `translate3d(${(d * lerpPose('x', a)).toFixed(1)}px,${lerpPose('y', a).toFixed(1)}px,${lerpPose('z', a).toFixed(1)}px) rotateY(${(-d * lerpPose('ry', a)).toFixed(2)}deg) scale(${lerpPose('s', a).toFixed(4)})`,
+    opacity: op.toFixed(3),
+    filter: lerpPose('blur', a) * (1 - hv) > 0.05 ? `blur(${(lerpPose('blur', a) * (1 - hv)).toFixed(1)}px)` : 'none',
+    zIndex: String(Math.round(30 - a * 5)),
+    pointerEvents: op < 0.05 ? 'none' : 'auto',
+    veil: (Math.min(1, a) * (0.3 + 0.14 * a) * (1 - hv)).toFixed(3),
+  };
 }
 
 export function Hero() {
@@ -37,7 +54,11 @@ export function Hero() {
     const N = slots.length;
     const reduced = prefersReducedMotion();
     const fine = window.matchMedia('(pointer: fine)').matches;
-    const sc = { active: Math.floor(N / 2), hovered: null as number | null, auto: !reduced, hover: false, t: 0, ready: false, rx: 0, ry: 0, gx: innerWidth / 2, gy: innerHeight * 0.64 };
+    const sc = {
+      active: Math.floor(N / 2), hovered: null as number | null, auto: !reduced, hover: false, t: 0, ready: false, rx: 0, ry: 0, gx: innerWidth / 2, gy: innerHeight * 0.64,
+      // Continuous ring position (unwrapped), its target, per-card hover amount, and whether frame painting has taken over from CSS transitions.
+      pos: Math.floor(N / 2), target: Math.floor(N / 2), hv: slots.map(() => 0), freed: false,
+    };
     const off = (i: number) => { let o = i - sc.active; if (o > N / 2) o -= N; if (o < -N / 2) o += N; return o; };
     const cleanups: (() => void)[] = [];
     const on = <K extends keyof HTMLElementEventMap>(t: HTMLElement | Window, ev: K, fn: (e: HTMLElementEventMap[K]) => void, o?: AddEventListenerOptions) => {
@@ -46,23 +67,41 @@ export function Hero() {
     };
     const timers: number[] = [];
 
+    const apply = (el: HTMLDivElement, i: number, p: ReturnType<typeof poseStyles>) => {
+      setStyle(el, 'transform', p.transform);
+      setStyle(el, 'opacity', p.opacity);
+      setStyle(el, 'filter', p.filter);
+      setStyle(el, 'z-index', p.zIndex);
+      setStyle(el, 'pointer-events', p.pointerEvents);
+      setStyle(veils[i], 'opacity', p.veil);
+    };
+    // Discrete render: before the intro (hidden) and during the fly-in (CSS transitions carry the motion).
     const render = () => {
       slots.forEach((el, i) => {
-        if (!sc.ready) { el.style.opacity = '0'; return; }
-        const o = off(i), t = slotFor(o);
-        el.style.transform = `translate3d(${t.x}px,${t.y}px,${t.z}px) rotateY(${t.ry}deg) scale(${t.s})`;
-        el.style.opacity = String(t.op);
-        el.style.filter = t.blur ? `blur(${t.blur}px)` : 'none';
-        el.style.zIndex = String(t.zi);
-        el.style.pointerEvents = t.op === 0 ? 'none' : 'auto';
+        const o = off(i);
         el.style.cursor = o === 0 ? 'default' : 'pointer';
         el.setAttribute('aria-hidden', o === 0 ? 'false' : 'true');
-        veils[i].style.opacity = String(o === 0 || sc.hovered === i ? 0 : 0.3 + 0.14 * Math.abs(o));
+        if (!sc.ready) { el.style.opacity = '0'; return; }
+        if (!sc.freed) apply(el, i, poseStyles(o, sc.hovered === i ? 1 : 0));
+      });
+    };
+    // Per-frame paint once the fly-in is over: the ring eases toward its target position.
+    const paint = (k: number) => {
+      if (!sc.freed) return;
+      sc.pos += (sc.target - sc.pos) * (reduced ? 1 : Math.min(1, 0.06 * k));
+      if (Math.abs(sc.target - sc.pos) < 0.0005) sc.pos = sc.target;
+      slots.forEach((el, i) => {
+        let o = i - sc.pos; o = ((o % N) + N) % N; if (o > N / 2) o -= N;
+        sc.hv[i] += ((sc.hovered === i ? 1 : 0) - sc.hv[i]) * Math.min(1, 0.12 * k);
+        apply(el, i, poseStyles(o, sc.hv[i]));
       });
     };
     const go = (i: number) => {
       sc.hovered = null; sc.t = 0;
-      sc.active = ((i % N) + N) % N;
+      const next = ((i % N) + N) % N;
+      let dlt = next - sc.active; if (dlt > N / 2) dlt -= N; if (dlt < -N / 2) dlt += N;
+      sc.target += dlt;
+      sc.active = next;
       render();
     };
 
@@ -98,7 +137,11 @@ export function Hero() {
       slots.forEach((el, i) => { el.style.transitionDuration = '1.6s'; el.style.transitionDelay = `${0.35 + Math.abs(off(i)) * 0.14}s`; });
       render();
       if (haloRef.current) { haloRef.current.style.transitionDelay = '.6s'; haloRef.current.style.opacity = '1'; }
-      timers.push(window.setTimeout(() => slots.forEach(el => { el.style.transitionDuration = ''; el.style.transitionDelay = ''; }), 2400));
+      timers.push(window.setTimeout(() => {
+        sc.pos = sc.target;
+        sc.freed = true;
+        slots.forEach(el => { el.style.transition = 'none'; });
+      }, 2400));
       const el = countRef.current;
       if (!el || reduced) return;
       const T = 2000, t0 = performance.now() + 500;
@@ -120,6 +163,7 @@ export function Hero() {
       setStyle(contentRef.current, 'opacity', Math.max(0, 1 - p * 1.7).toFixed(3));
 
       if (sc.ready && sc.auto && !sc.hover && p < 0.6) { sc.t += dt; if (sc.t >= AUTO_MS) go(sc.active + 1); }
+      paint(k);
       const has = fine && mx >= 0 && !reduced;
       const tx = has ? (mx / vw - 0.5) * 10 : 0, ty = has ? (my / vh - 0.5) * -6 : 0;
       sc.ry += (tx - sc.ry) * 0.05 * k;

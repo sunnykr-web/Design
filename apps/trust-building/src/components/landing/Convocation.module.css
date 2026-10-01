@@ -1,4 +1,10 @@
 .conv { position: relative; background: var(--cream); color: var(--ink); border-radius: 32px 32px 0 0; }
+.viewAll {
+  position: absolute; top: clamp(96px,13vh,140px); right: var(--pad-x); display: flex; align-items: center; gap: 8px;
+  padding-bottom: 4px; border-bottom: 1px solid #C9C0B2; font-size: 14px; font-weight: 600; color: var(--ink);
+  transition: color var(--hover-t), border-color var(--hover-t);
+}
+.viewAll:hover { color: var(--red-deep); border-bottom-color: var(--red-deep); }
 .col { display: flex; flex-direction: column; gap: clamp(24px,4vh,40px); padding: clamp(96px,13vh,140px) 0 clamp(64px,9vh,110px); }
 
 /* Scroll padding lets card shadows fade out instead of clipping at the rail edges. */
@@ -10,31 +16,35 @@
 
 .card { flex: none; margin: 0; display: flex; flex-direction: column; gap: 14px; cursor: pointer; }
 .frame {
-  position: relative; height: min(39vh,336px); border-radius: 18px; overflow: hidden;
+  position: relative; height: max(300px, min(39vh,336px)); border-radius: 18px; overflow: hidden;
   box-shadow: 0 2px 4px rgba(14,12,11,0), 0 12px 24px -8px rgba(14,12,11,0), 0 40px 72px -28px rgba(14,12,11,0);
   transition: transform var(--hover-t), box-shadow var(--hover-t);
 }
 .zoom { position: absolute; inset: 0; transition: transform var(--hover-t); }
 .img { display: block; will-change: transform; }
 .pill {
-  position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
-  border-radius: 999px; background: rgba(243,238,230,.94); color: var(--ink);
-  box-shadow: 0 8px 20px -6px rgba(14,12,11,.4); font-size: 17px; font-weight: 700;
+  position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 6px 0 18px;
+  border-radius: 999px; background: #FFFFFF; color: var(--ink); box-shadow: 0 8px 20px -6px rgba(14,12,11,.4);
+  font-size: 13px; font-weight: 600; white-space: nowrap;
   transition: background var(--hover-t), color var(--hover-t);
 }
-.pillArrow { display: inline-block; transform: rotate(-45deg); }
+.pillArrow { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; font-size: 17px; font-weight: 700; transition: transform var(--hover-t); }
 .cap { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; font-weight: 500; color: var(--muted); }
 .year { font-variant-numeric: tabular-nums; }
 
 .card:hover .frame, .card:focus-visible .frame { transform: var(--hover-lift); box-shadow: var(--hover-shadow); }
 .card:hover .zoom, .card:focus-visible .zoom { transform: var(--hover-zoom); }
 .card:hover .pill, .card:focus-visible .pill { background: var(--red); color: var(--white); }
+.card:hover .pillArrow, .card:focus-visible .pillArrow { transform: translateX(var(--nudge)); }
+
+.postFig { flex: none; display: flex; flex-direction: column; gap: 14px; }
+.postCap { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; font-weight: 500; color: var(--body); }
 .card:focus-visible { outline: none; }
 .card:focus-visible .frame { outline: 2px solid var(--red); outline-offset: 3px; }
 
 .quoteFig { flex: none; margin: 0; display: flex; flex-direction: column; gap: 14px; }
 .quote {
-  margin: 0; height: min(39vh,336px); width: clamp(210px,21vw,315px); display: flex; flex-direction: column;
+  margin: 0; height: max(300px, min(39vh,336px)); width: clamp(210px,21vw,315px); display: flex; flex-direction: column;
   justify-content: space-between; gap: 24px; padding: clamp(28px,2.6vw,42px); border-radius: 18px;
   background: var(--ink); color: var(--cream);
 }

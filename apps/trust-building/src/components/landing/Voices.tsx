@@ -3,13 +3,11 @@
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import { onFrame, onMeasure, setStyle } from '@/lib/motion';
-import { POST_COUNT_LABEL, VOICES, type Voice } from '@/lib/data/landing';
+import { POST_COUNT_LABEL, VOICE_ROW_A, VOICE_ROW_B, type VoiceCard as VoiceCardData } from '@/lib/data/landing';
 import { LINKS } from '@/lib/links';
 import { Eyebrow, LinkedInBadge, Lines } from '../ui';
 import s from './Voices.module.css';
 
-const ROW_A = VOICES.slice(0, 6);
-const ROW_B = VOICES.slice(6);
 
 /** Two endless marquee rows in opposite directions. They speed up with scroll and ease to a stop on hover. */
 export function Voices() {
@@ -64,7 +62,7 @@ export function Voices() {
         </div>
       </div>
       <div className={s.rows}>
-        {[ROW_A, ROW_B].map((row, r) => (
+        {[VOICE_ROW_A, VOICE_ROW_B].map((row, r) => (
           <div key={r} ref={el => { rowRefs.current[r] = el; }} data-dir={r === 0 ? -1 : 1} className={s.row}>
             {/* Each row renders twice so the loop is seamless; the copy is hidden from assistive tech. */}
             {[...row, ...row].map((w, i) => <VoiceCard key={i} w={w} dup={i >= row.length} />)}
@@ -75,18 +73,31 @@ export function Voices() {
   );
 }
 
-function VoiceCard({ w, dup }: { w: Voice; dup: boolean }) {
+function VoiceCard({ w, dup }: { w: VoiceCardData; dup: boolean }) {
   return (
     <article className={s.card} aria-hidden={dup || undefined}>
-      <p className={s.text}>{w.text}</p>
-      <div className={s.by}>
+      <header className={s.cardHead}>
         <span className={s.av}>
           {w.ini}
-          {w.av && <Image src={w.av} alt={w.name} width={38} height={38} className={s.avImg} />}
+          {w.av && <Image src={w.av} alt={w.name} width={44} height={44} className={s.avImg} />}
         </span>
-        <span className={s.who}><span className={s.name}>{w.name}</span><span className={s.role}>{w.role}</span></span>
+        <span className={s.who}>
+          <span className={s.name}>{w.name}</span>
+          <span className={s.role}>{w.role}</span>
+          <span className={s.date}>{w.date} · Edited</span>
+        </span>
         <span className={s.badge}><LinkedInBadge size={22} /></span>
+      </header>
+      <p className={s.text}>{w.text}</p>
+      <span className={s.more}>…see more</span>
+      <div className={s.stats}>
+        <span className={s.reacts}>
+          <span className={s.dots} aria-hidden="true"><span style={{ background: '#378FE9' }} /><span style={{ background: '#DF704D' }} /><span style={{ background: '#6DAE4F' }} /></span>
+          {w.likes}
+        </span>
+        <span>{w.comments}</span>
       </div>
+      <div className={s.actions} aria-hidden="true"><span>Like</span><span>Comment</span><span>Repost</span><span>Send</span></div>
     </article>
   );
 }

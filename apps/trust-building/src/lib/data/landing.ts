@@ -68,24 +68,31 @@ export const MANIFESTO_WORDS: { w: string; accent: boolean }[] = [
   ...MANIFESTO_PLAIN_2.split(' ').map(w => ({ w, accent: false })),
 ];
 
+/* ---------- LinkedIn-style post cards (convocation and immersion rails) ---------- */
+export type PostCardData = {
+  name: string; role: string; av: StaticImageData | null; date: string; likes: string; comments: string; text: string;
+};
+export const initials = (name: string) => name.split(' ').map(x => x[0]).join('');
+
 /* ---------- Convocation strip ---------- */
 export type ConvStripItem =
   | { kind: 'img'; conv: Convocation; place: string; year: string; ar: string }
+  | { kind: 'post'; conv: Convocation; post: PostCardData }
   | { kind: 'quote' };
 const bySlug = (s: string) => CONVOCATIONS.find(c => c.slug === s)!;
 export const CONV_STRIP: ConvStripItem[] = [
+  { kind: 'post', conv: bySlug('iit-bombay-2026'), post: { name: 'Nisha Nair', role: 'Growth Manager, Zomato', av: a8, date: '15 Mar 2026', likes: '2,603', comments: '171 comments', text: 'My parents flew in for this. They watched me study on a laptop for two years. Today they watched me walk across the stage at IIT Bombay.' } },
   { kind: 'img', conv: bySlug('iit-bombay-stage'), place: 'IIT Bombay', year: '2026', ar: '670/436' },
-  { kind: 'img', conv: bySlug('annual-convocation'), place: 'Annual convocation', year: '2026', ar: '670/436' },
+  { kind: 'post', conv: bySlug('annual-convocation'), post: { name: 'Lakshmi Reddy', role: 'Data Engineer, PhonePe', av: a4, date: '14 Mar 2026', likes: '2,184', comments: '146 comments', text: 'Walked the stage today. Two years of weekend classes, assignments submitted at midnight after putting the kids to bed, and one very patient family.' } },
   { kind: 'quote' },
+  { kind: 'post', conv: bySlug('iiit-bangalore'), post: { name: 'Harish Bhat', role: 'Data Engineer, PhonePe', av: a5, date: '21 Mar 2026', likes: '1,947', comments: '112 comments', text: 'Met my study group in person for the first time at IIIT Bangalore. Eighteen months of late-night calls, and they are exactly who I thought they would be.' } },
   { kind: 'img', conv: bySlug('degree-in-hand'), place: 'Degree in hand', year: '2026', ar: '596/658' },
-  { kind: 'img', conv: bySlug('iiit-bangalore'), place: 'IIIT Bangalore', year: '2026', ar: '670/436' },
-  { kind: 'img', conv: bySlug('gunavardhan-dandi'), place: 'Gunavardhan Dandi, on LinkedIn', year: 'Course Details', ar: '654/410' },
-  { kind: 'img', conv: bySlug('whole-cohort'), place: 'The whole cohort', year: '2026', ar: '670/436' },
-  { kind: 'img', conv: bySlug('iit-bombay-2026'), place: 'IIT Bombay', year: '2026', ar: '670/436' },
+  { kind: 'post', conv: bySlug('whole-cohort'), post: { name: 'Rohan Menon', role: 'Marketing Lead, Nykaa', av: a6, date: '16 Mar 2026', likes: '1,362', comments: '88 comments', text: 'Class of 2026, in one frame. A year of breakout rooms and late-night group calls, and today we finally stood next to each other.' } },
 ];
 
 /* ---------- Voices (testimonials) ---------- */
 export type Voice = { name: string; role: string; ini: string; av: StaticImageData | null; text: string };
+export type VoiceCard = Voice & { date: string; likes: string; comments: string };
 const voice = (name: string, role: string, av: StaticImageData | null, text: string): Voice => ({
   name, role, av, text, ini: name.split(' ').map(s => s[0]).join(''),
 });
@@ -104,14 +111,21 @@ export const VOICES: Voice[] = [
   voice('Aditya Sharma', 'Scrum Master, Tech Mahindra', a2, 'Having someone check in every fortnight, who actually read my submissions, changed everything.'),
 ];
 
+const META_DATES = ['2d', '5d', '1w', '1w', '2w', '3w'];
+const META_LIKES = ['1,284', '962', '2,031', '1,756', '874', '1,412'];
+const META_COMMENTS = ['64 comments', '41 comments', '118 comments', '93 comments', '37 comments', '72 comments'];
+const withMeta = (w: Voice, k: number): VoiceCard => ({ ...w, date: META_DATES[k % 6], likes: META_LIKES[k % 6], comments: META_COMMENTS[k % 6] });
+export const VOICE_ROW_A: VoiceCard[] = VOICES.slice(0, 6).map(withMeta);
+export const VOICE_ROW_B: VoiceCard[] = VOICES.slice(6).map((w, k) => withMeta(w, k + 3));
+
 /* ---------- Study abroad ---------- */
-export type AbroadPost = Voice & { date: string; likes: string; comments: string; body: string };
+export type AbroadPost = Voice & { date: string; likes: string; comments: string; body: string; photo: StaticImageData; photoAlt: string };
 export const ABROAD_POSTS: AbroadPost[] = [
-  { ...VOICES[0], date: '12 Aug 2026', likes: '1,528', comments: '78 comments', body: "A thank-you I've been putting off. When I enrolled I was sceptical. I'd tried online courses before and finished none of them. The difference this time was the mentor calls. Having someone check in every fortnight, who actually read my submissions, changed everything. I finished. First time ever." },
-  { ...VOICES[6], date: '3 Aug 2026', likes: '964', comments: '41 comments', body: VOICES[6].text },
-  { ...VOICES[4], date: '28 Jul 2026', likes: '1,102', comments: '56 comments', body: VOICES[4].text },
-  { ...VOICES[10], date: '19 Jul 2026', likes: '2,310', comments: '134 comments', body: VOICES[10].text },
-  { ...VOICES[7], date: '8 Jul 2026', likes: '1,847', comments: '92 comments', body: VOICES[7].text },
+  { ...VOICES[0], date: '12 Aug 2026', likes: '1,528', comments: '78 comments', photo: saV0, photoAlt: 'Learner speaking by a window', body: "A thank-you I've been putting off. When I enrolled I was sceptical. I'd tried online courses before and finished none of them. The difference this time was the mentor calls. Having someone check in every fortnight, who actually read my submissions, changed everything. I finished. First time ever." },
+  { ...VOICES[6], date: '3 Aug 2026', likes: '964', comments: '41 comments', photo: saV3, photoAlt: 'Learner seated in a studio', body: VOICES[6].text },
+  { ...VOICES[4], date: '28 Jul 2026', likes: '1,102', comments: '56 comments', photo: saV5, photoAlt: 'Learner in a blue blazer', body: VOICES[4].text },
+  { ...VOICES[10], date: '19 Jul 2026', likes: '2,310', comments: '134 comments', photo: saV1, photoAlt: 'Learner sharing their story', body: VOICES[10].text },
+  { ...VOICES[7], date: '8 Jul 2026', likes: '1,847', comments: '92 comments', photo: saV6, photoAlt: 'Learner sharing advice', body: VOICES[7].text },
 ];
 
 export const ABROAD_VIDEOS: { src: StaticImageData; alt: string; desc: string }[] = [
@@ -133,10 +147,10 @@ export const IMMERSION_STEPS: ImmersionStep[] = [
   { label: 'In their words', tag: 'Ankur Nagar, on LinkedIn', line: '“It was a superb event!”', src: im3Voices, alt: "Ankur Nagar's LinkedIn post and WhatsApp messages from attendees of From the Ground Up, Mumbai", city: 'ahmedabad' },
 ];
 
-export const IMMERSION_CARDS: { src: StaticImageData; alt: string; place: string; year: string; desc: string; city: string }[] = [
-  { src: im2, alt: 'Speaker addressing learners at an immersion session', place: 'IIT Bombay', year: '2026', desc: 'Faculty sessions on campus, with the questions you save up all term.', city: 'chennai' },
-  { src: im3, alt: 'Mentor speaking with a microphone', place: 'IIT Bombay', year: '2026', desc: 'Mentors who marked your assignments, now answering you face to face.', city: 'chandigarh' },
-  { src: im4, alt: 'upGrad founders together', place: 'IIT Bombay', year: '2026', desc: 'The founders drop in to hear what the cohort is building.', city: 'ahmedabad' },
-  { src: im5, alt: 'Immersion group photo', place: 'IIIT Bangalore', year: '2026', desc: 'One week, one campus, and a group photo that finally has everyone in it.', city: 'chennai' },
-  { src: im1, alt: 'upGrad team at the office', place: 'IIT Bombay', year: '2026', desc: 'The team behind the programme, meeting the learners it was built for.', city: 'chandigarh' },
+export const IMMERSION_CARDS: { src: StaticImageData; alt: string; place: string; city: string; post: PostCardData }[] = [
+  { src: im2, alt: 'Speaker addressing learners at an immersion session', place: 'IIT Bombay', city: 'chennai', post: { name: 'Priya Raman', role: 'Product Analyst, Freshworks', av: a3, date: '9 Feb 2026', likes: '1,284', comments: '64 comments', text: 'Finally got to ask the questions I had been saving up all term. Two hours with faculty on campus was worth more than a month of forum threads.' } },
+  { src: im3, alt: 'Mentor speaking with a microphone', place: 'IIT Bombay', city: 'chandigarh', post: { name: 'Karan Malhotra', role: 'Consultant, Deloitte', av: a1, date: '11 Feb 2026', likes: '962', comments: '41 comments', text: 'The mentor who marked every one of my assignments, answering my questions face to face. Strange and brilliant in equal measure.' } },
+  { src: im4, alt: 'upGrad founders together', place: 'IIT Bombay', city: 'ahmedabad', post: { name: 'Meera Pillai', role: 'Founder, Studio Kaapi', av: a7, date: '12 Feb 2026', likes: '2,031', comments: '118 comments', text: 'Did not expect the founders to show up and spend an hour listening to what our cohort is building. They took notes.' } },
+  { src: im5, alt: 'Immersion group photo', place: 'IIIT Bangalore', city: 'chennai', post: { name: 'Vikram Desai', role: 'Engineering Manager, Razorpay', av: a2, date: '14 Feb 2026', likes: '1,756', comments: '93 comments', text: 'One week, one campus, and a group photo that finally has everyone in it. See you all at convocation.' } },
+  { src: im1, alt: 'upGrad team at the office', place: 'IIT Bombay', city: 'chandigarh', post: { name: 'Ananya Nair', role: 'HR Business Partner, Wipro', av: null, date: '16 Feb 2026', likes: '874', comments: '37 comments', text: 'Met the team behind the programme today. You can tell they built it for people like us, juggling a job and a family.' } },
 ];

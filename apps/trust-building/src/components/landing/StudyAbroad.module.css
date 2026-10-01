@@ -1,69 +1,68 @@
-.abroad { position: relative; background: var(--cream); color: var(--ink); padding: clamp(40px,6vh,72px) 0 clamp(88px,12vh,140px); }
+.abroad { --panel-m: clamp(10px,1.6vw,24px); position: relative; background: var(--cream); color: var(--ink); padding: clamp(40px,6vh,72px) 0 clamp(88px,12vh,140px); }
 .head { padding-bottom: clamp(32px,3.4vw,52px); }
 
 .panel {
-  position: relative; margin: 0 clamp(10px,1.6vw,24px); border-radius: 32px; overflow: hidden; isolation: isolate;
-  padding: clamp(44px,5vw,76px) 0 clamp(30px,3vw,44px);
+  position: relative; z-index: 1; margin: 0 var(--panel-m); border-radius: 32px 32px 0 0; overflow-x: clip; isolation: isolate;
+  padding: clamp(44px,5vw,76px) 0 clamp(8px,1vw,16px);
 }
+.bgClip { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 32px 32px 0 0; isolation: isolate; }
 .bg { position: absolute; left: 0; right: 0; top: -70px; height: calc(100% + 140px); z-index: -2; will-change: transform; }
 .bgImg { object-fit: cover; object-position: center top; }
-.shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(18,22,38,.42) 0%, rgba(18,22,38,0) 42%, rgba(18,22,38,.24) 100%); }
+/* Fades the photo into the white panel below. */
+.shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(18,22,38,.42) 0%, rgba(18,22,38,0) 42%, rgba(255,255,255,0) 82%, #FFFFFF 100%); }
+.viewAll {
+  position: absolute; z-index: 3; top: clamp(44px,5vw,76px); right: clamp(20px,5vw,76px); display: flex; align-items: center; gap: 8px;
+  padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.55); font-size: 14px; font-weight: 600; color: #FFFFFF;
+  text-shadow: 0 1px 12px rgba(0,0,0,.3); transition: border-color var(--hover-t);
+}
+.viewAll:hover { border-bottom-color: #FFFFFF; }
 .h3 {
-  margin: 0; padding: 0 clamp(20px,5vw,76px); max-width: 920px; font-family: var(--serif); font-weight: 400;
+  margin: 0; padding: 0 calc(clamp(20px,5vw,76px) + 96px) 0 clamp(20px,5vw,76px); max-width: 1016px; font-family: var(--serif); font-weight: 400;
   font-size: clamp(32px,3.4vw,52px); line-height: 1.06; letter-spacing: -.015em; color: #FFFFFF;
   text-shadow: 0 2px 24px rgba(0,0,0,.3); text-wrap: balance;
 }
 
-.stage { position: relative; height: clamp(430px,34vw,480px); margin-top: clamp(24px,3vw,40px); perspective: 1600px; touch-action: pan-y; outline: none; }
+.stage { position: relative; height: clamp(520px,40vw,560px); margin-top: clamp(24px,3vw,40px); perspective: 1600px; touch-action: pan-y; outline: none; }
 .stage:focus-visible { outline: 2px solid #FFFFFF; outline-offset: -4px; border-radius: 12px; }
 .post {
-  position: absolute; left: 50%; top: 50%; width: min(440px,80vw); display: flex; flex-direction: column;
-  padding: 28px 28px 0; background: #FFFFFF; border-radius: 20px; font-family: var(--li); color: #1F1F1F;
-  text-align: left; user-select: none;
+  position: absolute; left: 50%; top: 50%; width: min(400px,80vw); height: clamp(460px,36vw,500px);
+  display: flex; flex-direction: column; gap: 12px; padding: 20px 20px 14px; background: #FFFFFF; border-radius: 20px;
+  font-family: var(--li); color: #1F1F1F; text-align: left; user-select: none;
   transition: transform 1.1s var(--ease), opacity 1.1s var(--ease), filter 1.1s var(--ease), box-shadow .6s;
 }
-.postHead { display: flex; align-items: flex-start; gap: 14px; }
+.postHead { flex: none; display: flex; align-items: center; gap: 12px; }
 .av {
-  position: relative; flex: none; width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background: #EFE9E1;
-  display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; color: #46403A;
+  position: relative; flex: none; width: 44px; height: 44px; border-radius: 50%; overflow: hidden; background: #EFE9E1;
+  display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: #46403A;
 }
 .avImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.name { font-size: 17px; font-weight: 600; }
-.role { font-size: 14px; color: #666666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.date { font-size: 13px; color: #666666; }
-.text { margin: 18px 0 0; font-size: 16px; line-height: 1.55; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; line-clamp: 6; overflow: hidden; }
-.stats { display: flex; align-items: center; justify-content: space-between; padding: 18px 0 14px; font-size: 13px; color: #666666; }
-.reacts { display: flex; align-items: center; gap: 10px; }
+.who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.name { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.role { font-size: 12px; color: #666666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.text { margin: 0; flex: none; font-size: 14px; line-height: 1.5; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.photo { position: relative; flex: 1 1 0; min-height: 52%; border-radius: 12px; overflow: hidden; background: var(--warm-grey); }
+.photoImg { object-fit: cover; object-position: center 30%; }
+.story {
+  position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 4px 0 16px;
+  border-radius: 999px; background: #FFFFFF; color: var(--ink); box-shadow: 0 8px 20px -6px rgba(14,12,11,.4);
+  font-family: var(--sans); font-size: 13px; font-weight: 600; white-space: nowrap; transition: background var(--hover-t), color var(--hover-t);
+}
+.storyArrow { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; font-size: 16px; font-weight: 700; transition: transform var(--hover-t); }
+.story:hover { background: var(--red); color: #FFFFFF; }
+.story:hover .storyArrow { transform: translateX(var(--nudge)); }
+.stats { flex: none; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: #666666; }
+.reacts { display: flex; align-items: center; gap: 8px; }
 .dots3 { display: flex; }
-.dots3 span { width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 0 1.5px #fff; }
+.dots3 span { width: 15px; height: 15px; border-radius: 50%; box-shadow: 0 0 0 1.5px #fff; }
 .dots3 span + span { margin-left: -4px; }
-.course {
-  margin: 0 -28px; padding: 15px 28px; border-top: 1px solid #E6E0D8; display: flex; align-items: center;
-  justify-content: space-between; font-size: 14px; font-weight: 600; color: #1F1F1F;
-}
-.courseArrow { display: inline-block; transition: transform var(--hover-t); }
-.course:hover .courseArrow { transform: translate(calc(var(--nudge) / 2), calc(var(--nudge) / -2)); }
 
-.controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: clamp(20px,2vw,28px); }
-.arrowBtn {
-  width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.45); background: rgba(255,255,255,.14);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #FFFFFF; font-size: 16px; cursor: pointer;
-  transition: background var(--hover-t), border-color var(--hover-t);
-}
-.arrowBtn:hover { background: var(--red); border-color: var(--red); }
-.dots { display: flex; align-items: center; gap: 8px; }
-/* The bar is 6px tall; the button around it keeps a 44px hit target. */
-.dot { width: 8px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; transition: width .7s var(--ease); }
-.dot.on { width: 44px; }
-.dotBar { position: relative; width: 100%; height: 6px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,.45); }
-.fill { position: absolute; inset: 0; background: #FFFFFF; transform: scaleX(0); transform-origin: left; }
-
-.rowHead { padding: clamp(80px,11vh,120px) var(--pad-x) 30px; }
+/* White-to-cream panel below the photo holds the video rail. */
+.lower { margin: 0 var(--panel-m); border-radius: 0 0 32px 32px; background: linear-gradient(180deg, #FFFFFF 0%, #F8F5F0 55%, var(--cream) 100%); }
+.rowHead { padding: 8px calc(var(--pad-x) - var(--panel-m)) 24px; }
 .accent { color: var(--red-deep); }
 .rail {
   display: flex; gap: clamp(14px,1.4vw,22px); overflow-x: auto; overflow-y: visible; cursor: grab;
-  padding: 14px var(--pad-x) 30px;
+  padding: 14px calc(var(--pad-x) - var(--panel-m)) 30px;
 }
 .video {
   position: relative; flex: none; width: clamp(230px,19vw,284px); aspect-ratio: 265/472; border-radius: 22px;

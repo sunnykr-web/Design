@@ -7,7 +7,7 @@ import { useDragRail } from '@/lib/useDragRail';
 import { ABROAD_POSTS, ABROAD_VIDEOS } from '@/lib/data/landing';
 import { LINKS } from '@/lib/links';
 import planeImg from '@/assets/sa-plane.png';
-import { LinkedInBadge, cx } from '../ui';
+import { LinkedInBadge } from '../ui';
 import { Lines, RowHead, SectionHead } from './Section';
 import s from './StudyAbroad.module.css';
 
@@ -17,12 +17,9 @@ const wrap = (i: number) => ((i % N) + N) % N;
 
 export function StudyAbroad() {
   const [idx, setIdx] = useState(0);
-  const idxRef = useRef(0);
-  idxRef.current = idx;
   const panelRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
-  const fillRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const railRef = useRef<HTMLDivElement>(null);
   const timer = useRef({ t: 0, paused: false, visible: false });
   useDragRail(railRef);
@@ -48,7 +45,6 @@ export function StudyAbroad() {
     window.addEventListener('pointerup', up);
 
     let m = { top: 0, h: 0 };
-    let lastFill: HTMLElement | null = null;
     const offMeasure = onMeasure(() => { m = pageRect(panel); });
     const offFrame = onFrame(({ sy, vh, dt }) => {
       if (sy + vh > m.top && sy < m.top + m.h) {
@@ -58,10 +54,6 @@ export function StudyAbroad() {
       // Auto-advance while on screen, not hovered and the tab is visible.
       if (!reduced && tm.visible && !tm.paused && !document.hidden) tm.t += dt;
       if (tm.t >= AUTO_MS) { tm.t = 0; setIdx(i => wrap(i + 1)); }
-      const f = fillRefs.current[idxRef.current];
-      if (lastFill && lastFill !== f) lastFill.style.transform = 'scaleX(0)';
-      if (f) f.style.transform = `scaleX(${(tm.t / AUTO_MS).toFixed(4)})`;
-      lastFill = f ?? null;
     });
     return () => {
       io.disconnect();
@@ -79,10 +71,13 @@ export function StudyAbroad() {
       />
 
       <div ref={panelRef} data-rv="" className={s.panel}>
-        <div ref={bgRef} className={s.bg}>
-          <Image src={planeImg} alt="" fill sizes="100vw" className={s.bgImg} />
+        <div className={s.bgClip} aria-hidden="true">
+          <div ref={bgRef} className={s.bg}>
+            <Image src={planeImg} alt="" fill sizes="100vw" className={s.bgImg} />
+          </div>
+          <div className={s.shade} />
         </div>
-        <div className={s.shade} />
+        <a href={LINKS.studyAbroadStories} className={s.viewAll}>View all →</a>
         <h3 className={s.h3}>They left for a degree. <em>They wrote home on LinkedIn.</em></h3>
 
         <div
@@ -91,7 +86,7 @@ export function StudyAbroad() {
           tabIndex={0}
           role="region"
           aria-roledescription="carousel"
-          aria-label="LinkedIn posts from learners who studied abroad"
+          aria-label="LinkedIn posts from learners who studied abroad. Use the left and right arrow keys to browse."
           onKeyDown={e => {
             if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
             if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
@@ -121,16 +116,21 @@ export function StudyAbroad() {
                 <header className={s.postHead}>
                   <span className={s.av}>
                     {p.ini}
-                    {p.av && <Image src={p.av} alt="" width={56} height={56} className={s.avImg} draggable={false} />}
+                    {p.av && <Image src={p.av} alt="" width={44} height={44} className={s.avImg} draggable={false} />}
                   </span>
                   <span className={s.who}>
                     <span className={s.name}>{p.name}</span>
-                    <span className={s.role}>{p.role}</span>
-                    <span className={s.date}>{p.date}</span>
+                    <span className={s.role}>{p.role} · {p.date}</span>
                   </span>
-                  <LinkedInBadge size={26} />
+                  <LinkedInBadge size={24} />
                 </header>
                 <p className={s.text}>{p.body}</p>
+                <div className={s.photo}>
+                  <Image src={p.photo} alt={p.photoAlt} fill sizes="400px" className={s.photoImg} draggable={false} />
+                  <a href={LINKS.studyAbroadStories} className={s.story} tabIndex={a === 0 ? undefined : -1}>
+                    View story<span className={s.storyArrow} aria-hidden="true">→</span>
+                  </a>
+                </div>
                 <div className={s.stats}>
                   <span className={s.reacts}>
                     <span className={s.dots3} aria-hidden="true">
@@ -140,43 +140,30 @@ export function StudyAbroad() {
                   </span>
                   <span>{p.comments}</span>
                 </div>
-                <a href={LINKS.courseDetails} className={s.course} tabIndex={a === 0 ? undefined : -1}>
-                  View Course Details<span className={s.courseArrow} aria-hidden="true">↗</span>
-                </a>
               </article>
             );
           })}
         </div>
-
-        <div className={s.controls}>
-          <button type="button" aria-label="Previous post" className={s.arrowBtn} onClick={() => go(idx - 1)}>←</button>
-          <div className={s.dots}>
-            {ABROAD_POSTS.map((_, i) => (
-              <button key={i} type="button" aria-label={`Show post ${i + 1}`} aria-current={i === idx ? 'true' : undefined} className={cx(s.dot, i === idx && s.on)} onClick={() => go(i)}>
-                <span className={s.dotBar}><span ref={el => { fillRefs.current[i] = el; }} className={s.fill} /></span>
-              </button>
-            ))}
-          </div>
-          <button type="button" aria-label="Next post" className={s.arrowBtn} onClick={() => go(idx + 1)}>→</button>
-        </div>
       </div>
 
-      <RowHead
-        className={s.rowHead}
-        title={<Lines lines={[{ text: <>Hear from the <span className={s.accent}>upGrad</span> learner</> }]} />}
-        side="Real voices, real struggles, and triumphs. Hear the unscripted stories of learners who forged lifelong friendships through late-night study sessions."
-      />
-      <div ref={railRef} data-drag="" className={s.rail}>
-        {ABROAD_VIDEOS.map(v => (
-          <div key={v.alt} data-ir="" className={s.video}>
-            <Image src={v.src} alt={v.alt} fill sizes="290px" className={s.videoImg} draggable={false} />
-            <div className={s.videoShade} />
-            <span className={s.play} aria-hidden="true">
-              <svg viewBox="0 0 12 12" width="14" height="14" fill="#FFFFFF" style={{ marginLeft: 2 }}><path d="M3 1.6v8.8a.6.6 0 0 0 .9.5l7-4.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5Z" /></svg>
-            </span>
-            <p className={s.videoCap}>{v.desc}</p>
-          </div>
-        ))}
+      <div className={s.lower}>
+        <RowHead
+          className={s.rowHead}
+          title={<Lines lines={[{ text: <>Hear from the <span className={s.accent}>upGrad</span> learner</>, style: { fontSize: 38.91 } }]} />}
+          side="Real voices, real struggles, and triumphs. Hear the unscripted stories of learners who forged lifelong friendships through late-night study sessions."
+        />
+        <div ref={railRef} data-drag="" className={s.rail}>
+          {ABROAD_VIDEOS.map(v => (
+            <div key={v.alt} data-ir="" className={s.video}>
+              <Image src={v.src} alt={v.alt} fill sizes="290px" className={s.videoImg} draggable={false} />
+              <div className={s.videoShade} />
+              <span className={s.play} aria-hidden="true">
+                <svg viewBox="0 0 12 12" width="14" height="14" fill="#FFFFFF" style={{ marginLeft: 2 }}><path d="M3 1.6v8.8a.6.6 0 0 0 .9.5l7-4.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5Z" /></svg>
+              </span>
+              <p className={s.videoCap}>{v.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
