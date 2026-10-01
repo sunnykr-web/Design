@@ -6,7 +6,10 @@ import s from '@/components/detail/Detail.module.css';
 import { CoverImage } from '@/components/detail/CoverImage';
 import { Grain } from '@/components/Grain';
 import { RevealObserver } from '@/components/RevealObserver';
+import { LiPostCard } from '@/components/pages/LiPostCard';
 import { Eyebrow, Lines, cx } from '@/components/ui';
+import { immersionPosts } from '@/lib/data/posts';
+import { LINKS } from '@/lib/links';
 import { IMMERSIONS, immersionHref } from '@/lib/data/immersions';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -97,7 +100,22 @@ export default async function ImmersionDetail({ params }: Props) {
           </div>
         </section>
 
-        <section className={s.more} aria-labelledby="more-title">
+        <section className={cx(s.stacked, s.stackWhite)} style={{ zIndex: 3 }} aria-labelledby="li-title">
+          <div className={s.liHead}>
+            <div className={s.moreHead} style={{ marginBottom: 0 }}>
+              <Eyebrow reveal color="var(--red-deep)">From LinkedIn</Eyebrow>
+              <h2 id="li-title" data-lines="" className={s.h2}>
+                <Lines lines={[{ text: 'What people said' }, { text: 'after the last one.', style: { fontStyle: 'italic', color: 'var(--muted)' } }]} />
+              </h2>
+            </div>
+            <Link data-rv="" href={LINKS.allPosts} className={s.viewAll}>View all →</Link>
+          </div>
+          <div className={s.postGrid}>
+            {immersionPosts(u.city).map(p => <LiPostCard key={p.name} post={p} bordered inGrid />)}
+          </div>
+        </section>
+
+        <section className={s.more} style={{ zIndex: 4 }} aria-labelledby="more-title">
           <div className={s.moreHead}>
             <Eyebrow reveal color="rgba(243,238,230,.72)">Other cities</Eyebrow>
             <h2 id="more-title" data-lines="" className={s.h2}>

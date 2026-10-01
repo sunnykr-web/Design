@@ -46,7 +46,7 @@ export function Convocation() {
           id="conv-title" num="01" title="Convocation" sub="Months on screen." accent="One day on stage."
           side="Trade your virtual classroom for the campus grounds as you finally meet the peers you’ve studied alongside for months."
         />
-        <a data-rv="" href={LINKS.convocationStories} className={s.viewAll}>View all →</a>
+        <Link data-rv="" href={LINKS.convocationStories} className={s.viewAll}>View all →</Link>
         <div ref={scrollRef} data-drag="" className={s.scroll}>
           <div className={s.track}>
             {CONV_STRIP.map((item, i) => {

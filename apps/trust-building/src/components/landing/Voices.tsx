@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { onFrame, onMeasure, setStyle } from '@/lib/motion';
 import { POST_COUNT_LABEL, VOICE_ROW_A, VOICE_ROW_B, type VoiceCard as VoiceCardData } from '@/lib/data/landing';
@@ -58,7 +59,7 @@ export function Voices() {
           </h2>
         </div>
         <div data-rv="">
-          <a href={LINKS.allPosts} className={s.all}>Read all {POST_COUNT_LABEL} posts →</a>
+          <Link href={LINKS.allPosts} className={s.all}>Read all {POST_COUNT_LABEL} posts →</Link>
         </div>
       </div>
       <div className={s.rows}>

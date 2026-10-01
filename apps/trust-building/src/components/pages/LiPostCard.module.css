@@ -1,0 +1,36 @@
+/* Full LinkedIn post: detail pages ("compact") and the all-posts feed ("feed"). */
+.card {
+  break-inside: avoid; margin: 0 0 20px; display: flex; flex-direction: column; background: #FFFFFF; border-radius: 18px; overflow: hidden;
+  font-family: var(--li); color: #1F1F1F;
+  box-shadow: 0 1px 2px rgba(14,12,11,.06), 0 10px 24px -12px rgba(14,12,11,.18);
+  transition: transform var(--hover-t), box-shadow var(--hover-t);
+}
+.card:hover { transform: var(--hover-lift); box-shadow: var(--hover-shadow); }
+.bordered { border: 1px solid #ECE6DC; }
+.inGrid { margin: 0; }
+.head { display: flex; align-items: center; gap: 12px; padding: 16px 16px 0; }
+.feed .head { padding: 18px 18px 0; }
+.av {
+  position: relative; flex: none; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: #EFE9E1;
+  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #46403A;
+}
+.feed .av { width: 44px; height: 44px; font-size: 13px; }
+.avImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.role { font-size: 12px; color: #666666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.date { font-size: 11.5px; color: #888888; }
+.badge { flex: none; align-self: flex-start; }
+.text { margin: 0; padding: 12px 16px 0; font-size: 14px; line-height: 1.55; text-wrap: pretty; }
+.feed .text { padding: 14px 18px 0; font-size: 14.5px; line-height: 1.6; }
+.photo { position: relative; margin: 12px 0 0; aspect-ratio: 4/3; overflow: hidden; background: var(--warm-grey); }
+.feed .photo { margin-top: 14px; }
+.photoImg { object-fit: cover; }
+.stats { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px 14px; font-size: 12px; color: #666666; }
+.feed .stats { margin: 0 18px; padding: 16px 0 10px; border-bottom: 1px solid #EBEBEB; }
+.reacts { display: flex; align-items: center; gap: 8px; }
+.dots { display: flex; }
+.dots span { width: 15px; height: 15px; border-radius: 50%; box-shadow: 0 0 0 1.5px #fff; }
+.dots span + span { margin-left: -4px; }
+.actions { display: grid; grid-template-columns: repeat(4,1fr); padding: 4px 8px 8px; font-size: 12.5px; font-weight: 600; color: #666666; }
+.actions span { display: flex; align-items: center; justify-content: center; height: 36px; }

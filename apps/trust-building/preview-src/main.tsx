@@ -4,11 +4,22 @@ import { createRoot } from 'react-dom/client';
 import Home from '../src/app/page';
 import ConvocationDetail from '../src/app/convocation/[slug]/page';
 import ImmersionDetail from '../src/app/immersion/[slug]/page';
-import { parse, type Route } from './router';
+import ConvocationStories from '../src/app/convocation/page';
+import ImmersionEvents from '../src/app/immersion/page';
+import LinkedInPosts from '../src/app/posts/page';
+import StudyAbroadStories from '../src/app/study-abroad/page';
+import { parse, type Listing, type Route } from './router';
+
+const LIST_PAGES: Record<Listing, () => ReactNode> = {
+  convocation: ConvocationStories,
+  immersion: ImmersionEvents,
+  posts: LinkedInPosts,
+  'study-abroad': StudyAbroadStories,
+};
 
 document.documentElement.classList.add('js');
 
-function Detail({ route }: { route: Exclude<Route, { page: 'home' }> }) {
+function Detail({ route }: { route: Extract<Route, { page: 'convocation' | 'immersion' }> }) {
   const [el, setEl] = useState<ReactNode>(null);
   useEffect(() => {
     const Page = route.page === 'convocation' ? ConvocationDetail : ImmersionDetail;
@@ -43,8 +54,9 @@ function App() {
     window.addEventListener('popstate', onPop);
     return () => { window.removeEventListener('preview:navigate', onNav); window.removeEventListener('popstate', onPop); };
   }, []);
-  const key = route.page === 'home' ? 'home' : `${route.page}-${route.slug}`;
-  return route.page === 'home' ? <Home key={key} /> : <Detail key={key} route={route} />;
+  if (route.page === 'home') return <Home key="home" />;
+  if (route.page === 'list') { const Page = LIST_PAGES[route.list]; return <Page key={route.list} />; }
+  return <Detail key={`${route.page}-${route.slug}`} route={route} />;
 }
 
 createRoot(document.getElementById('app')!).render(<App />);

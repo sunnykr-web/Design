@@ -18,6 +18,10 @@ npm run preview    # single self-contained page in preview/ (hash routes), for s
 | `/` | Landing page. Section ids: `p5-hero`, `p5-man`, `p5-conv`, `p5-abroad`, `p5-imm`, `p5-words`, `p5-close` |
 | `/convocation/[slug]` | Convocation Detail, one per moment (7, prerendered) |
 | `/immersion/[slug]` | Immersion Detail for `chennai`, `chandigarh`, `ahmedabad` (prerendered) |
+| `/convocation` | Convocation Stories: every moment |
+| `/immersion` | Immersion Events: every city |
+| `/study-abroad` | Study Abroad Stories: videos and posts, filterable |
+| `/posts` | LinkedIn Posts: every post, filterable by topic |
 
 These replace the prototype's `?c=` and `?u=` query strings. An unknown slug redirects to the first item, as the spec asks.
 
@@ -47,7 +51,7 @@ The prototype (`Trust Building V6.dc.html`) and its README disagree in a few pla
 - **Custom cursor follower** (`#p5-cur`). It is `display:none` in V6, so it isn't built.
 - **V1–V6 version switcher.** Prototype-only, dropped.
 - **Immersion step arrows.** Built per the updated V6 file: an outline arrow that becomes a white "View event" pill on the active step.
-- **"View all" pages.** The updated V6 links to Convocation Stories, Study Abroad Stories, Immersion Events and LinkedIn Posts pages that aren't in the handoff yet. Those links point at `#` placeholders in `src/lib/links.ts`.
+- **LinkedIn Posts data.** The design reads its posts from `linkedin-posts.js`, which wasn't in the handoff. `/posts` shows the posts already used elsewhere in the design (`ALL_POSTS` in `src/lib/data/posts.ts`) until that file arrives.
 - **Hover.** One rule everywhere (tokens in `globals.css`): cards lift 6px with a soft shadow and their image zooms 4%; filled buttons turn red (white on the red section); outline buttons and links change colour; arrows nudge 4px. The prototype's magnetic buttons, 3D card tilts, expanding "View story" pill and hover-only video captions were dropped.
 - **"All cities" back link.** Goes to `/#p5-imm`. In the prototype it went to `#im-<city>`, which the landing page immediately redirected back to the detail page.
 - **Mobile (< 900px).** The prototype wrapped the Immersion images below the pinned viewport, where they could never be seen. They now stack between the steps and the caption. The hero's "Read their posts" button no longer wraps on phones.

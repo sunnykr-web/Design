@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { clamp01, onFrame, onMeasure, pageRect, prefersReducedMotion, setStyle } from '@/lib/motion';
 import { useDragRail } from '@/lib/useDragRail';
@@ -77,7 +78,7 @@ export function StudyAbroad() {
           </div>
           <div className={s.shade} />
         </div>
-        <a href={LINKS.studyAbroadStories} className={s.viewAll}>View all →</a>
+        <Link href={LINKS.studyAbroadStories} className={s.viewAll}>View all →</Link>
         <h3 className={s.h3}>They left for a degree. <em>They wrote home on LinkedIn.</em></h3>
 
         <div
@@ -127,9 +128,9 @@ export function StudyAbroad() {
                 <p className={s.text}>{p.body}</p>
                 <div className={s.photo}>
                   <Image src={p.photo} alt={p.photoAlt} fill sizes="400px" className={s.photoImg} draggable={false} />
-                  <a href={LINKS.studyAbroadStories} className={s.story} tabIndex={a === 0 ? undefined : -1}>
+                  <Link href={LINKS.studyAbroadStories} className={s.story} tabIndex={a === 0 ? undefined : -1}>
                     View story<span className={s.storyArrow} aria-hidden="true">→</span>
-                  </a>
+                  </Link>
                 </div>
                 <div className={s.stats}>
                   <span className={s.reacts}>

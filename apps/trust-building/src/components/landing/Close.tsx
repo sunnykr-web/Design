@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { clamp01, onFrame, onMeasure, pageRect, setStyle } from '@/lib/motion';
 import { POST_COUNT_LABEL } from '@/lib/data/landing';
@@ -32,7 +33,7 @@ export function Close() {
         <p data-rv="" className={s.p}>Tell us where you’re starting from and we’ll show you the programmes the people in these posts took.</p>
         <div data-rv="" className={s.ctas}>
           <a href={LINKS.programmes} className={s.primary}>Explore programmes<span className={s.arrow} aria-hidden="true">→</span></a>
-          <a href={LINKS.allPosts} className={s.secondary}>Read all {POST_COUNT_LABEL} posts</a>
+          <Link href={LINKS.allPosts} className={s.secondary}>Read all {POST_COUNT_LABEL} posts</Link>
         </div>
       </div>
     </section>

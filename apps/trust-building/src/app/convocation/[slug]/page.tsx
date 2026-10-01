@@ -5,7 +5,10 @@ import { redirect } from 'next/navigation';
 import { DetailHeader } from '@/components/detail/DetailHeader';
 import s from '@/components/detail/Detail.module.css';
 import { RevealObserver } from '@/components/RevealObserver';
+import { LiPostCard } from '@/components/pages/LiPostCard';
 import { Eyebrow, Lines, cx } from '@/components/ui';
+import { CONV_PHOTOS, CONV_POSTS } from '@/lib/data/posts';
+import { LINKS } from '@/lib/links';
 import { CONVOCATIONS, convLook, convocationHref } from '@/lib/data/convocations';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -32,7 +35,7 @@ export default async function ConvocationDetail({ params }: Props) {
 
   return (
     <div className={cx(s.page, s.light, 'detail')}>
-      <DetailHeader backHref={BACK} backLabel="All moments" />
+      <DetailHeader backHref={LINKS.convocationStories} backLabel="All stories" />
       <main>
         <section className={s.hero}>
           <div className={s.heroGrid}>
@@ -76,9 +79,40 @@ export default async function ConvocationDetail({ params }: Props) {
           </div>
         </section>
 
-        <section className={s.more} aria-labelledby="more-title">
+        <section className={cx(s.stacked, s.stackCream)} style={{ zIndex: 3 }} aria-labelledby="photos-title">
           <div className={s.moreHead}>
-            <Eyebrow reveal color="rgba(243,238,230,.72)">02 · More from convocation</Eyebrow>
+            <Eyebrow reveal color="var(--red-deep)">02 · The day in photos</Eyebrow>
+            <h2 id="photos-title" data-lines="" className={s.h2}>
+              <Lines lines={[{ text: 'Caps, gowns,' }, { text: 'and proud families.', style: { fontStyle: 'italic', color: 'var(--muted)' } }]} />
+            </h2>
+          </div>
+          <div className={s.bento}>
+            {CONV_PHOTOS.map(p => (
+              <figure key={p.alt + p.rows} data-rv="" className={s.bentoItem} style={{ gridRow: `span ${p.rows}`, gridColumn: `span ${p.cols}` }}>
+                <Image src={p.src} alt={p.alt} fill sizes="(max-width: 700px) 100vw, 50vw" className={s.cardPic} style={{ objectFit: 'cover', objectPosition: p.pos }} />
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section className={cx(s.stacked, s.stackWhite)} style={{ zIndex: 4 }} aria-labelledby="li-title">
+          <div className={s.liHead}>
+            <div className={s.moreHead} style={{ marginBottom: 0 }}>
+              <Eyebrow reveal color="var(--red-deep)">03 · From LinkedIn</Eyebrow>
+              <h2 id="li-title" data-lines="" className={s.h2}>
+                <Lines lines={[{ text: 'Graduates,' }, { text: 'in their own words.', style: { fontStyle: 'italic', color: 'var(--muted)' } }]} />
+              </h2>
+            </div>
+            <Link data-rv="" href={LINKS.allPosts} className={s.viewAll}>View all →</Link>
+          </div>
+          <div className={s.masonry}>
+            {CONV_POSTS.map(p => <LiPostCard key={p.name} post={p} bordered photoPos="center 30%" />)}
+          </div>
+        </section>
+
+        <section className={s.more} style={{ zIndex: 5 }} aria-labelledby="more-title">
+          <div className={s.moreHead}>
+            <Eyebrow reveal color="rgba(243,238,230,.72)">04 · More from convocation</Eyebrow>
             <h2 id="more-title" data-lines="" className={s.h2}>
               <Lines lines={[{ text: 'Every graduate,' }, { text: 'on stage.', style: { fontStyle: 'italic', color: 'var(--red-bright)' } }]} />
             </h2>

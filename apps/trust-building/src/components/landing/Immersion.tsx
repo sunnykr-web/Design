@@ -95,7 +95,7 @@ export function Immersion() {
             <Image src={cafeImg} alt="" fill sizes="100vw" className={s.bgImg} />
           </div>
           <div className={s.shade} />
-          <a href={LINKS.immersionEvents} className={s.viewAll}>View all →</a>
+          <Link href={LINKS.immersionEvents} className={s.viewAll}>View all →</Link>
           <div className={s.inner}>
             <div className={s.left}>
               <div className={s.top}>

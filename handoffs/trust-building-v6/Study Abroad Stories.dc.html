@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #F3EEE6; color: #0E0C0B; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: inherit; }
+  ::selection { background: #E4041C; color: #FFFFFF; }
+</style>
+</helmet>
+<div style="width:100%;overflow-x:clip;background:#F3EEE6;min-height:100vh">
+  <header style="position:fixed;top:0;left:0;right:0;z-index:60;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 clamp(18px,4vw,56px);background:rgba(243,238,230,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(14,12,11,.08)">
+    <a href="Trust%20Building%20V6.dc.html" style="font-size:23px;font-weight:700;letter-spacing:-.04em;color:#E4041C">upGrad</a>
+    <a href="Trust%20Building%20V6.dc.html#p5-abroad" style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#4A453F;transition:color .3s" style-hover="color:#0E0C0B">← Back</a>
+  </header>
+
+  <section data-screen-label="01 Study Abroad Stories" style="padding:clamp(120px,16vh,160px) clamp(18px,6vw,96px) clamp(80px,11vh,120px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px 48px;margin-bottom:clamp(40px,6vh,64px)">
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <span data-rv="1" style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#B80317"><span style="width:6px;height:6px;border-radius:50%;background:#E4041C"></span>Study abroad · All stories</span>
+        <h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(48px,6vw,100px);line-height:.92;letter-spacing:-.035em">
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block">Study abroad</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.07em"><span data-ln="1" style="display:block;font-style:italic;color:#6A645C">When the classroom got a passport.</span></span>
+        </h1>
+      </div>
+      <p data-rv="1" style="margin:0;max-width:400px;font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:#4A453F;text-wrap:pretty">Some learners took their programme further than their desk. These are the videos they recorded and the posts they wrote from the other side.</p>
+    </div>
+
+    <div role="tablist" aria-label="Filter stories" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(28px,4vh,44px)">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+        <button type="button" role="tab" aria-selected="{{ f.sel }}" onClick="{{ f.pick }}" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 20px;border-radius:999px;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }};font-family:'DM Sans',system-ui,sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:background .3s,color .3s,border-color .3s">{{ f.label }}<span style="font-size:12px;font-weight:500;opacity:.6;font-variant-numeric:tabular-nums">{{ f.count }}</span></button>
+      </sc-for>
+    </div>
+
+    <div style="columns:4 260px;column-gap:20px">
+      <sc-for list="{{ items }}" as="it" hint-placeholder-count="12">
+        <sc-if value="{{ it.isVideo }}" hint-placeholder-val="{{ true }}">
+          <div data-rv="1" onMouseEnter="{{ it.enter }}" onMouseLeave="{{ it.leave }}" style="break-inside:avoid;margin:0 0 20px;display:flex;flex-direction:column;gap:12px;cursor:pointer">
+            <div style="position:relative;aspect-ratio:265/420;border-radius:18px;overflow:hidden;background:#2A2723;transform:{{ it.lift }};box-shadow:{{ it.shadow }};transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1)">
+              <img src="{{ it.src }}" alt="{{ it.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:{{ it.zoom }};transition:transform 1.4s cubic-bezier(.16,1,.3,1)">
+              <span style="position:absolute;left:12px;top:12px;display:flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;background:rgba(14,12,11,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#FFFFFF;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Video</span>
+              <span aria-hidden="true" style="position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:{{ it.btnBg }};color:{{ it.btnFg }};font-size:16px;padding-left:3px;box-shadow:0 8px 20px -6px rgba(0,0,0,.4);transition:background .4s,color .4s">▶</span>
+            </div>
+            <span style="font-size:15px;line-height:1.5;color:#2C2824;text-wrap:pretty">{{ it.desc }}</span>
+          </div>
+        </sc-if>
+        <sc-if value="{{ it.isPost }}" hint-placeholder-val="{{ false }}">
+          <article data-rv="1" style="break-inside:avoid;margin:0 0 20px;display:flex;flex-direction:column;background:#FFFFFF;border-radius:18px;font-family:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;color:#1F1F1F;box-shadow:0 1px 2px rgba(14,12,11,.06),0 10px 24px -12px rgba(14,12,11,.18);transition:transform .7s cubic-bezier(.16,1,.3,1),box-shadow .7s cubic-bezier(.16,1,.3,1)" style-hover="transform:translateY(-4px);box-shadow:0 1px 3px rgba(14,12,11,.05),0 12px 24px -12px rgba(14,12,11,.16),0 28px 48px -28px rgba(14,12,11,.18)">
+            <header style="display:flex;align-items:center;gap:12px;padding:16px 16px 0">
+              <span style="position:relative;flex:none;width:40px;height:40px;border-radius:50%;overflow:hidden;background:#EFE9E1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#46403A">{{ it.ini }}<sc-if value="{{ it.hasAv }}" hint-placeholder-val="{{ false }}"><img src="{{ it.av }}" alt="{{ it.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ it.name }}</span>
+                <span style="font-size:12px;color:#666666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ it.role }}</span>
+                <span style="font-size:11.5px;color:#888888">{{ it.date }}</span>
+              </span>
+              <span style="flex:none;align-self:flex-start;width:22px;height:22px;border-radius:4px;background:#0A66C2;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:Arial,sans-serif">in</span>
+            </header>
+            <p style="margin:0;padding:12px 16px 0;font-size:14px;line-height:1.55;color:#1F1F1F;text-wrap:pretty">{{ it.text }}</p>
+            <sc-if value="{{ it.hasPhoto }}" hint-placeholder-val="{{ false }}">
+              <div style="margin:12px 0 0;aspect-ratio:4/3;overflow:hidden;background:#2A2723">
+                <img src="{{ it.photo }}" alt="Photo shared by {{ it.name }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block">
+              </div>
+            </sc-if>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 14px;font-size:12px;color:#666666">
+              <span style="display:flex;align-items:center;gap:8px"><span style="display:flex"><span style="width:15px;height:15px;border-radius:50%;background:#378FE9;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:15px;height:15px;border-radius:50%;background:#DF704D;box-shadow:0 0 0 1.5px #fff"></span><span style="margin-left:-4px;width:15px;height:15px;border-radius:50%;background:#6DAE4F;box-shadow:0 0 0 1.5px #fff"></span></span>{{ it.likes }}</span>
+              <span>{{ it.comments }}</span>
+            </div>
+          </article>
+        </sc-if>
+      </sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { hov: -1, f: 'All' };
+  componentDidMount() {
+    this.reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { this.reveal(e.target); this.io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    this.scan = () => document.querySelectorAll('[data-ln]:not([data-seen]),[data-rv]:not([data-seen])').forEach(el => { el.setAttribute('data-seen', ''); if (this.reduced) return; el.style.opacity = '0'; this.io.observe(el); });
+    this.scan(); setTimeout(this.scan, 400);
+  }
+  componentDidUpdate() { this.scan && this.scan(); }
+  componentWillUnmount() { this.io && this.io.disconnect(); }
+  reveal(el) {
+    const ln = el.hasAttribute('data-ln'), h = ln && el.closest('h1'), sib = h ? [...h.querySelectorAll('[data-ln]')].indexOf(el) : 0;
+    el.style.opacity = '';
+    el.animate(ln ? [{ transform: 'translateY(110%) rotate(2deg)' }, { transform: 'none' }] : [{ opacity: 0, transform: 'translateY(24px)', filter: 'blur(6px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }],
+      { duration: ln ? 1200 : 1000, delay: 120 + sib * 110, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
+  }
+  renderVals() {
+    const { hov, f } = this.state;
+    const valt = ['Learner speaking by a window', 'Learner on being ghosted by a freelancer', 'Learner sharing a suggestion', 'Learner seated in a studio', 'Learner on handling visas and paperwork', 'Learner in a blue blazer', 'Learner sharing advice'];
+    const vdesc = [
+      'Why they chose to study abroad, and what finally made the move feel possible.',
+      'The setback that nearly stopped them, and how they got back on track.',
+      'The one piece of advice they would give anyone applying next year.',
+      'What their first semester overseas was really like.',
+      'How they handled visas, deadlines and the paperwork in between.',
+      'From admit letter to first day on campus, in their own words.',
+      'What they wish they had known before they left home.'
+    ];
+    const videos = valt.map((a, k) => ({ isVideo: true, isPost: false, alt: a, desc: vdesc[k], src: './assets/sa-v' + k + '.png' }));
+    const posts = [
+      ['Harish Bhat', 'Data Engineer, PhonePe', 'a5', '12 Aug 2026', '1,528', '78 comments', "A thank-you I've been putting off. When I enrolled I was sceptical. I'd tried online courses before and finished none of them. The difference this time was the mentor calls. Having someone check in every fortnight, who actually read my submissions, changed everything. I finished. First time ever.", 'sa-v0.png'],
+      ['Neha Joshi', 'HR Business Partner, Wipro', 'a3', '3 Aug 2026', '964', '41 comments', 'Just back from campus immersion week. Meeting 60 people from my cohort after a year of little squares on a screen. I did not expect it to matter this much. It did.', 'sa-v3.png'],
+      ['Sneha Gupta', 'Operations Manager, Delhivery', 'a1', '28 Jul 2026', '1,102', '56 comments', "If you're a working professional scared of quitting your job for a master's: this format works. I kept my salary, my role, and still finished.", null],
+      ['Nisha Nair', 'Growth Manager, Zomato', 'a8', '19 Jul 2026', '2,310', '134 comments', 'People keep asking if the programme is worth it, so, publicly: yes, if you do the work. No, if you want a certificate to happen to you.', 'sa-v5.png'],
+      ['Lakshmi Reddy', 'Data Engineer, PhonePe', 'a4', '8 Jul 2026', '1,847', '92 comments', 'Walked the stage today. Two years of weekend classes, assignments submitted at midnight after putting the kids to bed, and one very patient family.', 'sa-v6.png'],
+      ['Aman Kapoor', 'MS Data Science, Germany', 'a6', '2 Jul 2026', '1,231', '67 comments', 'First week in Berlin. The year I spent studying online before flying out meant I walked into class already knowing half the material.', 'sa-plane.png'],
+      ['Riya Sethi', 'MBA candidate, Dublin', null, '24 Jun 2026', '876', '39 comments', 'Visa approved. Twelve months of evenings, one very long document checklist, and a counsellor who answered every one of my 2am emails.', null],
+      ['Kunal Shah', 'MS Computer Science, USA', 'a0', '15 Jun 2026', '1,644', '88 comments', 'Started the programme from Pune. Finishing it in Arizona. Same laptop, very different view.', 'sa-v1.png']
+    ].map(([name, role, av, date, likes, comments, text, photo]) => ({ isVideo: false, isPost: true, name, role, date, likes, comments, text,
+      ini: name.split(' ').map(s => s[0]).join(''), hasAv: !!av, av: av ? './assets/avatars/' + av + '.png' : '', hasPhoto: !!photo, photo: photo ? './assets/' + photo : '' }));
+    const mixed = []; for (let i = 0; i < Math.max(videos.length, posts.length); i++) { if (posts[i]) mixed.push(posts[i]); if (videos[i]) mixed.push(videos[i]); }
+    const list = f === 'Videos' ? videos : f === 'LinkedIn posts' ? posts : mixed;
+    return {
+      filters: [['All', mixed.length], ['Videos', videos.length], ['LinkedIn posts', posts.length]].map(([label, count]) => {
+        const sel = label === f;
+        return { label, count, sel: sel ? 'true' : 'false', pick: () => this.setState({ f: label }), bg: sel ? '#0E0C0B' : 'transparent', fg: sel ? '#FFFFFF' : '#0E0C0B', bd: sel ? '#0E0C0B' : 'rgba(14,12,11,.24)' };
+      }),
+      items: list.map((it, k) => it.isVideo ? { ...it,
+        enter: () => this.setState({ hov: k }), leave: () => this.setState({ hov: -1 }),
+        lift: hov === k ? 'translateY(-6px)' : 'translateY(0)', shadow: hov === k ? '0 1px 3px rgba(14,12,11,.05),0 12px 24px -12px rgba(14,12,11,.16),0 28px 48px -28px rgba(14,12,11,.18)' : '0 0 0 rgba(0,0,0,0)',
+        zoom: hov === k ? 'scale(1.06)' : 'scale(1)', btnBg: hov === k ? '#E4041C' : '#FFFFFF', btnFg: hov === k ? '#FFFFFF' : '#0E0C0B' } : it)
+    };
+  }
+}
+</script>
+</body>
+</html>
