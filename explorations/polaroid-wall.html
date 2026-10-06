@@ -15,9 +15,8 @@
 
     HOW TO USE
     Paste a LinkedIn embed <iframe> inside any .photo element (where the
-    comment says so). The placeholder hides itself automatically and the
-    iframe fills the photo window. Edit the handwritten caption in
-    <figcaption>.
+    comment says so); it fills the photo window. Write the handwritten
+    caption inside the <figcaption> span.
   */
 
   :root {
@@ -201,7 +200,7 @@
     position: relative;
     aspect-ratio: var(--photo-ratio);
     overflow: hidden;
-    background: #1c1714;
+    background: #e2e1dd;   /* blank window until content is added */
     /* printed-photo edge: a hair uneven, like the developed emulsion */
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18), inset 0 0 3px rgba(0, 0, 0, 0.25);
     clip-path: polygon(0.2% 0.4%, 22% 0, 51% 0.3%, 78% 0.05%, 99.8% 0.3%, 100% 31%, 99.75% 66%, 99.9% 99.6%, 70% 100%, 38% 99.7%, 0.15% 100%, 0 64%, 0.25% 30%);
@@ -222,93 +221,6 @@
   .photo video { object-fit: cover; }
 
   .photo iframe { background: #fff; }
-
-  /* Placeholder hides itself as soon as real media is pasted in */
-  .photo:has(iframe, img, video) .placeholder { display: none; }
-
-  .placeholder {
-    position: absolute;
-    inset: 0;
-    color: rgba(255, 255, 255, 0.82);
-    background: var(--swatch);
-  }
-
-  /* grain over the blurred colour field */
-  .placeholder::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    mix-blend-mode: overlay;
-    pointer-events: none;
-  }
-
-  .ph-badge {
-    position: absolute;
-    top: 10%;
-    left: 8.5%;
-    width: 8%;
-    aspect-ratio: 1;
-    border-radius: 18%;
-    background: rgba(255, 214, 186, 0.9);
-    color: #a2542a;
-    display: grid;
-    place-items: center;
-    font: 700 clamp(9px, 1vw, 12px)/1 "Montserrat", sans-serif;
-  }
-
-  .ph-title {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    margin: 0;
-    text-align: center;
-    font: 700 5cqi/1 "Montserrat", sans-serif;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .ph-meta {
-    position: absolute;
-    right: 8.5%;
-    bottom: 9%;
-    text-align: right;
-    font: 500 clamp(9px, 1vw, 12px)/1.05 "Montserrat", sans-serif;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .ph-meta b { display: block; font-weight: 700; }
-
-  /* Colour fields approximating the six reference swatches */
-  .swatch-1 { --swatch:
-    radial-gradient(60% 55% at 58% 52%, #9a6a48 0%, transparent 70%),
-    radial-gradient(50% 50% at 20% 15%, #5a4436 0%, transparent 70%),
-    linear-gradient(180deg, #2c211c 0%, #15110f 100%); }
-  .swatch-2 { --swatch:
-    radial-gradient(55% 70% at 70% 45%, #f2b190 0%, transparent 70%),
-    radial-gradient(45% 60% at 10% 30%, #ff1a00 0%, transparent 80%),
-    linear-gradient(90deg, #e6180c 0%, #ef6a3e 45%, #e9a079 100%); }
-  .swatch-3 { --swatch:
-    radial-gradient(55% 45% at 75% 20%, #5b5a62 0%, transparent 75%),
-    radial-gradient(70% 60% at 35% 80%, #8a5236 0%, transparent 75%),
-    linear-gradient(160deg, #3b2c25 0%, #6a4632 60%, #7d4a2c 100%); }
-  .swatch-4 { --swatch:
-    radial-gradient(50% 50% at 90% 10%, #ece8dc 0%, transparent 75%),
-    radial-gradient(60% 50% at 55% 25%, #8b9583 0%, transparent 75%),
-    radial-gradient(60% 50% at 15% 80%, #1f3d58 0%, transparent 80%),
-    linear-gradient(160deg, #3b4b55 0%, #2d4659 50%, #8a99a4 100%); }
-  .swatch-5 { --swatch:
-    radial-gradient(60% 50% at 60% 15%, #c47a4a 0%, transparent 75%),
-    radial-gradient(55% 55% at 20% 80%, #a42a40 0%, transparent 75%),
-    radial-gradient(40% 40% at 55% 55%, #7d4a6a 0%, transparent 80%),
-    linear-gradient(180deg, #b0603a 0%, #6a2e2e 100%); }
-  .swatch-6 { --swatch:
-    radial-gradient(45% 45% at 50% 75%, #b8968c 0%, transparent 75%),
-    radial-gradient(60% 50% at 25% 20%, #3c3229 0%, transparent 75%),
-    linear-gradient(180deg, #4b342b 0%, #6a4a3e 50%, #3d2a24 100%); }
 
   /* Handwritten caption in the deep bottom border */
   figcaption {
@@ -396,13 +308,8 @@
         <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
-          <div class="placeholder swatch-1" aria-hidden="true">
-            <span class="ph-badge">in</span>
-            <p class="ph-title">Your post here</p>
-            <p class="ph-meta">LinkedIn post <b>Embed</b></p>
-          </div>
         </div>
-        <figcaption><span>Your Design Here</span></figcaption>
+        <figcaption><span></span></figcaption>
       </figure>
     </li>
 
@@ -411,13 +318,8 @@
         <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
-          <div class="placeholder swatch-2" aria-hidden="true">
-            <span class="ph-badge">in</span>
-            <p class="ph-title">Your post here</p>
-            <p class="ph-meta">LinkedIn post <b>Embed</b></p>
-          </div>
         </div>
-        <figcaption><span>Your Design Here</span></figcaption>
+        <figcaption><span></span></figcaption>
       </figure>
     </li>
 
@@ -426,13 +328,8 @@
         <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
-          <div class="placeholder swatch-3" aria-hidden="true">
-            <span class="ph-badge">in</span>
-            <p class="ph-title">Your post here</p>
-            <p class="ph-meta">LinkedIn post <b>Embed</b></p>
-          </div>
         </div>
-        <figcaption><span>Your Design Here</span></figcaption>
+        <figcaption><span></span></figcaption>
       </figure>
     </li>
 
@@ -441,13 +338,8 @@
         <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
-          <div class="placeholder swatch-4" aria-hidden="true">
-            <span class="ph-badge">in</span>
-            <p class="ph-title">Your post here</p>
-            <p class="ph-meta">LinkedIn post <b>Embed</b></p>
-          </div>
         </div>
-        <figcaption><span>Your Design Here</span></figcaption>
+        <figcaption><span></span></figcaption>
       </figure>
     </li>
 
@@ -456,13 +348,8 @@
         <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
-          <div class="placeholder swatch-5" aria-hidden="true">
-            <span class="ph-badge">in</span>
-            <p class="ph-title">Your post here</p>
-            <p class="ph-meta">LinkedIn post <b>Embed</b></p>
-          </div>
         </div>
-        <figcaption><span>Your Design Here</span></figcaption>
+        <figcaption><span></span></figcaption>
       </figure>
     </li>
 
@@ -471,13 +358,8 @@
         <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
-          <div class="placeholder swatch-6" aria-hidden="true">
-            <span class="ph-badge">in</span>
-            <p class="ph-title">Your post here</p>
-            <p class="ph-meta">LinkedIn post <b>Embed</b></p>
-          </div>
         </div>
-        <figcaption><span>Your Design Here</span></figcaption>
+        <figcaption><span></span></figcaption>
       </figure>
     </li>
 
