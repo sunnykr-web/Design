@@ -6,7 +6,7 @@
 <title>Polaroid Wall</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Ms+Madi&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Ms+Madi&display=swap" rel="stylesheet">
 <style>
   /*
     Polaroid wall — exploration
@@ -106,39 +106,7 @@
   .strip {
     position: relative;
     width: min(420px, 100%);
-    padding: 20px 22px 14px;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .strip-badge {
-    width: 26px;
-    height: 26px;
-    border-radius: 6px;
-    background: var(--ink);
-    color: var(--paper);
-    display: grid;
-    place-items: center;
-    font: 700 11px/1 "Montserrat", sans-serif;
-    align-self: start;
-  }
-
-  .strip-title {
-    margin: 0;
-    font: 400 clamp(30px, 5vw, 40px)/1 "Nanum Brush Script", cursive;
-    text-align: center;
-    transform: rotate(-3deg);
-    padding-right: 26px; /* optically centre against the badge */
-  }
-
-  .strip-label {
-    grid-column: 1 / -1;
-    justify-self: end;
-    font: 700 7.5px/1 "Montserrat", sans-serif;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    height: 92px;   /* blank strip, ready for its own content */
   }
 
   .strip .pushpin {
@@ -296,9 +264,6 @@
 
   <header class="strip paper">
     <img class="pushpin" src="assets/pin-side.png" alt="" width="60" height="97">
-    <span class="strip-badge" aria-hidden="true">“</span>
-    <h1 class="strip-title">Wall of Voices</h1>
-    <span class="strip-label">Learner posts · LinkedIn</span>
   </header>
 
   <ul class="grid">
