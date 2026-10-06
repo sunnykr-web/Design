@@ -116,11 +116,11 @@
   .strip .pushpin {
     position: absolute;
     left: 50%;
-    bottom: calc(100% - 26px);
-    width: 34px;
-    transform: translateX(-10%) rotate(-8deg);
-    transform-origin: 50% 100%;
-    filter: drop-shadow(5px 6px 3px rgba(0, 0, 0, 0.22));
+    bottom: calc(100% - 22px);
+    width: 40px;
+    height: auto;
+    transform: translateX(-30%);
+    filter: drop-shadow(4px 5px 3px rgba(0, 0, 0, 0.18));
     pointer-events: none;
   }
 
@@ -304,12 +304,13 @@
 
   .polaroid .pushpin {
     position: absolute;
-    top: -2.4%;
+    top: -3.2%;
     left: 50%;
-    width: 12%;
-    max-width: 46px;
+    width: 13%;
+    max-width: 48px;
+    height: auto;
     transform: translateX(-50%);
-    filter: drop-shadow(4px 7px 3px rgba(0, 0, 0, 0.24));
+    filter: drop-shadow(3px 5px 3px rgba(0, 0, 0, 0.22));
     pointer-events: none;
     z-index: 2;
   }
@@ -333,49 +334,10 @@
 </head>
 <body>
 
-<!-- Shared pin artwork -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs>
-    <radialGradient id="pin-cap" cx="38%" cy="32%" r="70%">
-      <stop offset="0"    stop-color="#f6c48b"/>
-      <stop offset="0.35" stop-color="#d98f48"/>
-      <stop offset="0.8"  stop-color="#b0652a"/>
-      <stop offset="1"    stop-color="#7d4519"/>
-    </radialGradient>
-    <linearGradient id="pin-stem" x1="0" x2="1">
-      <stop offset="0"   stop-color="#9a5a25"/>
-      <stop offset="0.4" stop-color="#e2a062"/>
-      <stop offset="1"   stop-color="#8a4c1c"/>
-    </linearGradient>
-    <linearGradient id="pin-needle" x1="0" x2="1">
-      <stop offset="0"   stop-color="#8f8f8f"/>
-      <stop offset="0.5" stop-color="#e8e8e8"/>
-      <stop offset="1"   stop-color="#7a7a7a"/>
-    </linearGradient>
-  </defs>
-
-  <!-- seen from the front, slightly above: domed cap over a short body -->
-  <symbol id="pin-front" viewBox="0 0 48 52">
-    <path d="M14 26 L14 38 Q24 46 34 38 L34 26 Z" fill="url(#pin-stem)"/>
-    <ellipse cx="24" cy="38" rx="10" ry="4.5" fill="#a9622b"/>
-    <circle cx="24" cy="22" r="20" fill="url(#pin-cap)"/>
-    <ellipse cx="17" cy="14" rx="6" ry="3.6" fill="#fff" opacity="0.35" transform="rotate(-30 17 14)"/>
-  </symbol>
-
-  <!-- seen from the side: handle, collar, needle -->
-  <symbol id="pin-side" viewBox="0 0 40 90">
-    <rect x="18.6" y="58" width="2.8" height="32" rx="1.4" fill="url(#pin-needle)"/>
-    <path d="M8 52 Q20 46 32 52 L30 60 Q20 64 10 60 Z" fill="url(#pin-stem)"/>
-    <path d="M14 22 Q13 38 11 50 Q20 55 29 50 Q27 38 26 22 Z" fill="url(#pin-stem)"/>
-    <ellipse cx="20" cy="16" rx="12" ry="11" fill="url(#pin-cap)"/>
-    <ellipse cx="16" cy="11" rx="4" ry="2.4" fill="#fff" opacity="0.35" transform="rotate(-30 16 11)"/>
-  </symbol>
-</svg>
-
 <main class="wall">
 
   <header class="strip paper">
-    <svg class="pushpin" viewBox="0 0 40 90" aria-hidden="true"><use href="#pin-side"/></svg>
+    <img class="pushpin" src="assets/pin-side.png" alt="" width="60" height="97">
     <span class="strip-badge" aria-hidden="true">“</span>
     <h1 class="strip-title">Wall of Voices</h1>
     <span class="strip-label">Learner posts · LinkedIn</span>
@@ -385,7 +347,7 @@
 
     <li>
       <figure class="polaroid paper">
-        <svg class="pushpin" viewBox="0 0 48 52" aria-hidden="true"><use href="#pin-front"/></svg>
+        <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
           <div class="placeholder swatch-1" aria-hidden="true">
@@ -400,7 +362,7 @@
 
     <li>
       <figure class="polaroid paper">
-        <svg class="pushpin" viewBox="0 0 48 52" aria-hidden="true"><use href="#pin-front"/></svg>
+        <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
           <div class="placeholder swatch-2" aria-hidden="true">
@@ -415,7 +377,7 @@
 
     <li>
       <figure class="polaroid paper">
-        <svg class="pushpin" viewBox="0 0 48 52" aria-hidden="true"><use href="#pin-front"/></svg>
+        <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
           <div class="placeholder swatch-3" aria-hidden="true">
@@ -430,7 +392,7 @@
 
     <li>
       <figure class="polaroid paper">
-        <svg class="pushpin" viewBox="0 0 48 52" aria-hidden="true"><use href="#pin-front"/></svg>
+        <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
           <div class="placeholder swatch-4" aria-hidden="true">
@@ -445,7 +407,7 @@
 
     <li>
       <figure class="polaroid paper">
-        <svg class="pushpin" viewBox="0 0 48 52" aria-hidden="true"><use href="#pin-front"/></svg>
+        <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
           <div class="placeholder swatch-5" aria-hidden="true">
@@ -460,7 +422,7 @@
 
     <li>
       <figure class="polaroid paper">
-        <svg class="pushpin" viewBox="0 0 48 52" aria-hidden="true"><use href="#pin-front"/></svg>
+        <img class="pushpin" src="assets/pin-front.png" alt="" width="60" height="59">
         <div class="photo">
           <!-- PASTE LINKEDIN EMBED <iframe> HERE -->
           <div class="placeholder swatch-6" aria-hidden="true">
