@@ -20,8 +20,8 @@
   */
 
   :root {
-    --wall:        #e7e7e5;
-    --wall-light:  #f6f6f4;
+    --wall:        #cbcac6;   /* painted plaster, warm mid grey */
+    --wall-light:  #dedcd8;
     --paper:       #fbfbf9;
     --ink:         #1b1b1b;
     --pin-light:   #e7a764;
@@ -42,11 +42,20 @@
     min-height: 100vh;
     color: var(--ink);
     font-family: "Montserrat", system-ui, sans-serif;
-    /* soft daylight from the top-left, falling off to the right like the reference */
+    /* painted plaster wall: lit from the top-left, uneven in tone and surface */
     background-color: var(--wall);
     background-image:
-      radial-gradient(ellipse 70% 60% at 18% 0%, var(--wall-light) 0%, transparent 70%),
-      linear-gradient(100deg, transparent 55%, rgba(0, 0, 0, 0.045) 100%);
+      /* fine stucco relief: noise lit from the top-left so it reads as bumps, not dots */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeDiffuseLighting surfaceScale='1.1' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='225' elevation='55'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -.5 0 0 0 .4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E"),
+      /* broad patchy mottling, like uneven paint coverage */
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1200' preserveAspectRatio='none'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .24 0 0 0 0 .22 1 0 0 0 -.42'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"),
+      /* daylight from the top-left */
+      radial-gradient(ellipse 75% 65% at 15% 0%, var(--wall-light) 0%, transparent 70%),
+      /* falling into shade on the right and toward the floor */
+      linear-gradient(100deg, transparent 50%, rgba(40, 36, 30, 0.12) 100%),
+      linear-gradient(180deg, transparent 60%, rgba(40, 36, 30, 0.08) 100%);
+    background-size: 300px 300px, 100% 100%, auto, auto, auto;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
     overflow-x: hidden;
   }
 
