@@ -6,7 +6,7 @@
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   display: flex; gap: 2px;
   padding: 3px;
-  background: #091E42;
+  background: #121214;
   border-radius: 999px;
   box-shadow: 0 4px 14px rgba(9, 30, 66, 0.25);
   font: 600 13px/1 "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -23,4 +23,5 @@
 .ug-version__opt:hover { background: rgba(255, 255, 255, 0.12); }
 .ug-version__opt:focus-visible { outline: 2px solid #4F8AFB; outline-offset: 2px; }
 .ug-version__opt[aria-current="page"],
-.ug-version__opt[aria-pressed="true"] { background: #FFFFFF; color: #091E42; }
+.ug-version__opt[aria-pressed="true"] { background: #FFFFFF; color: #121214; }
+@media (max-width: 560px) { .ug-version__opt small { display: none; } }

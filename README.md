@@ -34,6 +34,7 @@ The frames are set in Circular, which is licensed and not bundled here; the page
 - Quick amounts (minimum, 10,000, half, full fee), Indian digit grouping as you type, and inline errors that say what is wrong instead of a silently disabled button.
 - The summary shows the balance and its due date and carries the main button, which names the amount ("Continue to pay INR 1,027"); on phones it moves to a bottom bar.
 - The pay step leads with the QR, a 10-minute expiry timer with "Get a new QR", short how-to steps and a waiting state; notes and consent move below, with a working "Read more".
-- Responsive down to phone width, real radio inputs, visible focus and 44px+ targets. Colours come from the Upgrad DS tokens, with the primary red for actions.
+- Responsive down to phone width, real radio inputs, visible focus and 44px+ targets.
+- Visual finish follows the UI references sunny shared: light grey canvas, white cards with large radii and soft shadows, near-black for the strong elements (dark "Paying now" card, pill buttons, selected icon tiles), big figures with a light currency unit, a delivery-style progress tracker and a numbered timeline for the QR steps. Spacing, radius and icon sizes come from the Upgrad DS scale and the DS red stays the brand accent; neutrals with no DS variable are `--ck-*` tokens in `checkout-v2.css`.
 
 Deep links: `#v2-select`, `#v2-amount`, `#v2-review`.

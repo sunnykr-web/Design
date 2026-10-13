@@ -10,7 +10,7 @@
     document.querySelectorAll(BARS).forEach((bar) => {
       const box = bar.getBoundingClientRect();
       const showing = box.height > 0 && getComputedStyle(bar).display !== 'none';
-      if (showing && box.bottom >= window.innerHeight - 1) lift = Math.max(lift, window.innerHeight - box.top);
+      if (showing && box.bottom >= window.innerHeight - 40) lift = Math.max(lift, window.innerHeight - box.top);
     });
     toggle.style.bottom = 'calc(' + (16 + Math.round(lift)) + 'px + env(safe-area-inset-bottom, 0px))';
   }

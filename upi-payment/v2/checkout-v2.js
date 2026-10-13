@@ -19,6 +19,8 @@
     upfront: 'Pay upfront',
   };
 
+  const ARROW = '<svg class="ck-i ck-i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
   const state = { plan: 'reserve', amount: null, method: null, view: 'choose', touched: false };
 
   const $ = (sel) => root.querySelector(sel);
@@ -93,6 +95,11 @@
     // summary and actions
     $$('[data-ck-amount]').forEach((el) => { el.textContent = ok ? inr(state.amount) : '–'; });
     $$('[data-ck-amount-or-dash]').forEach((el) => { el.textContent = ok ? inr(state.amount) : '–'; });
+    // large figures set the currency as a light unit, as in "INR 1,027"
+    $$('[data-ck-amount-big]').forEach((el) => {
+      el.innerHTML = ok ? '<span class="ck-unit">INR</span>' + state.amount.toLocaleString('en-IN') : '<span class="ck-unit">INR</span>0';
+      el.classList.toggle('is-empty', !ok);
+    });
     $$('[data-ck-balance]').forEach((el) => { el.textContent = inr(balance); });
     $('[data-ck-due-line]').textContent = balance === 0 ? 'nothing left to pay' : (ok ? 'due by ' + dueDate : 'due within 7 days');
     $$('[data-ck-due]').forEach((el) => { el.textContent = dueDate; });
@@ -103,7 +110,8 @@
     const why = blocker();
     $$('[data-ck-next]').forEach((el) => {
       el.disabled = Boolean(why);
-      el.textContent = why ? 'Continue' : 'Continue to pay ' + inr(state.amount);
+      const label = why || el.dataset.ckNext === 'short' ? 'Continue' : 'Continue to pay ' + inr(state.amount);
+      el.innerHTML = label + (why ? '' : ARROW);
     });
     $('[data-ck-hint]').textContent = why || 'You can review everything on the next step';
 
