@@ -57,14 +57,12 @@
     const ok = amountOk();
     const balance = ok ? COURSE_FEE - state.amount : COURSE_FEE;
 
-    // views and steps
+    // views and progress (the bar's width follows data-ck-view in the CSS)
     root.dataset.ckView = state.view;
     $$('[data-ck-panel]').forEach((el) => { el.hidden = el.dataset.ckPanel !== state.view; });
-    $$('[data-ck-step]').forEach((el) => {
-      const isCurrent = el.dataset.ckStep === state.view;
-      if (isCurrent) el.setAttribute('aria-current', 'step'); else el.removeAttribute('aria-current');
-      el.classList.toggle('is-done', state.view === 'review' && el.dataset.ckStep === 'choose');
-    });
+    const progress = $('[data-ck-progress]');
+    progress.setAttribute('aria-valuenow', state.view === 'review' ? '80' : '15');
+    progress.setAttribute('aria-valuetext', state.view === 'review' ? 'Step 2 of 3, review and pay' : 'Step 1 of 3, amount and method');
 
     // plan
     $$('input[name="ck-plan"]').forEach((el) => { el.checked = el.value === state.plan; });

@@ -30,6 +30,7 @@
   --ck-error:       var(--uG-error);
   --ck-error-soft:  #FFF1F1;
   --ck-focus:       #3D7BF0;
+  --ck-progress:    linear-gradient(90deg, #67CBAA 0%, #2BADF8 100%); /* Figma progress bar */
   /* depth */
   --ck-shadow-card:  0 1px 1px rgba(18, 18, 20, 0.03), 0 12px 32px -12px rgba(18, 18, 20, 0.10);
   --ck-shadow-tile:  0 1px 2px rgba(18, 18, 20, 0.06), inset 0 0 0 1px rgba(18, 18, 20, 0.06);
@@ -72,7 +73,7 @@
   backdrop-filter: saturate(1.4) blur(14px);
 }
 .ck-header__inner {
-  max-width: 1120px; margin: 0 auto; height: 68px;
+  max-width: 1120px; margin: 0 auto; height: 60px;
   padding: 0 var(--uG-16);
   display: flex; align-items: center; justify-content: space-between; gap: var(--uG-16);
 }
@@ -117,40 +118,16 @@
 .ck-main { min-width: 0; }
 .ck-stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--uG-16); }
 
-/* ---------- Tracker ---------- */
-.ck-track {
-  --fill: 0.12;
-  position: relative;
-  list-style: none; padding: 0;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 680px;
+/* ---------- Progress ---------- */
+/* 60px header + 8px bar = the 68px header in the Figma frame; the fill grows with the step */
+.ck-progress { height: var(--uG-8); }
+.ck-progress__fill {
+  display: block; width: 15%; height: 100%;
+  background: var(--ck-progress);
+  transition: width 0.4s ease;
 }
-.ck-app[data-ck-view="review"] .ck-track { --fill: 0.62; }
-.ck-track::before, .ck-track::after {
-  content: ""; position: absolute; top: 11px; left: 12px; height: 4px; border-radius: 4px;
-}
-.ck-track::before { right: 12px; background: var(--ck-line-dash); }
-.ck-track::after { width: calc((100% - 24px) * var(--fill)); background: var(--ck-ink); transition: width 0.4s ease; }
-.ck-track__node { position: relative; z-index: 1; display: grid; gap: 2px; justify-items: center; text-align: center; }
-.ck-track__node:first-child { justify-items: start; text-align: left; }
-.ck-track__node:last-child { justify-items: end; text-align: right; }
-.ck-track__dot {
-  width: 26px; height: 26px; margin-bottom: var(--uG-8);
-  display: grid; place-items: center;
-  border-radius: 50%;
-  background: var(--ck-line-dash);
-  box-shadow: 0 0 0 4px var(--ck-canvas);
-  color: transparent;
-}
-.ck-track__dot .ck-i { width: 14px; height: 14px; stroke-width: 2.4; }
-.ck-track__label { font-size: 14px; font-weight: 500; color: var(--ck-text-3); }
-.ck-track__sub { font-size: 12px; color: var(--ck-text-3); font-family: var(--ck-mono); }
-.ck-track__node[aria-current="step"] .ck-track__dot { background: var(--ck-surface); box-shadow: 0 0 0 4px var(--ck-canvas), inset 0 0 0 7px var(--ck-ink); }
-.ck-track__node[aria-current="step"] .ck-track__label { color: var(--ck-text); }
-.ck-track__node[aria-current="step"] .ck-track__sub { color: var(--ck-text-2); }
-.ck-track__node.is-done .ck-track__dot { background: var(--ck-ink); color: var(--uG-white); }
-.ck-track__node.is-done .ck-track__label { color: var(--ck-text); }
-.ck-track__node.is-done .ck-track__sub { color: var(--ck-text-2); }
+.ck-app[data-ck-view="review"] .ck-progress__fill { width: 80%; }
+@media (prefers-reduced-motion: reduce) { .ck-progress__fill { transition: none; } }
 
 /* ---------- Type ---------- */
 .ck-intro { display: grid; gap: var(--uG-10); justify-items: start; padding: var(--uG-4) 0 var(--uG-8); }
@@ -534,7 +511,6 @@
   .ck-row__body { padding-right: var(--uG-12); gap: var(--uG-12); }
   .ck-row__meta { display: none; }
   .ck-field__input { font-size: 40px; }
-  .ck-track__label { font-size: 12.5px; }
   .ck-pay__top { flex-wrap: wrap; }
   .ck-status { margin-left: 68px; margin-top: calc(-1 * var(--uG-8)); }
   .ck-figure { font-size: 34px; }
