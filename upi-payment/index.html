@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>upGrad | Payments</title>
+  <link rel="stylesheet" href="../tokens/upgrad-ds.css">
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<body data-step="select">
+
+  <header class="ug-header">
+    <nav class="ug-header__nav" aria-label="Checkout">
+      <a class="ug-header__logo" href="#select" aria-label="upGrad home"><img src="assets/upgrad-logo.svg" width="60" height="32" alt="upGrad"></a>
+      <p class="ug-header__title">Checkout</p>
+      <button class="ug-header__user" type="button" aria-haspopup="menu">
+        <span class="ug-avatar" aria-hidden="true">SK</span>
+        <span class="ug-header__name">Sunny</span>
+        <img src="assets/icon-chevron-down.svg" width="14" height="8" alt="">
+      </button>
+    </nav>
+  </header>
+  <div class="ug-progress" data-progress style="width: 15%"></div>
+
+  <main class="co-page">
+    <div class="co-container">
+      <h1 class="co-welcome t-28">Welcome  Sunny Kumar</h1>
+
+      <section class="ug-card co-hero" aria-label="Course">
+        <div class="co-hero__price">
+          <p class="t-20">Start learning from</p>
+          <p class="t-28">INR 2,347/mo**</p>
+          <p class="t-20">at 18% interest or INR 65,000</p>
+        </div>
+        <div class="co-course">
+          <div class="co-course__logo"><img src="assets/course-logo.png" width="120" height="40" alt="upGrad"></div>
+          <div class="co-course__body">
+            <p class="co-course__name t-18">Advance Certificate in Digital Marketing</p>
+            <p class="t-14 c-muted">UPGRAD EDUCATION PVT LTD</p>
+            <p class="t-14"><span class="c-muted">4 months | Starts from: </span>Oct 31, 2026</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="co-layout">
+        <div class="co-main">
+
+          <!-- Steps 1–3: choose and enter -->
+          <div data-view="choose">
+            <section class="ug-card" aria-labelledby="options-title">
+              <h2 id="options-title" class="ug-card__title">1. Payment Options</h2>
+              <div class="co-options">
+                <div class="co-tabs" role="tablist" aria-orientation="vertical">
+                  <button class="ug-tab" role="tab" aria-selected="true" type="button">
+                    <span class="ug-tab__label"><img src="assets/icon-reserve.svg" width="20" height="22" alt=""><span>Reserve a Seat</span></span>
+                    <span class="ug-chip">Pay the rest later</span>
+                  </button>
+                  <button class="ug-tab" role="tab" aria-selected="false" type="button">
+                    <span class="ug-tab__label"><img src="assets/icon-recommended.svg" width="20" height="20" alt=""><span>Recommended</span></span>
+                    <span class="ug-chip">0% Interest onwards</span>
+                  </button>
+                  <button class="ug-tab" role="tab" aria-selected="false" type="button">
+                    <span class="ug-tab__label"><img src="assets/icon-pocket.svg" width="23" height="22" alt=""><span>Pocket-Friendly</span></span>
+                    <span class="ug-chip">Lowest cost / month</span>
+                  </button>
+                  <button class="ug-tab" role="tab" aria-selected="false" type="button">
+                    <span class="ug-tab__label"><img src="assets/icon-other.svg" width="22" height="22" alt=""><span>Other options</span></span>
+                    <span class="ug-chip">Pay upfront</span>
+                  </button>
+                </div>
+
+                <div class="co-panel" role="tabpanel">
+                  <p class="co-panel__title">Pay minimum INR 1,000</p>
+                  <p class="co-panel__lede t-14">and the rest within 7 days through full fee payment or an easy financing option.</p>
+
+                  <div class="co-methods" role="radiogroup" aria-label="Payment method">
+                    <button class="ug-method" role="radio" aria-checked="false" type="button" data-method="Credit Card"><img src="assets/icon-card.svg" alt="">Credit Card</button>
+                    <button class="ug-method" role="radio" aria-checked="false" type="button" data-method="Debit Card"><img src="assets/icon-card.svg" alt="">Debit Card</button>
+                    <button class="ug-method" role="radio" aria-checked="false" type="button" data-method="Net Banking"><img src="assets/icon-netbanking.svg" alt="">Net Banking</button>
+                    <button class="ug-method" role="radio" aria-checked="false" type="button" data-method="UPI"><img src="assets/icon-upi.svg" alt="">UPI</button>
+                  </div>
+
+                  <div class="co-empty" data-when="no-method">
+                    <img src="assets/empty-state.png" width="120" height="120" alt="">
+                    <p class="t-14 c-secondary">Choose a payment option to begin with</p>
+                  </div>
+
+                  <form data-when="method" data-amount-form hidden novalidate>
+                    <div class="co-divider"></div>
+                    <div class="co-amount">
+                      <label for="amount" class="t-16" style="display: block">Enter Reserve a Seat amount</label>
+                      <p class="co-amount__hint t-14" id="amount-hint">Please enter an amount between INR 1,000 &amp; INR 65,000</p>
+                      <div class="co-amount__row">
+                        <span class="co-amount__currency">INR</span>
+                        <input class="ug-input" id="amount" name="amount" type="number" inputmode="numeric" min="1000" max="65000" step="1" aria-describedby="amount-hint" autocomplete="off">
+                      </div>
+                      <div class="co-divider co-amount__rule"></div>
+                      <p class="co-amount__note t-12 c-muted" data-when="upi"><img src="assets/icon-info.svg" width="16" height="16" alt="">The limits applicable for any transaction are governed by the UPI Vendors.</p>
+                    </div>
+                    <div class="co-cta">
+                      <button class="ug-button" type="submit" disabled>Next<img src="assets/icon-arrow-right.svg" width="16" height="16" alt=""></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </section>
+
+            <div style="padding: var(--uG-20) 0">
+              <section class="ug-card"><h2 class="ug-card__title ug-card__title--done">2. Billing Details</h2></section>
+            </div>
+          </div>
+
+          <!-- Step 4: review and pay -->
+          <div class="co-stack" data-view="review" hidden>
+            <section class="ug-card">
+              <h2 class="ug-card__title ug-card__title--done">1. Payment Options</h2>
+              <div class="co-review">
+                <p class="co-label co-review__method" data-method-label>UPI</p>
+                <div class="co-review__sub">
+                  <p class="co-label c-muted">Custom Amount Details</p>
+                  <div class="co-review__row">
+                    <p class="co-label">Paying Now</p>
+                    <p class="co-review__amount" data-amount>INR 1,027</p>
+                  </div>
+                </div>
+                <p class="co-review__note t-12 c-muted">Please complete next step to proceed and checkout.</p>
+                <button class="co-link" type="button" data-edit>EDIT</button>
+              </div>
+            </section>
+
+            <section class="ug-card">
+              <h2 class="ug-card__title ug-card__title--done">2. Billing Details</h2>
+              <div class="co-review">
+                <p class="co-billing__name t-16">Sunny Kumar</p>
+                <p class="co-billing__address t-16">ajp colonya akjsdf alsdfknadf, 560600, Bommasandra, Karnataka, India</p>
+                <button class="co-link" type="button">EDIT</button>
+              </div>
+            </section>
+
+            <section>
+              <h3 class="co-note-title">Please Note</h3>
+              <div class="co-note">
+                <ul>
+                  <li>You will have to pay the balance amount within the next 7 days.</li>
+                  <li>The limits applicable for any transaction are governed by UPI Vendors.</li>
+                  <li>Please acknowledge terms and condition to initiate payment.</li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="ug-card">
+              <p class="co-consent">By proceeding, you confirm your understanding and acceptance that processing fees and charges may vary based on the policies of your bank or third-party credit provider. Please refer to the terms and conditions provided by your bank or credit facility provider for a detailed breakdown of any applicable fees. upGrad is not responsible for any fees or charges imposed by your...&nbsp;<button type="button">Read More</button></p>
+            </section>
+
+            <section class="ug-card co-qr-card" data-when="upi">
+              <h2 class="co-qr-card__title">3. UPI Payment Mode</h2>
+              <div class="co-qr" data-qr>
+                <img src="assets/upi-qr.png" width="370" height="425" alt="UPI QR code to scan with a BHIM UPI app">
+                <button class="co-qr__reveal" type="button" data-reveal>Show Code</button>
+              </div>
+            </section>
+          </div>
+
+          <p class="co-footnote t-12 c-muted" style="margin-top: 0">**Exact pricing will be provided according to your chosen EMI plan by your bank, subject to your bank’s T&amp;Cs.</p>
+          <div class="co-spacer" data-when="method"></div>
+        </div>
+
+        <aside class="co-summary" aria-labelledby="summary-title">
+          <h2 id="summary-title" class="co-summary__title">SUMMARY</h2>
+          <dl class="co-summary__rows">
+            <div class="co-summary__row"><dt>Course Fee</dt><dd>INR 65,000</dd></div>
+            <div class="co-summary__row" data-when="paying"><dt>Total</dt><dd>INR 65,000</dd></div>
+            <div class="co-summary__row" data-when="paying"><dt>Paying Now<small>(downpayment)</small></dt><dd data-amount>INR 1,000</dd></div>
+          </dl>
+          <dl class="co-summary__total">
+            <div class="co-summary__row"><dt data-total-label>Total</dt><dd data-total>INR 65,000</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="co-paybar" data-when="paying" hidden>
+    <div class="co-paybar__inner">
+      <div class="co-paybar__amount">
+        <span class="t-20">Paying Now</span>
+        <span class="t-28" data-amount>INR 1,000</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="checkout.js"></script>
+</body>
+</html>

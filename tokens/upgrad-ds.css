@@ -1,0 +1,84 @@
+/* UPGRAD DESIGN SYSTEM — tokens
+   Mirrors the variable collections of the "Upgrad Design System" Figma library
+   (Spacing & Sizes, Primitives, UG Design Palette) as they resolve in the
+   default mode. Names follow the Figma variable path. Keep the two in sync. */
+
+:root {
+  /* Units & Space */
+  --uG-2: 2px;    --uG-4: 4px;    --uG-6: 6px;    --uG-8: 8px;
+  --uG-10: 10px;  --uG-12: 12px;  --uG-14: 14px;  --uG-16: 16px;
+  --uG-20: 20px;  --uG-24: 24px;  --uG-28: 28px;  --uG-32: 32px;
+  --uG-36: 36px;  --uG-40: 40px;  --uG-44: 44px;  --uG-48: 48px;
+  --uG-56: 56px;  --uG-64: 64px;  --uG-80: 80px;  --uG-96: 96px;
+  --uG-100: 100px; --uG-128: 128px; --uG-205: 205px;
+  --uG-padding-small: 100px;
+  --uG-padding-large: 205px;
+
+  /* Radius */
+  --uG-radius-0: 0;
+  --uG-radius-001: 4px;
+  --uG-radius-01: 8px;
+  --uG-radius-02: 12px;
+  --uG-radius-03: 14px;
+  --uG-radius-04: 16px;
+  --uG-radius-05: 20px;
+  --uG-radius-06: 24px;
+  --uG-radius-07: 40px;
+  --uG-radius-rounded: 128px;
+
+  /* Icon */
+  --uG-icon-xs: 12px;
+  --uG-icon-sm: 16px;
+  --uG-icon-md: 20px;
+  --uG-icon-lg: 24px;
+  --uG-icon-xl: 32px;
+  --uG-icon-xxl: 48px;
+
+  /* Primitives — primary red */
+  --uG-red-main:   #EE2C3C;
+  --uG-red-tint-1: #FCD5D8;
+  --uG-red-tint-2: #F8ABB1;
+  --uG-red-tint-3: #FF7581;
+  --uG-red-tint-4: #F15663;
+  --uG-red-shade-1: #BE2330;
+  --uG-red-shade-2: #8F1A24;
+  --uG-red-shade-3: #5F1218;
+  --uG-red-shade-4: #30090C;
+
+  /* Primitives — neutrals */
+  --uG-white:        #FFFFFF;
+  --uG-black:        #000000;
+  --uG-greyscale-0:  #131313;
+  --uG-greyscale-1:  #333333;
+  --uG-greyscale-2:  #666666;
+  --uG-greyscale-3:  #999999;
+  --uG-greyscale-4:  #CCCCCC;
+  --uG-greyscale-5:  #E6E6E6;
+  --uG-greyscale-6:  #F2F2F2;
+  --uG-greyscale-7:  #F5F5F5;
+  --uG-greyscale-8a: #F9F9F9;
+  --uG-ivory:        #FAF9F6;
+
+  /* Primitives — state */
+  --uG-error:         #EA0C0C;
+  --uG-error-light:   #FFD4D4;
+  --uG-success:       #3F9161;
+  --uG-success-light: #DCF0E4;
+  --uG-warning:       #DB8708;
+  --uG-warning-light: #FFECCF;
+
+  /* UG Design Palette — semantic */
+  --uG-theme-primary:            var(--uG-red-main);
+  --uG-fill-bg-white:            var(--uG-white);
+  --uG-fill-bg-disable:          var(--uG-greyscale-7);
+  --uG-fill-cta-primary-red-hovered: var(--uG-red-tint-4);
+  --uG-fill-cta-primary-red-pressed: var(--uG-red-shade-1);
+  --uG-fill-cta-disable:         var(--uG-greyscale-5);
+  --uG-stroke-default:           var(--uG-greyscale-5);
+  --uG-stroke-divider:           var(--uG-greyscale-6);
+  --uG-stroke-cta-secondary-default: var(--uG-greyscale-4);
+  --uG-text-cta-primary-default: var(--uG-white);
+  --uG-text-body-greyscale-1:    var(--uG-greyscale-1);
+  --uG-text-body-greyscale-2:    var(--uG-greyscale-2);
+  --uG-icon-default-red:         var(--uG-red-main);
+}
