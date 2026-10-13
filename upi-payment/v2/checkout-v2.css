@@ -372,10 +372,10 @@
 /* upGrad mark as a faint watermark, bleeding off the top-right corner as in the
    Wall of Voices frame (Figma 13hMVjIUc9X1sKOfVHmSc1, node 1371:2786; source in
    assets/upgrad-mark.svg). Same white-at-6% treatment as the arrow it replaced,
-   at a fixed 150px (40% smaller) so it sits as a corner mark on every step. */
+   at a fixed 125px (half its first size) so it sits as a corner mark on every step. */
 .ck-balance::before {
   content: ""; position: absolute; right: 0; top: 0;
-  height: 150px; aspect-ratio: 317 / 403;
+  height: 125px; aspect-ratio: 317 / 403;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='139 0 317 403'%3E%3Cpath d='M139 195V-109H553.5C554 -25 554.7 158 553.5 218C552 293 469 402.5 352.5 402.5C259.3 402.5 199 345.5 180.5 317C218 326.5 231 324 258 317C279.6 311.4 296.333 295 302 287.5V317H339.5V218H238V258H274.5C262.5 284 215.5 283.5 198 279C180.5 274.5 139 260 139 195Z' fill='%23ffffff' fill-opacity='.06'/%3E%3C/svg%3E") no-repeat right top / contain;
   pointer-events: none;
 }
