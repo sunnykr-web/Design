@@ -263,21 +263,8 @@
         </div>
       </main>
 
-      <!-- Summary: the amount and the main action, then the course -->
+      <!-- Summary: the course, then the amount and the main action -->
       <aside class="ck-summary" aria-labelledby="ck-summary-title">
-        <div class="ck-balance">
-          <h2 class="ck-balance__label" id="ck-summary-title">Paying now</h2>
-          <p class="ck-balance__figure" data-ck-amount-big>–</p>
-          <dl class="ck-balance__rows">
-            <div><dt>Course fee</dt><dd>INR 65,000</dd></div>
-            <div><dt>Balance <span data-ck-due-line>due within 7 days</span></dt><dd data-ck-balance>INR 65,000</dd></div>
-          </dl>
-          <div class="ck-balance__cta" data-ck-cta-wrap>
-            <button class="ck-btn ck-btn--light ck-btn--block" type="button" data-ck-next disabled>Continue</button>
-            <p class="ck-balance__hint" data-ck-hint>Enter an amount to continue</p>
-          </div>
-        </div>
-
         <section class="ck-group" aria-label="Course">
           <h3 class="ck-group__title">
             <svg class="ck-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5a2 2 0 0 1 2-2h13v15h-13a2 2 0 0 0-2 2z"/><path d="M4.5 20.5v-15M8.5 7.5h7"/></svg>
@@ -294,6 +281,19 @@
             </dl>
           </div>
         </section>
+
+        <div class="ck-balance">
+          <h2 class="ck-balance__label" id="ck-summary-title">Paying now</h2>
+          <p class="ck-balance__figure" data-ck-amount-big>–</p>
+          <dl class="ck-balance__rows">
+            <div><dt>Course fee</dt><dd>INR 65,000</dd></div>
+            <div><dt>Balance <span data-ck-due-line>due within 7 days</span></dt><dd data-ck-balance>INR 65,000</dd></div>
+          </dl>
+          <div class="ck-balance__cta" data-ck-cta-wrap>
+            <button class="ck-btn ck-btn--light ck-btn--block" type="button" data-ck-next disabled>Continue</button>
+            <p class="ck-balance__hint" data-ck-hint>Enter an amount to continue</p>
+          </div>
+        </div>
       </aside>
     </div>
   </div>
