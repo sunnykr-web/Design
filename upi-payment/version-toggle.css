@@ -1,0 +1,26 @@
+/* V1 / V2 switch, fixed to the bottom-left corner of both checkout versions.
+   version-toggle.js lifts it above any bottom bar that is showing. */
+.ug-version {
+  position: fixed; z-index: 100;
+  left: calc(16px + env(safe-area-inset-left, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: flex; gap: 2px;
+  padding: 3px;
+  background: #091E42;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(9, 30, 66, 0.25);
+  font: 600 13px/1 "Inter", "Helvetica Neue", Arial, sans-serif;
+  transition: bottom 0.2s ease;
+}
+.ug-version__opt {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 36px; padding: 0 14px;
+  border: 0; border-radius: 999px;
+  background: transparent; color: #FFFFFF;
+  font: inherit; text-decoration: none; cursor: pointer;
+}
+.ug-version__opt small { font-weight: 400; font-size: 12px; opacity: 0.7; }
+.ug-version__opt:hover { background: rgba(255, 255, 255, 0.12); }
+.ug-version__opt:focus-visible { outline: 2px solid #4F8AFB; outline-offset: 2px; }
+.ug-version__opt[aria-current="page"],
+.ug-version__opt[aria-pressed="true"] { background: #FFFFFF; color: #091E42; }

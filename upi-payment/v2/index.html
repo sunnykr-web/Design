@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>upGrad | Payments (V2)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../../tokens/upgrad-ds.css">
+  <link rel="stylesheet" href="checkout-v2.css">
+  <link rel="stylesheet" href="../version-toggle.css">
+</head>
+<body class="ck-body">
+
+<div class="ck-app" data-ck-root data-ck-view="choose">
+
+  <header class="ck-header">
+    <div class="ck-header__inner">
+      <img class="ck-header__logo" src="../assets/upgrad-logo.svg" width="60" height="32" alt="upGrad">
+      <p class="ck-header__title">
+        <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="2.5" y="7" width="11" height="8" rx="2" fill="currentColor"/></svg>
+        Secure checkout
+      </p>
+      <span class="ck-header__user"><span class="ck-avatar" aria-hidden="true">SK</span><span class="ck-header__name">Sunny</span></span>
+    </div>
+  </header>
+
+  <div class="ck-shell">
+    <ol class="ck-steps" aria-label="Checkout steps">
+      <li class="ck-steps__item" data-ck-step="choose"><span class="ck-steps__num">1</span>Amount &amp; method</li>
+      <li class="ck-steps__line" aria-hidden="true"></li>
+      <li class="ck-steps__item" data-ck-step="review"><span class="ck-steps__num">2</span>Review &amp; pay</li>
+    </ol>
+
+    <div class="ck-layout">
+      <main class="ck-main">
+
+        <!-- Step 1: plan, amount and method on one screen -->
+        <div class="ck-stack" data-ck-panel="choose">
+          <div class="ck-intro">
+            <p class="ck-eyebrow">Hi Sunny Kumar</p>
+            <h1 class="ck-h1">Reserve your seat</h1>
+          </div>
+
+          <section class="ck-card" aria-labelledby="ck-plan-title">
+            <h2 class="ck-h2" id="ck-plan-title"><span class="ck-h2__num">1</span>Choose a payment plan</h2>
+            <div class="ck-plans" role="radiogroup" aria-labelledby="ck-plan-title">
+              <label class="ck-option">
+                <input type="radio" name="ck-plan" value="reserve" checked>
+                <span class="ck-option__body">
+                  <img src="../assets/icon-reserve.svg" width="20" height="22" alt="">
+                  <span class="ck-option__text"><strong>Reserve a seat</strong><span>Pay from INR 1,000 now, the rest within 7 days</span></span>
+                </span>
+              </label>
+              <label class="ck-option">
+                <input type="radio" name="ck-plan" value="recommended">
+                <span class="ck-option__body">
+                  <img src="../assets/icon-recommended.svg" width="20" height="20" alt="">
+                  <span class="ck-option__text"><strong>Recommended</strong><span>EMI from INR 2,347/mo*, 0% interest onwards</span></span>
+                </span>
+              </label>
+              <label class="ck-option">
+                <input type="radio" name="ck-plan" value="pocket">
+                <span class="ck-option__body">
+                  <img src="../assets/icon-pocket.svg" width="23" height="22" alt="">
+                  <span class="ck-option__text"><strong>Pocket-friendly</strong><span>Lowest cost per month</span></span>
+                </span>
+              </label>
+              <label class="ck-option">
+                <input type="radio" name="ck-plan" value="upfront">
+                <span class="ck-option__body">
+                  <img src="../assets/icon-other.svg" width="22" height="22" alt="">
+                  <span class="ck-option__text"><strong>Pay upfront</strong><span>INR 65,000 in one go</span></span>
+                </span>
+              </label>
+            </div>
+            <p class="ck-note" data-ck-plan-note hidden>This prototype covers Reserve a seat. The other plans follow the same steps once their offers are designed.</p>
+          </section>
+
+          <section class="ck-card" aria-labelledby="ck-amount-label" data-ck-amount-card>
+            <h2 class="ck-h2"><span class="ck-h2__num">2</span><label for="ck-amount" id="ck-amount-label">How much would you like to pay now?</label></h2>
+            <div class="ck-field" data-ck-field>
+              <span class="ck-field__prefix" aria-hidden="true">INR</span>
+              <input class="ck-field__input" id="ck-amount" type="text" inputmode="numeric" autocomplete="off" placeholder="1,000 to 65,000" aria-describedby="ck-amount-help">
+            </div>
+            <p class="ck-help" id="ck-amount-help" aria-live="polite" data-ck-help>Minimum INR 1,000. You pay the balance within 7 days.</p>
+            <div class="ck-chips" role="group" aria-label="Quick amounts">
+              <button class="ck-chip" type="button" data-ck-quick="1000">INR 1,000 <small>minimum</small></button>
+              <button class="ck-chip" type="button" data-ck-quick="10000">INR 10,000</button>
+              <button class="ck-chip" type="button" data-ck-quick="32500">INR 32,500 <small>half</small></button>
+              <button class="ck-chip" type="button" data-ck-quick="65000">INR 65,000 <small>full fee</small></button>
+            </div>
+          </section>
+
+          <section class="ck-card" aria-labelledby="ck-method-title">
+            <h2 class="ck-h2" id="ck-method-title"><span class="ck-h2__num">3</span>Pay with</h2>
+            <div class="ck-methods" role="radiogroup" aria-labelledby="ck-method-title">
+              <label class="ck-option ck-option--method">
+                <input type="radio" name="ck-method" value="UPI">
+                <span class="ck-option__body"><img src="../assets/icon-upi.svg" width="24" height="24" alt=""><span class="ck-option__text"><strong>UPI</strong><span>Scan a QR with any UPI app</span></span><span class="ck-tag">Instant</span></span>
+              </label>
+              <label class="ck-option ck-option--method">
+                <input type="radio" name="ck-method" value="Credit Card">
+                <span class="ck-option__body"><img src="../assets/icon-card.svg" width="24" height="24" alt=""><span class="ck-option__text"><strong>Credit card</strong><span>Visa, Mastercard, RuPay, Amex</span></span></span>
+              </label>
+              <label class="ck-option ck-option--method">
+                <input type="radio" name="ck-method" value="Debit Card">
+                <span class="ck-option__body"><img src="../assets/icon-card.svg" width="24" height="24" alt=""><span class="ck-option__text"><strong>Debit card</strong><span>Visa, Mastercard, RuPay</span></span></span>
+              </label>
+              <label class="ck-option ck-option--method">
+                <input type="radio" name="ck-method" value="Net Banking">
+                <span class="ck-option__body"><img src="../assets/icon-netbanking.svg" width="24" height="24" alt=""><span class="ck-option__text"><strong>Net banking</strong><span>All major Indian banks</span></span></span>
+              </label>
+            </div>
+            <p class="ck-note" data-ck-upi-note hidden><img src="../assets/icon-info.svg" width="16" height="16" alt="">Your UPI app sets its own per-transaction limit.</p>
+          </section>
+
+          <p class="ck-footnote">*Exact pricing will be provided according to your chosen EMI plan by your bank, subject to your bank’s T&amp;Cs.</p>
+        </div>
+
+        <!-- Step 2: review and pay -->
+        <div class="ck-stack" data-ck-panel="review" hidden>
+          <button class="ck-back" type="button" data-ck-back>
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Change amount or method
+          </button>
+
+          <section class="ck-card ck-pay" aria-labelledby="ck-pay-title" data-ck-pay-upi>
+            <div class="ck-pay__head">
+              <h1 class="ck-h1" id="ck-pay-title">Scan to pay <span data-ck-amount>INR 1,000</span></h1>
+              <p class="ck-timer" data-ck-timer-wrap>QR expires in <strong data-ck-timer>10:00</strong></p>
+            </div>
+            <div class="ck-pay__body">
+              <div class="ck-qr" data-ck-qr>
+                <img src="../assets/upi-qr.png" width="370" height="425" alt="UPI QR code to scan with a UPI app">
+                <button class="ck-qr__reveal" type="button" data-ck-reveal>Show QR</button>
+                <div class="ck-qr__expired" data-ck-expired hidden>
+                  <p>This QR has expired</p>
+                  <button class="ck-btn ck-btn--secondary" type="button" data-ck-refresh>Get a new QR</button>
+                </div>
+              </div>
+              <ol class="ck-howto">
+                <li>Open any UPI app, such as Google Pay, PhonePe, Paytm or BHIM.</li>
+                <li>Scan this QR and check that the amount is <strong data-ck-amount>INR 1,000</strong>.</li>
+                <li>Approve with your UPI PIN. This page updates when the payment lands.</li>
+              </ol>
+            </div>
+            <p class="ck-waiting" data-ck-waiting><span class="ck-pulse" aria-hidden="true"></span>Waiting for your payment</p>
+          </section>
+
+          <section class="ck-card ck-pay" aria-labelledby="ck-pay-card-title" data-ck-pay-other hidden>
+            <h1 class="ck-h1" id="ck-pay-card-title">Pay <span data-ck-amount>INR 1,000</span> by <span data-ck-method-lower>card</span></h1>
+            <p class="ck-help">You will finish the payment on your bank’s secure page.</p>
+            <button class="ck-btn ck-btn--primary ck-btn--block" type="button" data-ck-proceed>Proceed to pay <span data-ck-amount>INR 1,000</span></button>
+            <p class="ck-note" data-ck-proceed-note hidden>Prototype only: the payment gateway is not connected.</p>
+          </section>
+
+          <section class="ck-card" aria-labelledby="ck-details-title">
+            <h2 class="ck-h2" id="ck-details-title">Your details</h2>
+            <dl class="ck-details">
+              <div><dt>Plan</dt><dd data-ck-plan-label>Reserve a seat</dd></div>
+              <div><dt>Paying now</dt><dd data-ck-amount>INR 1,000</dd></div>
+              <div><dt>Method</dt><dd data-ck-method>UPI</dd></div>
+              <div><dt>Billed to</dt><dd>Sunny Kumar<br><span class="ck-muted">ajp colonya akjsdf alsdfknadf, 560600, Bommasandra, Karnataka, India</span></dd></div>
+            </dl>
+          </section>
+
+          <section class="ck-card ck-card--quiet" aria-labelledby="ck-before-title">
+            <h2 class="ck-h3" id="ck-before-title">Before you pay</h2>
+            <ul class="ck-list">
+              <li>Pay the balance of <strong data-ck-balance>INR 64,000</strong> by <strong data-ck-due>20 Oct 2026</strong> to keep your seat.</li>
+              <li>UPI apps and banks set their own transaction limits.</li>
+              <li>Paying means you accept the terms below.</li>
+            </ul>
+            <p class="ck-consent" data-ck-consent>By proceeding, you confirm your understanding and acceptance that processing fees and charges may vary based on the policies of your bank or third-party credit provider. Please refer to the terms and conditions provided by your bank or credit facility provider for a detailed breakdown of any applicable fees. upGrad is not responsible for any fees or charges imposed by your bank or credit provider.</p>
+            <button class="ck-link" type="button" data-ck-more aria-expanded="false">Read more</button>
+          </section>
+        </div>
+      </main>
+
+      <!-- Order summary, with the main action on desktop -->
+      <aside class="ck-summary" aria-labelledby="ck-summary-title">
+        <div class="ck-course">
+          <img src="../assets/course-logo.png" width="120" height="40" alt="upGrad">
+          <div>
+            <p class="ck-course__name">Advance Certificate in Digital Marketing</p>
+            <p class="ck-muted">4 months · Starts Oct 31, 2026</p>
+          </div>
+        </div>
+        <h2 class="ck-summary__title" id="ck-summary-title">Summary</h2>
+        <dl class="ck-rows">
+          <div><dt>Course fee</dt><dd>INR 65,000</dd></div>
+          <div><dt>Paying now</dt><dd data-ck-amount-or-dash>–</dd></div>
+          <div class="ck-rows__total"><dt>Balance <small data-ck-due-line>due within 7 days</small></dt><dd data-ck-balance>INR 65,000</dd></div>
+        </dl>
+        <div class="ck-summary__cta" data-ck-cta-wrap>
+          <button class="ck-btn ck-btn--primary ck-btn--block" type="button" data-ck-next disabled>Continue</button>
+          <p class="ck-summary__hint" data-ck-hint>Enter an amount to continue</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Phone: the main action stays in reach -->
+  <div class="ck-mobilebar" data-ck-mobilebar>
+    <div>
+      <p class="ck-muted">Paying now</p>
+      <p class="ck-mobilebar__amount" data-ck-amount-or-dash>–</p>
+    </div>
+    <button class="ck-btn ck-btn--primary" type="button" data-ck-next disabled>Continue</button>
+  </div>
+</div>
+
+<nav class="ug-version" aria-label="Design version">
+  <a class="ug-version__opt" href="../index.html">V1 <small>Figma</small></a>
+  <a class="ug-version__opt" href="index.html" aria-current="page">V2 <small>Improved</small></a>
+</nav>
+
+<script src="checkout-v2.js"></script>
+<script src="../version-toggle.js"></script>
+</body>
+</html>
