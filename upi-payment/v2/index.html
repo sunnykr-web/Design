@@ -47,16 +47,23 @@
       </li>
     </ol>
 
+    <!-- Page heading: above both columns, so the first card on each side starts on one line -->
+    <div class="ck-pagehead">
+      <div class="ck-intro" data-ck-panel="choose">
+        <span class="ck-kicker">Checkout</span>
+        <h1 class="ck-display"><span class="ck-display__soft">Hi Sunny Kumar,</span> reserve your seat</h1>
+      </div>
+      <button class="ck-back" type="button" data-ck-panel="review" data-ck-back hidden>
+        <svg class="ck-i ck-i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6-6 6 6 6"/></svg>
+        Change amount or method
+      </button>
+    </div>
+
     <div class="ck-layout">
       <main class="ck-main">
 
         <!-- Step 1: plan, amount and method on one screen -->
         <div class="ck-stack" data-ck-panel="choose">
-          <div class="ck-intro">
-            <span class="ck-kicker">Checkout</span>
-            <h1 class="ck-display"><span class="ck-display__soft">Hi Sunny Kumar,</span> reserve your seat</h1>
-          </div>
-
           <section class="ck-card" aria-labelledby="ck-plan-title">
             <div class="ck-card__head">
               <h2 class="ck-h2" id="ck-plan-title">Payment plan</h2>
@@ -169,11 +176,6 @@
 
         <!-- Step 2: review and pay -->
         <div class="ck-stack" data-ck-panel="review" hidden>
-          <button class="ck-back" type="button" data-ck-back>
-            <svg class="ck-i ck-i--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6-6 6 6 6"/></svg>
-            Change amount or method
-          </button>
-
           <section class="ck-card ck-pay" aria-labelledby="ck-pay-title" data-ck-pay-upi>
             <div class="ck-pay__top">
               <span class="ck-tile ck-tile--lg"><svg class="ck-i" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M13.5 13.5h3v3h-3zM20.5 13.5v.01M16.5 20.5h4M20.5 17v3.5"/></svg></span>

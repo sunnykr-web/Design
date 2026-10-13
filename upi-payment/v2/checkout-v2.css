@@ -111,8 +111,9 @@
 .ck-shell { max-width: 1120px; margin: 0 auto; padding: var(--uG-12) var(--uG-16) var(--uG-96); }
 .ck-layout {
   display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: var(--uG-24);
-  align-items: start; margin-top: var(--uG-32);
+  align-items: start; margin-top: var(--uG-16);
 }
+.ck-pagehead { margin-top: var(--uG-32); }
 .ck-main { min-width: 0; }
 .ck-stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--uG-16); }
 
@@ -360,6 +361,8 @@
   position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px);
   display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--uG-16);
 }
+/* same top inset as a card, so "Your course" reads on the line of the first card's heading */
+.ck-summary .ck-group { padding-top: var(--uG-24); }
 .ck-balance {
   position: relative; overflow: hidden;
   display: grid; gap: var(--uG-16);
@@ -525,7 +528,7 @@
   .ck-user { padding: 0 var(--uG-4); }
   .ck-secure { padding: 0 var(--uG-10); }
   .ck-shell { padding-top: var(--uG-8); }
-  .ck-layout { margin-top: var(--uG-24); }
+  .ck-pagehead { margin-top: var(--uG-24); }
   .ck-card { padding: var(--uG-20) var(--uG-12) var(--uG-16); border-radius: var(--uG-radius-05); }
   .ck-card__head { padding: 0 var(--uG-6); }
   .ck-row__body { padding-right: var(--uG-12); gap: var(--uG-12); }
