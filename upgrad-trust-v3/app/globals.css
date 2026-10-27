@@ -443,6 +443,15 @@ html.motion [data-kb] { animation: kb 2.2s var(--ease) .1s both; }
   .hero__lede { font-size: 15px; line-height: 1.45; }
   .hero__stage { flex: 1 1 auto; height: auto; min-height: 0; margin-top: 4px; }
 }
+/* Phones: no "Read their posts" button; the post count is smaller and centred, clear of the version toggle. */
+@media (max-width: 720px) {
+  .hero { padding-bottom: 108px; }
+  .hero__cta { display: none; }
+  .hero__foot { display: flex; justify-content: center; }
+  .hero__count { align-items: center; gap: 6px; }
+  .hero__num { font-size: 30px; }
+  .hero__numlabel { font-size: 10px; letter-spacing: .18em; }
+}
 /* Short phone screens (and in-app browsers): drop the eyebrow and lede so the post stays readable. */
 @media (max-width: 720px) and (max-height: 800px) {
   .hero__eyebrow, .hero__lede { display: none; }
