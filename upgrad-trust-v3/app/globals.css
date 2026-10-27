@@ -424,6 +424,8 @@ html.motion [data-kb] { animation: kb 2.2s var(--ease) .1s both; }
 @media (max-width: 720px) {
   /* The absolutely placed links would collide with the section titles on narrow screens. */
   .conv__all, .panel__all { top: auto; position: static; align-self: flex-start; }
+  /* The card strip's top padding (room for the hover lift) overlaps the link here; keep the link above it. */
+  .conv__all { position: relative; z-index: 2; }
   .panel__all { display: inline-flex; margin: 0 clamp(20px, 5vw, 76px) 16px; }
   .panel__h3 { padding-right: clamp(20px, 5vw, 76px); }
 }
