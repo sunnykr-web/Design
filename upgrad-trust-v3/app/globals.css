@@ -445,9 +445,9 @@ html.motion [data-kb] { animation: kb 2.2s var(--ease) .1s both; }
   .hero__lede { font-size: 15px; line-height: 1.45; }
   .hero__stage { flex: 1 1 auto; height: auto; min-height: 0; margin-top: 4px; }
 }
-/* Phones: no "Read their posts" button; the post count is smaller and centred, clear of the version toggle. */
+/* Phones: no "Read their posts" button; the post count is smaller and centred. */
 @media (max-width: 720px) {
-  .hero { padding-bottom: 108px; }
+  .hero { padding-bottom: 84px; }
   .hero__cta { display: none; }
   .hero__foot { display: flex; justify-content: center; }
   .hero__count { align-items: center; gap: 6px; }
@@ -666,10 +666,6 @@ html.motion [data-kb] { animation: kb 2.2s var(--ease) .1s both; }
 /* Each version builds on the last: V2-only content shows in V3 too. */
 [hidden] { display: none !important; }
 html[data-ver='1'] .v2-only, html:is([data-ver='2'], [data-ver='3']) .v1-only { display: none !important; }
-.vtoggle { position: fixed; left: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 280; display: flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid rgba(243, 238, 230, .18); background: rgba(14, 12, 11, .82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-.vtoggle button { min-width: 44px; min-height: 32px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: rgba(243, 238, 230, .7); font-size: 12px; font-weight: 600; letter-spacing: .06em; cursor: pointer; transition: background-color .3s, color .3s; }
-.vtoggle button:hover { color: var(--cream); }
-html[data-ver='1'] .vtoggle [data-set-ver='1'], html[data-ver='2'] .vtoggle [data-set-ver='2'], html[data-ver='3'] .vtoggle [data-set-ver='3'] { background: var(--cream); color: var(--ink); }
 
 /* V2: "View all" links become solid pill buttons so they stand out. */
 html:is([data-ver='2'], [data-ver='3']) :is(.viewall, .words__all) {
@@ -706,8 +702,6 @@ html[data-ver='3'] .d-h1 { font-size: clamp(40px, 5vw, 84px); letter-spacing: -.
 html[data-ver='3'] .d-h2 { font-size: clamp(34px, 3.8vw, 60px); letter-spacing: -.03em; line-height: 1; }
 html[data-ver='3'] .cvquote blockquote p { font-size: clamp(20px, 1.6vw, 26px); line-height: 1.2; }
 html[data-ver='3'] :is(.pre__pct, .hero__num, .imm__numwin, .imm__text p, .d-fact span:last-child, .ocard__title, .icard__title, .imd__brew span, .imd__about p, .cvd__about p) { letter-spacing: -.02em; }
-/* Keep the hero's bottom row clear of the version toggle in the bottom-left corner. */
-.hero__foot { bottom: max(clamp(24px, 4vh, 40px), 64px); }
 html[data-ver='3'] .hero__h1 .ln > span { text-wrap: balance; }
 
 /* ───────────────────────── LinkedIn post header and footer ("Wall of Voices" Figma, 1386:3603) ─────────────────────────
