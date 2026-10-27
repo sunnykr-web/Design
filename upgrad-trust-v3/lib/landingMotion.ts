@@ -286,10 +286,13 @@ export class LandingMotion {
     const vw = innerWidth, T = 5200;
     if (sc.ready && sc.auto && !sc.hover && p < 0.6) { sc.t += dt; if (sc.t >= T) this.scGo(sc.active + 1); }
     this.scPaint(k);
-    // Phones: the card fills the stage left between the copy and the foot, so the hero fits one screen
-    // (the card reaches 240px below the rig's centre). Wider screens scale the rig with the viewport.
-    const s = vw <= 720 ? Math.min(1, (vw - 60) / 320, (sc.st.clientHeight - 16) / 480) : Math.max(0.56, Math.min(1, vw / 1100));
-    this.set(sc.rig, 'transform', `scale(${s.toFixed(3)}) rotateX(${(p * 20).toFixed(2)}deg)`);
+    // Phones: the card (190px above the rig's centre, 240px below, about 8% larger for its translateZ) is centred
+    // in the stage left between the copy and the foot and scaled to fill it, so the hero fits one screen.
+    // Wider screens scale with the viewport.
+    const phone = vw <= 720;
+    const s = phone ? Math.min(1, (vw - 50) / 335, (sc.st.clientHeight - 16) / 470) : Math.max(0.56, Math.min(1, vw / 1100));
+    const ty = phone ? -25 * s : 0;
+    this.set(sc.rig, 'transform', `translateY(${ty.toFixed(1)}px) scale(${s.toFixed(3)}) rotateX(${(p * 20).toFixed(2)}deg)`);
     this.set(sc.st, 'transform', `translate3d(0,${(-p * 90).toFixed(1)}px,0) scale(${(1 - p * 0.1).toFixed(4)})`);
     this.set(sc.st, 'opacity', Math.max(0, 1 - p * 1.2).toFixed(3));
   }
