@@ -15,7 +15,7 @@ export function Convocation() {
               <p className="shead__sub"><span className="ln ln--loose"><span data-ln="1">Months on screen. <span className="soft">One day on stage.</span></span></span></p>
             </div>
             <p data-rv="1" className="shead__p">Trade your virtual classroom for the campus grounds as you finally meet the peers you’ve studied alongside for months.</p>
-            <span data-rv="1" className="conv__all all-top"><Link href="/convocation/" className="viewall">View all →</Link></span>
+            <span data-rv="1" className="conv__all"><Link href="/convocation/" className="viewall">View all →</Link></span>
           </div>
 
           <div id="cv-scroll" data-drag="1" className="conv__scroll">
@@ -50,7 +50,6 @@ export function Convocation() {
             <span>Convocation 2026</span>
             <div><div id="cv-bar" className="conv__bar" /></div>
           </div>
-          <div className="all-foot"><Link href="/convocation/" className="viewall">View all →</Link></div>
         </div>
       </div>
     </section>

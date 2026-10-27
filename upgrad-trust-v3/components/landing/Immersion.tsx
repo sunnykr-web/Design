@@ -13,7 +13,7 @@ export function Immersion({ goStep }: { goStep: (i: number) => void }) {
         <div className="imm__sticky">
           <img id="im-bg" className="imm__bg" src="/assets/cafe.webp" alt="" />
           <div className="imm__shade" />
-          <Link href="/immersion/" className="viewall viewall--dark imm__all all-top">View all →</Link>
+          <Link href="/immersion/" className="viewall viewall--dark imm__all all-d">View all →</Link>
           <div className="imm__grid">
             <div className="imm__left">
               <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
@@ -22,6 +22,7 @@ export function Immersion({ goStep }: { goStep: (i: number) => void }) {
                   <h2 id="imm-h" className="shead__h2"><span className="ln ln--loose"><span data-ln="1">Immersion</span></span></h2>
                   <p className="shead__sub"><span className="ln ln--loose"><span data-ln="1">When the course <span className="soft">stepped off the screen.</span></span></span></p>
                 </div>
+                <span className="all-m"><Link href="/immersion/" className="viewall viewall--dark">View all →</Link></span>
                 <ol className="imm__steps" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                   {IMM_STEPS.map((s, i) => (
                     <li key={s.label} id={'im-s' + i} className={'imm-step' + (i === 0 ? ' is-active' : '')}>
@@ -84,7 +85,6 @@ export function Immersion({ goStep }: { goStep: (i: number) => void }) {
           </Link>
         ))}
       </div>
-      <div className="all-foot"><Link href="/immersion/" className="viewall viewall--dark">View all →</Link></div>
     </section>
   );
 }

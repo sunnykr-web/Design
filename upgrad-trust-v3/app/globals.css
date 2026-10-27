@@ -424,16 +424,15 @@ html.motion [data-kb] { animation: kb 2.2s var(--ease) .1s both; }
 @media (max-width: 720px) {
   /* The absolutely placed links would collide with the section titles on narrow screens. */
   .conv__all, .panel__all { top: auto; position: static; align-self: flex-start; }
-  .conv__all { order: -1; }
   .panel__all { display: inline-flex; margin: 0 clamp(20px, 5vw, 76px) 16px; }
   .panel__h3 { padding-right: clamp(20px, 5vw, 76px); }
 }
 
-/* On phones the "View all" links move below the content they lead to: read first, then go further. */
-.all-foot { display: none; }
+/* On phones "View all" sits right under the section's heading and subtext, before the content. */
+.all-m { display: none; }
 @media (max-width: 720px) {
-  .all-top { display: none !important; }
-  .all-foot { display: flex; justify-content: center; padding: 28px clamp(20px, 5vw, 76px) 0; }
+  .all-d { display: none !important; }
+  .all-m { display: flex; align-self: flex-start; }
 }
 
 /* ───────────────────────── LinkedIn post: feed layout ───────────────────────── */
