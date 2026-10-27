@@ -435,6 +435,24 @@ html.motion [data-kb] { animation: kb 2.2s var(--ease) .1s both; }
   .all-m { display: flex; align-self: flex-start; }
 }
 
+/* Phones: the hero sizes to its content (no fixed 900px), with a bigger headline and card. */
+@media (max-width: 720px) {
+  .hero { height: auto; min-height: 100svh; padding-bottom: 168px; }
+  .hero__copy { padding-top: 104px; gap: 18px; }
+  html[data-ver='3'] .hero__h1 { font-size: clamp(44px, 12vw, 54px); }
+  .hero__lede { font-size: 16px; }
+  .hero__stage { height: 460px; margin-top: 12px; }
+}
+
+/* Phones: the study abroad panel is a self-contained rounded card that stays dark to its edge,
+   and the video rail below sits on the page background, so nothing fades into the cream. */
+@media (max-width: 720px) {
+  .panel, .panel__backdrop { border-radius: 24px; }
+  .panel { overflow: hidden; padding-bottom: 24px; }
+  .panel__shade { background: linear-gradient(180deg, rgba(18, 22, 38, .42) 0%, rgba(18, 22, 38, .1) 40%, rgba(18, 22, 38, .55) 100%); }
+  .panel-foot { margin-top: 48px; background: none; border-radius: 0; }
+}
+
 /* ───────────────────────── LinkedIn post: feed layout ───────────────────────── */
 .pc { display: flex; flex-direction: column; background: var(--white); border-radius: 18px; font-family: var(--li); color: #1F1F1F; box-shadow: 0 1px 2px rgba(14, 12, 11, .06), 0 10px 24px -12px rgba(14, 12, 11, .18); transition: transform .7s var(--ease), box-shadow .7s var(--ease); }
 .pc__head { display: flex; align-items: center; gap: 12px; padding: 18px 18px 0; }

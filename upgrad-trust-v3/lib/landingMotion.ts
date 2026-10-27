@@ -286,7 +286,8 @@ export class LandingMotion {
     const vw = innerWidth, T = 5200;
     if (sc.ready && sc.auto && !sc.hover && p < 0.6) { sc.t += dt; if (sc.t >= T) this.scGo(sc.active + 1); }
     this.scPaint(k);
-    const s = Math.max(0.56, Math.min(1, vw / 1100));
+    // Phones get a near full-size card; wider screens scale the rig with the viewport.
+    const s = vw <= 720 ? Math.min(1, (vw - 60) / 320) : Math.max(0.56, Math.min(1, vw / 1100));
     this.set(sc.rig, 'transform', `scale(${s.toFixed(3)}) rotateX(${(p * 20).toFixed(2)}deg)`);
     this.set(sc.st, 'transform', `translate3d(0,${(-p * 90).toFixed(1)}px,0) scale(${(1 - p * 0.1).toFixed(4)})`);
     this.set(sc.st, 'opacity', Math.max(0, 1 - p * 1.2).toFixed(3));
