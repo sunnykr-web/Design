@@ -429,6 +429,13 @@ html.motion [data-kb] { animation: kb 2.2s var(--ease) .1s both; }
   .panel__h3 { padding-right: clamp(20px, 5vw, 76px); }
 }
 
+/* On phones the "View all" links move below the content they lead to: read first, then go further. */
+.all-foot { display: none; }
+@media (max-width: 720px) {
+  .all-top { display: none !important; }
+  .all-foot { display: flex; justify-content: center; padding: 28px clamp(20px, 5vw, 76px) 0; }
+}
+
 /* ───────────────────────── LinkedIn post: feed layout ───────────────────────── */
 .pc { display: flex; flex-direction: column; background: var(--white); border-radius: 18px; font-family: var(--li); color: #1F1F1F; box-shadow: 0 1px 2px rgba(14, 12, 11, .06), 0 10px 24px -12px rgba(14, 12, 11, .18); transition: transform .7s var(--ease), box-shadow .7s var(--ease); }
 .pc__head { display: flex; align-items: center; gap: 12px; padding: 18px 18px 0; }

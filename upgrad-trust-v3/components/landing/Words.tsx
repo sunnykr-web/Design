@@ -16,12 +16,13 @@ export function Words() {
             <span className="ln"><span data-ln="1" className="soft">We didn’t edit a word.</span></span>
           </h2>
         </div>
-        <span data-rv="1"><Link href={POSTS_HREF} className="words__all">Read all {count} posts →</Link></span>
+        <span data-rv="1" className="all-top"><Link href={POSTS_HREF} className="words__all">Read all {count} posts →</Link></span>
       </div>
       <div className="words__rows">
         <MarqueeRow dir={-1} items={MARQUEE_A} />
         <MarqueeRow dir={1} items={MARQUEE_B} />
       </div>
+      <div className="all-foot"><Link href={POSTS_HREF} className="words__all">Read all {count} posts →</Link></div>
     </section>
   );
 }

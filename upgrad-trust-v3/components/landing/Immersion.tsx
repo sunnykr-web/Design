@@ -13,7 +13,7 @@ export function Immersion({ goStep }: { goStep: (i: number) => void }) {
         <div className="imm__sticky">
           <img id="im-bg" className="imm__bg" src="/assets/cafe.webp" alt="" />
           <div className="imm__shade" />
-          <Link href="/immersion/" className="viewall viewall--dark imm__all">View all →</Link>
+          <Link href="/immersion/" className="viewall viewall--dark imm__all all-top">View all →</Link>
           <div className="imm__grid">
             <div className="imm__left">
               <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
@@ -84,6 +84,7 @@ export function Immersion({ goStep }: { goStep: (i: number) => void }) {
           </Link>
         ))}
       </div>
+      <div className="all-foot"><Link href="/immersion/" className="viewall viewall--dark">View all →</Link></div>
     </section>
   );
 }

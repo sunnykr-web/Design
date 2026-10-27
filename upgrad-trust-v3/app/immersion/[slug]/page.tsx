@@ -88,11 +88,12 @@ export default async function ImmersionDetail({ params }: Params) {
                 <span className="ln"><span data-ln="1" className="soft">after the last one.</span></span>
               </h2>
             </div>
-            <span data-rv="1"><Link href={POSTS_HREF} className="viewall">View all →</Link></span>
+            <span data-rv="1" className="all-top"><Link href={POSTS_HREF} className="viewall">View all →</Link></span>
           </div>
           <div className="grid3">
             {immersionPosts(u.city).map(p => <FeedPost key={p.name} p={p} variant="card" reveal />)}
           </div>
+          <div className="all-foot"><Link href={POSTS_HREF} className="viewall">View all →</Link></div>
         </section>
 
         <section className="d-more" style={{ zIndex: 4 }} aria-labelledby="more-h">

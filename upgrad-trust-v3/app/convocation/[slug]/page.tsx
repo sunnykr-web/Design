@@ -99,11 +99,12 @@ export default async function ConvocationDetail({ params }: Params) {
                 <span className="ln"><span data-ln="1" className="soft">in their own words.</span></span>
               </h2>
             </div>
-            <span data-rv="1"><Link href={POSTS_HREF} className="viewall">View all →</Link></span>
+            <span data-rv="1" className="all-top"><Link href={POSTS_HREF} className="viewall">View all →</Link></span>
           </div>
           <div className="cols3 masonry">
             {CONVOCATION_POSTS.map(p => <FeedPost key={p.name + p.date} p={p} variant="card" reveal photoPos="center 30%" />)}
           </div>
+          <div className="all-foot"><Link href={POSTS_HREF} className="viewall">View all →</Link></div>
         </section>
 
         <section className="d-more" style={{ zIndex: 5 }} aria-labelledby="more-h">

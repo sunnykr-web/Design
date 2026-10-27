@@ -31,7 +31,7 @@ export function StudyAbroad({ active, go, onPause }: Props) {
           <img id="ab-bg" className="panel__bg" src="/assets/sa-plane.webp" alt="" />
           <div className="panel__shade" />
         </div>
-        <Link href={ABROAD_HREF} className="viewall viewall--white panel__all">View all →</Link>
+        <Link href={ABROAD_HREF} className="viewall viewall--white panel__all all-top">View all →</Link>
         <h3 className="panel__h3">They left for a degree. <em>They wrote home on LinkedIn.</em></h3>
 
         <div
@@ -81,6 +81,8 @@ export function StudyAbroad({ active, go, onPause }: Props) {
           })}
         </div>
       </div>
+
+      <div className="all-foot"><Link href={ABROAD_HREF} className="viewall">View all →</Link></div>
 
       <div className="panel-foot">
         <div className="subhead">
