@@ -435,22 +435,20 @@ html.motion [data-kb] { animation: kb 2.2s var(--ease) .1s both; }
   .all-m { display: flex; align-self: flex-start; }
 }
 
-/* Phones: the hero sizes to its content (no fixed 900px), with a bigger headline and card. */
+/* Phones: the hero is exactly one screen; the stage takes the space left and the card scales to fit it. */
 @media (max-width: 720px) {
-  .hero { height: auto; min-height: 100svh; padding-bottom: 168px; }
-  .hero__copy { padding-top: 104px; gap: 18px; }
-  html[data-ver='3'] .hero__h1 { font-size: clamp(44px, 12vw, 54px); }
-  .hero__lede { font-size: 16px; }
-  .hero__stage { height: 460px; margin-top: 12px; }
+  .hero { height: 100svh; min-height: 600px; display: flex; flex-direction: column; padding-bottom: 128px; }
+  .hero__copy { padding-top: 92px; gap: 16px; }
+  html[data-ver='3'] .hero__h1 { font-size: clamp(40px, 11.5vw, 50px); }
+  .hero__lede { font-size: 15px; }
+  .hero__stage { flex: 1 1 auto; height: auto; min-height: 0; margin-top: 8px; }
 }
 
-/* Phones: the study abroad panel is a self-contained rounded card that stays dark to its edge,
-   and the video rail below sits on the page background, so nothing fades into the cream. */
+/* Phones: the study abroad photo needs room below the cards to fade into the white, as on desktop,
+   so the panel runs on past the stage and the fade starts above the card's bottom edge. */
 @media (max-width: 720px) {
-  .panel, .panel__backdrop { border-radius: 24px; }
-  .panel { overflow: hidden; padding-bottom: 24px; }
-  .panel__shade { background: linear-gradient(180deg, rgba(18, 22, 38, .42) 0%, rgba(18, 22, 38, .1) 40%, rgba(18, 22, 38, .55) 100%); }
-  .panel-foot { margin-top: 48px; background: none; border-radius: 0; }
+  .panel { padding-bottom: 96px; }
+  .panel__shade { background: linear-gradient(180deg, rgba(18, 22, 38, .42) 0%, rgba(18, 22, 38, 0) 36%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, .85) 84%, #FFFFFF 100%); }
 }
 
 /* ───────────────────────── LinkedIn post: feed layout ───────────────────────── */
